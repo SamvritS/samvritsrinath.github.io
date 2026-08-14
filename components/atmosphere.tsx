@@ -1,20 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { cn } from "@/lib/utils";
-import { mulberry32 } from "@/lib/utils";
-
-function useReducedMotion() {
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setReduced(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
-  return reduced;
-}
+import { useEffect, useRef } from "react";
+import { cn, mulberry32 } from "@/lib/utils";
+import { useReducedMotion } from "@/lib/use-reduced-motion";
 
 type Star = {
   id: number;
@@ -29,15 +17,16 @@ type Star = {
 export function Atmosphere() {
   const reduced = useReducedMotion();
   const nebulaRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
 
   // Deterministic stars — identical on server and client.
   const stars: Star[] = (() => {
     const rand = mulberry32(42);
-    return Array.from({ length: 90 }, (_, i) => ({
+    return Array.from({ length: 150 }, (_, i) => ({
       id: i,
       left: rand() * 100,
       top: rand() * 100,
-      size: rand() * 1.4 + 0.6,
+      size: rand() * 1.8 + 0.6,
       delay: rand() * 6,
       duration: 4 + rand() * 6,
       opacity: 0.35 + rand() * 0.55,
@@ -47,16 +36,23 @@ export function Atmosphere() {
   useEffect(() => {
     if (reduced) return;
     const el = nebulaRef.current;
-    if (!el) return;
+    const glow = glowRef.current;
+    if (!el || !glow) return;
     let targetX = 0;
     let targetY = 0;
+    let glowX = -100;
+    let glowY = -100;
     let raf = 0;
     const onMove = (e: PointerEvent) => {
-      targetX = (e.clientX / window.innerWidth - 0.5) * 26;
-      targetY = (e.clientY / window.innerHeight - 0.5) * 26;
+      targetX = (e.clientX / window.innerWidth - 0.5) * 80;
+      targetY = (e.clientY / window.innerHeight - 0.5) * 80;
+      glowX = e.clientX;
+      glowY = e.clientY;
       if (!raf) {
         raf = requestAnimationFrame(() => {
           el.style.transform = `translate3d(${targetX.toFixed(2)}px, ${targetY.toFixed(2)}px, 0)`;
+          glow.style.left = `${glowX.toFixed(1)}px`;
+          glow.style.top = `${glowY.toFixed(1)}px`;
           raf = 0;
         });
       }
@@ -75,8 +71,8 @@ export function Atmosphere() {
       style={{ backgroundColor: "var(--void)" }}
     >
       {/* Base gradient wash */}
-      <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_0%,color-mix(in_srgb,var(--accent-indigo)_7%,transparent)_0%,transparent_55%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(90%_70%_at_85%_100%,color-mix(in_srgb,var(--accent-violet)_6%,transparent)_0%,transparent_55%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_0%,color-mix(in_srgb,var(--accent-indigo)_20%,transparent)_0%,transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(90%_70%_at_85%_100%,color-mix(in_srgb,var(--accent-violet)_17%,transparent)_0%,transparent_60%)]" />
 
       {/* Cursor-responsive nebula field */}
       <div
@@ -86,16 +82,32 @@ export function Atmosphere() {
           reduced && "transition-none",
         )}
       >
-        <div className="absolute left-[8%] top-[12%] h-[38vh] w-[36vw] rounded-full bg-[color-mix(in_srgb,var(--accent-indigo)_14%,transparent)] blur-[110px] animate-drift" />
+        <div className="absolute left-[8%] top-[12%] h-[38vh] w-[36vw] rounded-full bg-[color-mix(in_srgb,var(--accent-indigo)_26%,transparent)] blur-[110px] animate-drift" />
         <div
-          className="absolute right-[6%] top-[32%] h-[34vh] w-[30vw] rounded-full bg-[color-mix(in_srgb,var(--accent-blue)_12%,transparent)] blur-[110px] animate-drift"
+          className="absolute right-[6%] top-[32%] h-[34vh] w-[30vw] rounded-full bg-[color-mix(in_srgb,var(--accent-blue)_22%,transparent)] blur-[110px] animate-drift"
           style={{ animationDelay: "-9s" }}
         />
         <div
-          className="absolute bottom-[8%] left-[28%] h-[32vh] w-[34vw] rounded-full bg-[color-mix(in_srgb,var(--accent-violet)_11%,transparent)] blur-[120px] animate-drift"
+          className="absolute bottom-[8%] left-[28%] h-[32vh] w-[34vw] rounded-full bg-[color-mix(in_srgb,var(--accent-violet)_20%,transparent)] blur-[120px] animate-drift"
           style={{ animationDelay: "-17s" }}
         />
       </div>
+
+      {/* Pointer-follow glow */}
+      <div
+        ref={glowRef}
+        aria-hidden
+        className={cn(
+          "absolute h-[42rem] w-[42rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[130px]",
+          reduced && "hidden",
+        )}
+        style={{
+          background:
+            "radial-gradient(circle, color-mix(in srgb, var(--accent-indigo) 22%, transparent) 0%, transparent 60%)",
+          left: "-9999px",
+          top: "-9999px",
+        }}
+      />
 
       {/* Faint coordinate grid */}
       <div

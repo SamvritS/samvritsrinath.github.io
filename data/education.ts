@@ -24,6 +24,7 @@ export const education = {
 export const teaching: TeachingCompany[] = [
   {
     company: "UC San Diego — CSE Department",
+    logo: "/assets/companies/CSE_UCSD.png",
     roles: [
       {
         role: "Education Researcher & Head Tutor (CSE 8A)",
@@ -58,6 +59,7 @@ export const teaching: TeachingCompany[] = [
   },
   {
     company: "CSE — Peer Led Academic Cohorts (PACE)",
+    logo: "/assets/companies/CSE_PACE.png",
     roles: [
       {
         role: "Lead Peer Mentor (CSE 89)",
@@ -78,21 +80,25 @@ export const clubs: Club[] = [
     name: "Triton Software Engineering",
     role: "SWE / Product Manager",
     website: "https://tritonse.github.io/",
+    logo: "/assets/clubs/tse.png",
   },
   {
     name: "ACM AI @ UCSD",
     role: "Technical Events Lead",
     website: "https://ai.acmucsd.com/",
+    logo: "/assets/clubs/acm-ai.png",
   },
   {
     name: "UCSD CS & Engineering Society",
     role: "President · SWE · PR Chair",
     website: "https://csesucsd.com/",
+    logo: "/assets/clubs/cses.png",
   },
   {
     name: "Triton Unmanned Aerial Systems",
     role: "Computer Vision — Saliency",
     website: "https://tritonuas.com/",
+    logo: "/assets/clubs/tuas.png",
   },
 ];
 

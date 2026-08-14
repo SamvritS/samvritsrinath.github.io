@@ -97,9 +97,18 @@ export default async function ProjectPage({
         ))}
       </div>
 
-      <div className="mt-10 max-w-4xl">
-        <Figure figure={{ src: project.cover, alt: project.coverAlt, caption: project.coverAlt, source: project.title }} number={1} />
-      </div>
+      {project.cover && (
+        <div className="mt-10 max-w-4xl">
+          <Figure
+            figure={{
+              src: project.cover,
+              alt: project.coverAlt ?? project.title,
+              caption: project.coverAlt ?? project.title,
+              source: project.title,
+            }}
+          />
+        </div>
+      )}
 
       <div className="mt-10 border-t border-line pt-10">
         <VisualStory sections={project.sections} />

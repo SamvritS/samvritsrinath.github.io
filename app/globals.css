@@ -24,8 +24,9 @@
   --glow: rgba(91, 91, 240, 0.16);
   --glass-nav: rgba(255, 255, 255, 0.72);
   --glass-float: rgba(255, 255, 255, 0.55);
-  --star: rgba(11, 16, 32, 0.5);
-  --grid-line: rgba(11, 16, 32, 0.05);
+  --glass-card: rgba(255, 255, 255, 0.58);
+  --star: rgba(11, 16, 32, 0.6);
+  --grid-line: rgba(11, 16, 32, 0.09);
 }
 
 .dark {
@@ -45,8 +46,9 @@
   --glow: rgba(124, 124, 255, 0.16);
   --glass-nav: rgba(13, 17, 26, 0.66);
   --glass-float: rgba(13, 17, 26, 0.5);
-  --star: rgba(245, 247, 250, 0.6);
-  --grid-line: rgba(245, 247, 250, 0.04);
+  --glass-card: rgba(13, 17, 26, 0.46);
+  --star: rgba(245, 247, 250, 0.65);
+  --grid-line: rgba(245, 247, 250, 0.07);
 }
 
 @theme inline {
@@ -154,6 +156,13 @@
     background: var(--glass-float);
     backdrop-filter: blur(14px) saturate(150%);
     -webkit-backdrop-filter: blur(14px) saturate(150%);
+    border: 1px solid var(--line);
+  }
+
+  .glass-card {
+    background: var(--glass-card);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
     border: 1px solid var(--line);
   }
 

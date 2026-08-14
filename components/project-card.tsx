@@ -1,21 +1,22 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { Project } from "@/lib/types";
+import { CardGlow } from "@/components/card-glow";
+import { TechIcon } from "@/components/tech-icon";
+import { ProjectCover } from "@/components/project-cover";
 
 export function ProjectCard({ project }: { project: Project }) {
+  const tech = project.technologies.slice(0, 5);
   return (
     <Link
       href={`/work/${project.slug}`}
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 hover:border-line-strong hover:shadow-[0_20px_60px_-32px_var(--glow)]"
+      className="glass-card group relative flex h-full flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:border-line-strong hover:shadow-[0_20px_60px_-32px_var(--glow)]"
     >
+      <CardGlow />
       <div className="relative aspect-[16/10] overflow-hidden bg-space">
-        <Image
-          src={project.cover}
-          alt={project.coverAlt}
-          fill
+        <ProjectCover
+          project={project}
           sizes="(min-width: 768px) 33vw, 100vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
         />
       </div>
       <div className="flex flex-1 flex-col p-6">
@@ -33,7 +34,14 @@ export function ProjectCard({ project }: { project: Project }) {
         <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-ink-soft">
           {project.tagline}
         </p>
-        <span className="mt-4 flex items-center gap-1 font-mono text-xs uppercase tracking-[0.18em] text-indigo">
+        {tech.length > 0 && (
+          <div className="mt-4 flex flex-wrap items-center gap-2.5">
+            {tech.map((t) => (
+              <TechIcon key={t} name={t} className="h-4 w-4 text-ink-faint" />
+            ))}
+          </div>
+        )}
+        <span className="mt-auto flex items-center gap-1 pt-4 font-mono text-xs uppercase tracking-[0.18em] text-indigo">
           Case study
           <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </span>

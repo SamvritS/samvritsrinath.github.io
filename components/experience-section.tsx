@@ -1,12 +1,14 @@
+import Image from "next/image";
 import { experience } from "@/data/experience";
 import { SectionHeading } from "@/components/section-heading";
+import { TechIcon } from "@/components/tech-icon";
 
 export function ExperienceSection() {
   return (
     <section id="experience" className="border-t border-line">
       <div className="mx-auto max-w-6xl px-6 py-24 md:py-36">
         <SectionHeading
-          index="03"
+          index="01"
           kicker="Experience"
           title="Production systems, and the teaching that feeds them."
         />
@@ -14,10 +16,23 @@ export function ExperienceSection() {
         <div className="flex flex-col gap-16">
           {experience.map((company) => (
             <div key={company.company}>
-              <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <h3 className="text-xl font-semibold tracking-tight text-ink md:text-2xl">
-                  {company.company}
-                </h3>
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  {company.logo && (
+                    <div className="glass-card flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl p-2">
+                      <Image
+                        src={company.logo}
+                        alt={`${company.company} logo`}
+                        width={96}
+                        height={96}
+                        className="h-full w-full object-contain"
+                      />
+                    </div>
+                  )}
+                  <h3 className="text-xl font-semibold tracking-tight text-ink md:text-2xl">
+                    {company.company}
+                  </h3>
+                </div>
                 {company.location && (
                   <span className="font-mono text-xs tracking-widest text-ink-faint">
                     {company.location}
@@ -46,6 +61,17 @@ export function ExperienceSection() {
                             </li>
                           ))}
                         </ul>
+                      )}
+                      {role.technologies.length > 0 && (
+                        <div className="mt-4 flex flex-wrap items-center gap-3">
+                          {role.technologies.slice(0, 6).map((t) => (
+                            <TechIcon
+                              key={t}
+                              name={t}
+                              className="h-4 w-4 text-ink-faint"
+                            />
+                          ))}
+                        </div>
                       )}
                     </div>
                     <span className="font-mono text-xs tracking-widest text-ink-faint md:pt-1 md:text-right">

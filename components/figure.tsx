@@ -38,7 +38,7 @@ export function Figure({
           aria-label={number ? `Enlarge figure ${number}` : "Enlarge figure"}
           className="group block w-full cursor-zoom-in text-left"
         >
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-line bg-surface">
+          <div className="glass-card relative aspect-[4/3] overflow-hidden rounded-2xl">
             <Image
               src={figure.src}
               alt={figure.alt}

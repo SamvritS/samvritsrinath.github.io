@@ -36,8 +36,8 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 }
 
 export function VisualStory({ sections }: { sections: ContentSection[] }) {
-  const figureSectionIndexes = sections
-    .map((s, i) => (s.type === "figure" ? i : -1))
+  const figureIndexes = sections
+    .map((s, i) => (s.type === "figure" || s.type === "gallery" ? i : -1))
     .filter((i) => i >= 0);
 
   return (
@@ -79,7 +79,7 @@ export function VisualStory({ sections }: { sections: ContentSection[] }) {
                 {section.heading && (
                   <SectionHeading>{section.heading}</SectionHeading>
                 )}
-                <div className="rounded-2xl border border-line bg-surface/60 p-6 md:p-10">
+                <div className="glass-card rounded-2xl p-6 md:p-10">
                   <Diagram data={section.diagram} />
                 </div>
               </SectionShell>
@@ -93,8 +93,26 @@ export function VisualStory({ sections }: { sections: ContentSection[] }) {
                 )}
                 <Figure
                   figure={section.figure}
-                  number={figureSectionIndexes.indexOf(i) + 1}
+                  number={figureIndexes.indexOf(i) + 1}
                 />
+              </SectionShell>
+            );
+            break;
+          case "gallery":
+            inner = (
+              <SectionShell index={i} wide>
+                {section.heading && (
+                  <SectionHeading>{section.heading}</SectionHeading>
+                )}
+                <div className="flex flex-col gap-6">
+                  {section.images.map((figure, j) => (
+                    <Figure
+                      key={figure.src}
+                      figure={figure}
+                      number={figureIndexes.indexOf(i) + j + 1}
+                    />
+                  ))}
+                </div>
               </SectionShell>
             );
             break;

@@ -15,17 +15,17 @@ export function SelectedWork() {
   return (
     <section id="work" className="mx-auto max-w-6xl px-6 py-24 md:py-36">
       <SectionHeading
-        index="01"
+        index="03"
         kicker="Selected Work"
-        title="The work that matters."
-        description="Research and systems engineering with measurable outcomes — where the evidence is the point."
+        title="Projects with papers, benchmarks, and shipped systems."
+        description="Research and systems engineering with measurable outcomes — each case study links to its source, dataset, or paper."
       />
 
       {spotlight && (
         <Reveal>
           <Link
             href={`/work/${spotlight.slug}`}
-            className="group block rounded-3xl border border-line bg-surface/60 p-8 transition-all duration-300 hover:border-line-strong hover:shadow-[0_32px_80px_-48px_var(--glow)] md:p-14"
+            className="glass-card group relative block overflow-hidden rounded-3xl p-8 transition-all duration-300 hover:border-line-strong hover:shadow-[0_32px_80px_-48px_var(--glow)] md:p-14"
           >
           <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
             <div>
@@ -48,7 +48,7 @@ export function SelectedWork() {
           </div>
 
           {pipeline?.type === "diagram" && (
-            <div className="mt-12 rounded-2xl border border-line bg-surface/70 p-6 md:p-10">
+            <div className="mt-12 rounded-2xl border border-line bg-surface/60 p-6 md:p-10">
               <Diagram data={pipeline.diagram} />
             </div>
           )}

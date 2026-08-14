@@ -1,18 +1,24 @@
 import { Hero } from "@/components/hero";
+import { ExperienceSection } from "@/components/experience-section";
+import { SkillsSection } from "@/components/skills-section";
 import { SelectedWork } from "@/components/selected-work";
 import { ResearchSection } from "@/components/research-section";
-import { ExperienceSection } from "@/components/experience-section";
-import { AboutSection } from "@/components/about-section";
+import { EducationSection } from "@/components/education-section";
+import { TeachingSection } from "@/components/teaching-section";
+import { ClubsSection } from "@/components/clubs-section";
 import { ContactSection } from "@/components/contact-section";
 
 export default function HomePage() {
   return (
     <>
       <Hero />
+      <ExperienceSection />
+      <SkillsSection />
       <SelectedWork />
       <ResearchSection />
-      <ExperienceSection />
-      <AboutSection />
+      <EducationSection />
+      <TeachingSection />
+      <ClubsSection />
       <ContactSection />
     </>
   );

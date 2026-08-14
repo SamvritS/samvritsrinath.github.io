@@ -9,10 +9,10 @@ export function ResearchSection() {
     <section id="research" className="border-t border-line">
       <div className="mx-auto max-w-6xl px-6 py-24 md:py-36">
         <SectionHeading
-          index="02"
+          index="04"
           kicker="Research"
-          title="Understanding systems — and how we learn them."
-          description="Two threads: internet measurement that maps who actually operates the network, and computing education research for the generative-AI era."
+          title="Internet measurement and computing education."
+          description="Two threads: mapping who actually operates the network, and studying how students learn with generative AI."
         />
 
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-20">
@@ -54,7 +54,7 @@ export function ResearchSection() {
                   href={pub.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group rounded-2xl border border-line bg-surface/50 p-6 transition-all duration-300 hover:border-line-strong"
+                  className="glass-card group rounded-2xl p-6 transition-all duration-300 hover:border-line-strong"
                 >
                   <div className="mb-3 flex items-center justify-between">
                     <span className="font-mono text-xs uppercase tracking-[0.2em] text-indigo">
@@ -71,7 +71,7 @@ export function ResearchSection() {
                     {pub.abstract}
                   </p>
                   <span className="mt-4 flex items-center gap-1 font-mono text-xs uppercase tracking-[0.18em] text-indigo">
-                    Read on arXiv
+                    Read the paper
                     <ArrowUpRight className="h-3.5 w-3.5" />
                   </span>
                 </a>

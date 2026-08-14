@@ -29,7 +29,7 @@ export const publications: Publication[] = [
       "Daniel Zingaro",
       "Leo Porter",
     ],
-    venue: "arXiv preprint (cs.CY)",
+    venue: "Computers & Education",
     year: "2025",
     href: "https://arxiv.org/abs/2510.18806",
     abstract:
@@ -55,8 +55,7 @@ export const publications: Publication[] = [
 ];
 
 export const researchStats = [
-  { value: "2", label: "arXiv publications" },
+  { value: "2", label: "co-authored papers" },
   { value: "2", label: "active areas" },
-  { value: "IMC", label: "measurement venue" },
-  { value: "ITiCSE", label: "education venue" },
+  { value: "8", label: "papers across case studies" },
 ] as const;

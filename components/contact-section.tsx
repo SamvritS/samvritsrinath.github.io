@@ -7,12 +7,12 @@ export function ContactSection() {
     <section id="contact" className="border-t border-line">
       <div className="mx-auto max-w-6xl px-6 py-28 md:py-40">
         <p className="eyebrow mb-6 flex items-center gap-3">
-          <span className="text-ink-faint">05</span>
+          <span className="text-ink-faint">08</span>
           <span className="h-px w-8 bg-current opacity-40" />
           Contact
         </p>
         <h2 className="max-w-3xl text-4xl font-semibold leading-tight tracking-tight text-ink md:text-6xl">
-          Let&apos;s build something.
+          Open to research collaborations and systems work.
         </h2>
 
         <div className="mt-12 flex flex-wrap items-center gap-4">

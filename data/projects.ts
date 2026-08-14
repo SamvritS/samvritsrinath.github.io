@@ -2,8 +2,8 @@ import type { Project } from "@/lib/types";
 
 export const projects: Project[] = [
   {
-    slug: "asset-ownership",
-    title: "Asset Ownership Platform",
+    slug: "ip-sage",
+    title: "IP-Sage",
     eyebrow: "Research · Network Measurement",
     tagline: "Determining who actually operates 238 million IPv4 addresses.",
     description:
@@ -22,7 +22,7 @@ export const projects: Project[] = [
     technologies: ["Python", "Go", "BigQuery", "GCP", "OpenAI", "Claude"],
     links: [
       {
-        label: "Paper",
+        label: "Paper (IMC '25)",
         href: "/assets/papers/OperatorLLMs_IMC25.pdf",
         external: true,
       },
@@ -80,7 +80,7 @@ export const projects: Project[] = [
           src: "/assets/projects/ip-sage/ip-sage-1.webp",
           alt: "IP-Sage CLI resolving operators across a network range",
           caption: "The IP-Sage command-line interface attributing operators across scanned ranges.",
-          source: "Asset Ownership Platform",
+          source: "IP-Sage",
         },
       },
     ],
@@ -154,6 +154,46 @@ export const projects: Project[] = [
           source: "SpecSplit",
         },
       },
+      {
+        type: "figure",
+        heading: "Architecture",
+        figure: {
+          src: "/assets/projects/specsplit/architecture.svg",
+          alt: "SpecSplit system architecture diagram",
+          caption: "System architecture: draft and target nodes coupled over gRPC with KV-cache sharding.",
+          source: "SpecSplit",
+        },
+      },
+      {
+        type: "gallery",
+        heading: "Benchmarks",
+        images: [
+          {
+            src: "/assets/projects/specsplit/tpot_vs_gamma.png",
+            alt: "Tokens per token-acceptance versus gamma",
+            caption: "Throughput and acceptance as speculation depth γ varies.",
+            source: "SpecSplit",
+          },
+          {
+            src: "/assets/projects/specsplit/tokens_per_second_by_prompt.png",
+            alt: "Tokens per second by prompt shape",
+            caption: "End-to-end tokens per second across prompt categories.",
+            source: "SpecSplit",
+          },
+          {
+            src: "/assets/projects/specsplit/network_overhead.png",
+            alt: "Network overhead of disaggregated speculation",
+            caption: "gRPC network overhead relative to total generation time.",
+            source: "SpecSplit",
+          },
+          {
+            src: "/assets/projects/specsplit/verify_vs_draft_time.png",
+            alt: "Verification versus draft generation time",
+            caption: "Breakdown of draft, verify, and transfer time per request.",
+            source: "SpecSplit",
+          },
+        ],
+      },
     ],
   },
   {
@@ -224,6 +264,42 @@ export const projects: Project[] = [
           source: "OptFantasy",
         },
       },
+      {
+        type: "gallery",
+        heading: "Season results",
+        images: [
+          {
+            src: "/assets/projects/optfantasy/method_score_comparison.png",
+            alt: "Method score comparison across the season",
+            caption: "Final out-of-sample scores for all six methods across the 2024 season.",
+            source: "OptFantasy",
+          },
+          {
+            src: "/assets/projects/optfantasy/weekly_score_trajectories.png",
+            alt: "Weekly score trajectories by method",
+            caption: "Week-to-week scores, showing where the ADP heuristic pulls ahead.",
+            source: "OptFantasy",
+          },
+          {
+            src: "/assets/projects/optfantasy/integrality_gap.png",
+            alt: "Integrality gap of the MIQCP relaxation",
+            caption: "Integrality gap between the continuous relaxation and integer solutions.",
+            source: "OptFantasy",
+          },
+          {
+            src: "/assets/projects/optfantasy/runtime_vs_score.png",
+            alt: "Runtime versus score tradeoff",
+            caption: "The runtime-to-score frontier that favors fast heuristics over exact solvers.",
+            source: "OptFantasy",
+          },
+          {
+            src: "/assets/projects/optfantasy/method_cumulative_trajectory.webp",
+            alt: "Cumulative score trajectory of each method",
+            caption: "Cumulative points over the season for every method.",
+            source: "OptFantasy",
+          },
+        ],
+      },
     ],
   },
   {
@@ -272,6 +348,48 @@ export const projects: Project[] = [
           caption: "Three-body chaos, where the differentiable Hamiltonian core keeps trajectories honest.",
           source: "LomaVerse",
         },
+      },
+      {
+        type: "gallery",
+        heading: "Simulated systems",
+        images: [
+          {
+            src: "/assets/projects/lomaverse/SolarSystem3D.jpg",
+            alt: "Three-dimensional solar system in LomaVerse",
+            caption: "A stable solar system rendered in the 3D viewer.",
+            source: "LomaVerse",
+          },
+          {
+            src: "/assets/projects/lomaverse/SolarSystem2D.jpg",
+            alt: "Two-dimensional solar system orbits",
+            caption: "The same system in the 2D orbit renderer.",
+            source: "LomaVerse",
+          },
+          {
+            src: "/assets/projects/lomaverse/Binary2D.jpg",
+            alt: "Binary star system in 2D",
+            caption: "A bound binary pair holding its orbit over thousands of steps.",
+            source: "LomaVerse",
+          },
+          {
+            src: "/assets/projects/lomaverse/Binary3D.jpg",
+            alt: "Binary star system in 3D",
+            caption: "Binary dynamics with the Hamiltonian core enforcing conservation.",
+            source: "LomaVerse",
+          },
+          {
+            src: "/assets/projects/lomaverse/Chaos2D.jpg",
+            alt: "Chaotic three-body interaction in 2D",
+            caption: "Chaotic trajectories where tiny perturbations change outcomes.",
+            source: "LomaVerse",
+          },
+          {
+            src: "/assets/projects/lomaverse/UI.jpg",
+            alt: "LomaVerse user interface",
+            caption: "The LomaVerse UI for configuring masses, potentials, and integrators.",
+            source: "LomaVerse",
+          },
+        ],
       },
     ],
   },
@@ -349,6 +467,48 @@ export const projects: Project[] = [
           source: "HoneyLLM",
         },
       },
+      {
+        type: "gallery",
+        heading: "Platform",
+        images: [
+          {
+            src: "/assets/projects/interview-site/SysDesign.jpg",
+            alt: "HoneyLLM system design overview",
+            caption: "End-to-end system design: content injection, telemetry, and verdicting.",
+            source: "HoneyLLM",
+          },
+          {
+            src: "/assets/projects/interview-site/Gemini.png",
+            alt: "Gemini response to a canary-injected interview",
+            caption: "Gemini leaking an invisible ASCII canary verbatim into its answer.",
+            source: "HoneyLLM",
+          },
+          {
+            src: "/assets/projects/interview-site/Qwen.jpg",
+            alt: "Qwen response to a canary-injected interview",
+            caption: "Qwen exhibiting the same smuggling behaviour.",
+            source: "HoneyLLM",
+          },
+          {
+            src: "/assets/projects/interview-site/Cluely.jpg",
+            alt: "Cluely response to a canary-injected interview",
+            caption: "Cluely preserving the canary, confirming provider-agnostic detection.",
+            source: "HoneyLLM",
+          },
+          {
+            src: "/assets/projects/interview-site/Claude.webp",
+            alt: "Claude response to a canary-injected interview",
+            caption: "Claude reproducing the watermark under adversarial prompting.",
+            source: "HoneyLLM",
+          },
+          {
+            src: "/assets/projects/interview-site/HoneyBucket.webp",
+            alt: "HoneyBucket canary URL telemetry",
+            caption: "Canary URL visitation telemetry recorded per candidate.",
+            source: "HoneyLLM",
+          },
+        ],
+      },
     ],
   },
   {
@@ -394,6 +554,42 @@ export const projects: Project[] = [
           caption: "Methodology for attributing IP hops to countries and flagging in-between exposure.",
           source: "Country-in-the-Middle",
         },
+      },
+      {
+        type: "gallery",
+        heading: "Findings",
+        images: [
+          {
+            src: "/assets/projects/traceroutes/heatmap_violators.png",
+            alt: "Heatmap of in-between countries",
+            caption: "Frequency with which each country appears in the middle of measured paths.",
+            source: "Country-in-the-Middle",
+          },
+          {
+            src: "/assets/projects/traceroutes/definitions.png",
+            alt: "Definitions of country-in-the-middle",
+            caption: "Definitions used to classify countries in the middle of a path.",
+            source: "Country-in-the-Middle",
+          },
+          {
+            src: "/assets/projects/traceroutes/types_of_targets.png",
+            alt: "Types of government targets measured",
+            caption: "Breakdown of the government websites measured in each country.",
+            source: "Country-in-the-Middle",
+          },
+          {
+            src: "/assets/projects/traceroutes/cdf_unlabeled_hops.png",
+            alt: "CDF of hops that could not be attributed",
+            caption: "Distribution of unlabeled hops — the attribution challenge the study faced.",
+            source: "Country-in-the-Middle",
+          },
+          {
+            src: "/assets/projects/traceroutes/banjo_graph_with_outline.png",
+            alt: "Network graph of paths through countries",
+            caption: "Graph of measured paths, highlighting countries that repeatedly sit in the middle.",
+            source: "Country-in-the-Middle",
+          },
+        ],
       },
     ],
   },
@@ -441,6 +637,30 @@ export const projects: Project[] = [
           source: "GPU Megakernels",
         },
       },
+      {
+        type: "gallery",
+        heading: "Kernel results",
+        images: [
+          {
+            src: "/assets/projects/gpu-kernels/Llama.jpg",
+            alt: "Llama kernel memory analysis",
+            caption: "Memory-movement opportunities identified inside a batched Llama-8B megakernel.",
+            source: "GPU Megakernels",
+          },
+          {
+            src: "/assets/projects/gpu-kernels/MatrixMult.jpg",
+            alt: "Matrix multiplication within a megakernel",
+            caption: "Shared-memory allocation for matrix operations under the runtime manager.",
+            source: "GPU Megakernels",
+          },
+          {
+            src: "/assets/projects/gpu-kernels/ProcessorPipeline.jpg",
+            alt: "Processor pipeline inside the megakernel",
+            caption: "Pipeline stages and the memory handoffs between them.",
+            source: "GPU Megakernels",
+          },
+        ],
+      },
     ],
   },
   {
@@ -463,6 +683,11 @@ export const projects: Project[] = [
     ],
     technologies: ["Curriculum Design", "Python", "Pandas"],
     links: [
+      {
+        label: "Paper (ITiCSE '24)",
+        href: "/assets/papers/CS1_LLM_Experience_Report__ITiCSE_2024_.pdf",
+        external: true,
+      },
       {
         label: "arXiv",
         href: "https://arxiv.org/abs/2406.15379",
@@ -493,6 +718,30 @@ export const projects: Project[] = [
           caption: "How helpful students found LLM tools, and their comfort using them.",
           source: "CS1-LLM Experience Report",
         },
+      },
+      {
+        type: "gallery",
+        heading: "Course evidence",
+        images: [
+          {
+            src: "/assets/research/ITiCSE/LLM_workflow_image.png",
+            alt: "LLM workflow used in the CS1-LLM course",
+            caption: "The structured workflow students used when working with LLMs.",
+            source: "CS1-LLM Experience Report",
+          },
+          {
+            src: "/assets/research/ITiCSE/copilot_helped_hindered.png",
+            alt: "How Copilot helped or hindered students",
+            caption: "Where students reported Copilot helping versus hindering their work.",
+            source: "CS1-LLM Experience Report",
+          },
+          {
+            src: "/assets/research/ITiCSE/divergent_column_percent_small.png",
+            alt: "Divergent responses across assessment columns",
+            caption: "Divergence in student responses across assessment formats.",
+            source: "CS1-LLM Experience Report",
+          },
+        ],
       },
     ],
   },
@@ -573,6 +822,36 @@ export const projects: Project[] = [
           "Built with Triton Software Engineering for Patriots and Paws, replacing a cumbersome manual furniture-request workflow with a structured inventory system: administrators manage items and volunteers process requests through a clean, responsive interface.",
         ],
       },
+      {
+        type: "gallery",
+        heading: "Interface",
+        images: [
+          {
+            src: "/assets/projects/pap-inventory/pap-inventory-1.jpg",
+            alt: "PAP Inventory Processing dashboard",
+            caption: "The dashboard administrators use to manage the furniture inventory.",
+            source: "PAP Inventory Processing",
+          },
+          {
+            src: "/assets/projects/pap-inventory/pap-inventory-2.jpg",
+            alt: "Inventory item management screen",
+            caption: "Managing individual furniture items and their status.",
+            source: "PAP Inventory Processing",
+          },
+          {
+            src: "/assets/projects/pap-inventory/pap-inventory-3.jpg",
+            alt: "Request processing workflow",
+            caption: "Processing and fulfilling veteran furniture requests.",
+            source: "PAP Inventory Processing",
+          },
+          {
+            src: "/assets/projects/pap-inventory/pap-inventory-4.jpg",
+            alt: "Mobile-friendly inventory view",
+            caption: "The responsive interface used by volunteers on site.",
+            source: "PAP Inventory Processing",
+          },
+        ],
+      },
     ],
   },
   {
@@ -609,6 +888,36 @@ export const projects: Project[] = [
           "Built with Triton Software Engineering to reduce stigma and promote healing: a directory of culturally competent therapists and support groups, delivered as a polished cross-platform mobile app backed by Firebase.",
         ],
       },
+      {
+        type: "gallery",
+        heading: "Screens",
+        images: [
+          {
+            src: "/assets/projects/psyches-of-color/psyches-of-color-1.jpg",
+            alt: "Psyches of Color app home screen",
+            caption: "The home screen connecting youth to culturally competent care.",
+            source: "Psyches of Color App",
+          },
+          {
+            src: "/assets/projects/psyches-of-color/psyches-of-color-2.jpg",
+            alt: "Resource directory screen",
+            caption: "Browsing therapists and support groups by need.",
+            source: "Psyches of Color App",
+          },
+          {
+            src: "/assets/projects/psyches-of-color/psyches-of-color-3.jpg",
+            alt: "Therapist profile view",
+            caption: "A therapist profile with credentials and specialties.",
+            source: "Psyches of Color App",
+          },
+          {
+            src: "/assets/projects/psyches-of-color/psyches-of-color-4.jpg",
+            alt: "Support group listing",
+            caption: "Support groups and community resources.",
+            source: "Psyches of Color App",
+          },
+        ],
+      },
     ],
   },
   {
@@ -621,8 +930,6 @@ export const projects: Project[] = [
     category: "Personal",
     year: "2024",
     featured: false,
-    cover: "/assets/projects/ip-sage/ip-sage-1.webp",
-    coverAlt: "Parkinson's Disease Predictor",
     metrics: [
       { value: "77%", label: "accuracy" },
       { value: "2", label: "model families" },
@@ -657,8 +964,6 @@ export const projects: Project[] = [
     category: "Personal",
     year: "2024",
     featured: false,
-    cover: "/assets/projects/ip-sage/ip-sage-1.webp",
-    coverAlt: "Developer Journal web app",
     metrics: [
       { value: "10", label: "people led" },
       { value: "PWA", label: "local-first" },
@@ -693,8 +998,6 @@ export const projects: Project[] = [
     category: "Club",
     year: "2023",
     featured: false,
-    cover: "/assets/projects/ip-sage/ip-sage-1.webp",
-    coverAlt: "Political sentiment classifier",
     metrics: [
       { value: "85%+", label: "accuracy" },
       { value: "BERT", label: "transformer" },

@@ -20,7 +20,7 @@ export default function ResearchPage() {
           <span>Measurement · Education</span>
         </p>
         <h1 className="text-4xl font-semibold tracking-tight text-ink md:text-6xl">
-          Understanding systems.
+          Internet measurement &amp; CS education.
         </h1>
         <p className="mt-5 max-w-xl text-base leading-relaxed text-ink-soft md:text-lg">
           Two threads of work — mapping who really operates the internet, and
@@ -31,14 +31,14 @@ export default function ResearchPage() {
       <SectionHeading
         index="01"
         kicker="Areas"
-        title="Where the research lives."
+        title="Networking and education research."
       />
 
       <div className="grid gap-6 md:grid-cols-2">
         {researchAreas.map((area) => (
           <div
             key={area.title}
-            className="rounded-2xl border border-line bg-surface/60 p-8"
+            className="glass-card rounded-2xl p-8"
           >
             <h3 className="text-lg font-semibold tracking-tight text-ink md:text-xl">
               {area.title}
@@ -64,7 +64,7 @@ export default function ResearchPage() {
         <SectionHeading
           index="02"
           kicker="Publications"
-          title="What's been written up."
+          title="Co-authored papers."
         />
         <div className="mb-12">
           <MetricRow metrics={[...researchStats]} />
@@ -73,7 +73,7 @@ export default function ResearchPage() {
           {publications.map((pub) => (
             <article
               key={pub.href}
-              className="group rounded-2xl border border-line bg-surface/60 p-8 transition-all duration-300 hover:border-line-strong"
+              className="glass-card group rounded-2xl p-8 transition-all duration-300 hover:border-line-strong"
             >
               <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
                 <span className="font-mono text-xs uppercase tracking-[0.2em] text-indigo">
@@ -106,7 +106,7 @@ export default function ResearchPage() {
                 rel="noopener noreferrer"
                 className="mt-6 inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.18em] text-indigo"
               >
-                Read on arXiv
+                Read the paper
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
             </article>

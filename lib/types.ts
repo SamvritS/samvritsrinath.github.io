@@ -36,6 +36,7 @@ export type ContentSection =
   | { type: "metrics"; heading?: string; metrics: Metric[] }
   | { type: "diagram"; heading?: string; diagram: DiagramData }
   | { type: "figure"; heading?: string; figure: Figure }
+  | { type: "gallery"; heading?: string; images: Figure[] }
   | { type: "links"; heading?: string; links: Link[] };
 
 export type Project = {
@@ -47,8 +48,8 @@ export type Project = {
   category: string;
   year: string;
   featured: boolean;
-  cover: string;
-  coverAlt: string;
+  cover?: string;
+  coverAlt?: string;
   metrics: Metric[];
   technologies: string[];
   links: Link[];
@@ -89,9 +90,11 @@ export type Club = {
   name: string;
   role: string;
   website: string;
+  logo?: string;
 };
 
 export type TeachingCompany = {
   company: string;
+  logo?: string;
   roles: WorkRole[];
 };

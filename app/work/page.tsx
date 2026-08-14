@@ -18,7 +18,7 @@ export default function WorkPage() {
           <span>Systems · Research · Software</span>
         </p>
         <h1 className="text-4xl font-semibold tracking-tight text-ink md:text-6xl">
-          All the work.
+          Work &amp; case studies.
         </h1>
         <p className="mt-5 max-w-xl text-base leading-relaxed text-ink-soft md:text-lg">
           Every project below has a case study with the system, the evidence,

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { clubs, education, teaching, teachingStats } from "@/data/education";
 import { MetricRow } from "@/components/metric";
 import { SectionHeading } from "@/components/section-heading";
+import { TechIcon } from "@/components/tech-icon";
 
 export const metadata: Metadata = {
   title: "About",
@@ -59,9 +61,22 @@ export default function AboutPage() {
         <div className="flex flex-col gap-16">
           {teaching.map((company) => (
             <div key={company.company}>
-              <h3 className="text-xl font-semibold tracking-tight text-ink md:text-2xl">
-                {company.company}
-              </h3>
+              <div className="flex flex-wrap items-center gap-4">
+                {company.logo && (
+                  <div className="glass-card flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl p-2">
+                    <Image
+                      src={company.logo}
+                      alt={`${company.company} logo`}
+                      width={96}
+                      height={96}
+                      className="h-full w-full object-contain"
+                    />
+                  </div>
+                )}
+                <h3 className="text-xl font-semibold tracking-tight text-ink md:text-2xl">
+                  {company.company}
+                </h3>
+              </div>
               <div className="mt-6 flex flex-col gap-8">
                 {company.roles.map((role) => (
                   <div
@@ -82,6 +97,17 @@ export default function AboutPage() {
                           </li>
                         ))}
                       </ul>
+                      {role.technologies.length > 0 && (
+                        <div className="mt-4 flex flex-wrap items-center gap-3">
+                          {role.technologies.slice(0, 6).map((t) => (
+                            <TechIcon
+                              key={t}
+                              name={t}
+                              className="h-4 w-4 text-ink-faint"
+                            />
+                          ))}
+                        </div>
+                      )}
                     </div>
                     <span className="font-mono text-xs tracking-widest text-ink-faint md:pt-1 md:text-right">
                       {role.duration}
@@ -107,13 +133,26 @@ export default function AboutPage() {
               href={club.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex flex-col justify-between rounded-2xl border border-line bg-surface/60 p-6 transition-all duration-300 hover:border-line-strong"
+              className="glass-card group flex flex-col justify-between rounded-2xl p-6 transition-all duration-300 hover:border-line-strong"
             >
               <div>
-                <h3 className="text-base font-semibold tracking-tight text-ink group-hover:text-indigo">
-                  {club.name}
-                </h3>
-                <p className="mt-2 text-sm text-ink-soft">{club.role}</p>
+                <div className="flex items-center gap-3">
+                  {club.logo && (
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-line bg-surface p-1.5">
+                      <Image
+                        src={club.logo}
+                        alt=""
+                        width={72}
+                        height={72}
+                        className="h-full w-full object-contain"
+                      />
+                    </span>
+                  )}
+                  <h3 className="text-base font-semibold tracking-tight text-ink group-hover:text-indigo">
+                    {club.name}
+                  </h3>
+                </div>
+                <p className="mt-3 text-sm text-ink-soft">{club.role}</p>
               </div>
               <ArrowUpRight className="mt-6 h-4 w-4 text-ink-faint transition-colors group-hover:text-indigo" />
             </a>
