@@ -13,6 +13,12 @@ export const projects: Project[] = [
     featured: true,
     cover: "/assets/projects/ip-sage/ip-sage-1.webp",
     coverAlt: "IP-Sage terminal interface showing IP operator attribution",
+    paper: {
+      title: "OperatorLLMs",
+      venue: "IMC '25",
+      year: "2025",
+      href: "/assets/papers/OperatorLLMs_IMC25.pdf",
+    },
     metrics: [
       { value: "238M", label: "IPv4 addresses" },
       { value: "13.7K", label: "unique operators" },
@@ -20,13 +26,7 @@ export const projects: Project[] = [
       { value: "66%", label: "coverage gain" },
     ],
     technologies: ["Python", "Go", "BigQuery", "GCP", "OpenAI", "Claude"],
-    links: [
-      {
-        label: "Paper (IMC '25)",
-        href: "/assets/papers/OperatorLLMs_IMC25.pdf",
-        external: true,
-      },
-    ],
+    links: [],
     sections: [
       {
         type: "prose",
@@ -36,27 +36,11 @@ export const projects: Project[] = [
         ],
       },
       {
-        type: "diagram",
-        heading: "System",
-        diagram: {
-          title: "Attribution architecture",
-          nodes: [
-            { id: "censys", label: "CENSYS", sublabel: "domain + TLS + WHOIS", kind: "source" },
-            { id: "prune", label: "PRUNE", sublabel: "cloud / CDN / 404", kind: "process" },
-            { id: "interpret", label: "INTERPRET", sublabel: "LLM classification", kind: "process" },
-            { id: "guard", label: "GUARDRAILS", sublabel: "structured fallbacks", kind: "process" },
-            { id: "cache", label: "CACHE", sublabel: "BigQuery operator store", kind: "storage" },
-            { id: "owner", label: "OPERATOR", sublabel: "1.2.3.4 → owner", kind: "output" },
-          ],
-          edges: [
-            ["censys", "prune"],
-            ["prune", "interpret"],
-            ["interpret", "guard"],
-            ["guard", "cache"],
-            ["cache", "owner"],
-            ["owner", "cache"],
-          ],
-        },
+        type: "visual",
+        heading: "Pipeline",
+        visual: "ownership-pipeline",
+        caption:
+          "The cache lets previously resolved operators be reused across the full 238M-address snapshot — the warm path skips the expensive LLM step entirely.",
       },
       {
         type: "prose",
@@ -65,6 +49,16 @@ export const projects: Project[] = [
           "Each IP is resolved to its hosting domains via Censys, then aggressively pruned — cloud providers, CDNs, parked domains, and 404s never reach the expensive step. The surviving evidence is interpreted by an LLM into an operator classification, with structured guardrails when the model is uncertain.",
           "Because adjacent addresses almost always share an operator, every answer is written back to a BigQuery-backed cache. The cache turns the worst-case cold lookup into a single key scan, which is what makes the full 238M-address sweep tractable.",
         ],
+      },
+      {
+        type: "paper",
+        heading: "Research note",
+        paper: {
+          title: "OperatorLLMs",
+          venue: "IMC '25",
+          year: "2025",
+          href: "/assets/papers/OperatorLLMs_IMC25.pdf",
+        },
       },
       {
         type: "metrics",
@@ -90,6 +84,12 @@ export const projects: Project[] = [
     featured: true,
     cover: "/assets/projects/specsplit/dashboard.png",
     coverAlt: "SpecSplit dashboard visualizing speculative decoding throughput",
+    paper: {
+      title: "SpecSplit",
+      venue: "Research paper",
+      year: "2025",
+      href: "/assets/papers/SpecSplit.pdf",
+    },
     metrics: [
       { value: "75%", label: "token acceptance" },
       { value: "2 tok/s", label: "throughput" },
@@ -99,7 +99,6 @@ export const projects: Project[] = [
     technologies: ["Python", "PyTorch", "gRPC", "CUDA", "NVIDIA DGX"],
     links: [
       { label: "GitHub", href: "https://github.com/SamvritS/SpecSplit", external: true },
-      { label: "Paper", href: "/assets/papers/SpecSplit.pdf", external: true },
     ],
     sections: [
       {
@@ -110,24 +109,11 @@ export const projects: Project[] = [
         ],
       },
       {
-        type: "diagram",
-        heading: "Architecture",
-        diagram: {
-          title: "Disaggregated speculation over gRPC",
-          nodes: [
-            { id: "client", label: "CLIENT", sublabel: "prompt + request", kind: "source" },
-            { id: "draft", label: "DRAFT", sublabel: "Llama 3.1 8B · DGX Spark", kind: "process" },
-            { id: "tree", label: "TREE", sublabel: "speculation candidates", kind: "process" },
-            { id: "target", label: "TARGET", sublabel: "Llama 3.1 70B", kind: "process" },
-            { id: "output", label: "OUTPUT", sublabel: "accepted tokens", kind: "output" },
-          ],
-          edges: [
-            ["client", "draft"],
-            ["draft", "tree"],
-            ["tree", "target"],
-            ["target", "output"],
-          ],
-        },
+        type: "visual",
+        heading: "Topology",
+        visual: "specsplit-topology",
+        caption:
+          "Draft and target live on separate GPUs — the tree of candidates crosses one gRPC hop, so a rejected branch never poisons later verification.",
       },
       {
         type: "prose",
@@ -144,16 +130,6 @@ export const projects: Project[] = [
           src: "/assets/projects/specsplit/acceptance_heatmap.png",
           alt: "Heatmap of token acceptance across speculation depth",
           caption: "Token acceptance by speculation depth and position.",
-          source: "SpecSplit",
-        },
-      },
-      {
-        type: "figure",
-        heading: "Architecture",
-        figure: {
-          src: "/assets/projects/specsplit/architecture.svg",
-          alt: "SpecSplit system architecture diagram",
-          caption: "System architecture: draft and target nodes coupled over gRPC with KV-cache sharding.",
           source: "SpecSplit",
         },
       },
@@ -201,6 +177,12 @@ export const projects: Project[] = [
     featured: false,
     cover: "/assets/projects/optfantasy/method_score_comparison.png",
     coverAlt: "Method score comparison chart for OptFantasy",
+    paper: {
+      title: "OptFantasy",
+      venue: "CSE 203B · Winter 2026",
+      year: "2026",
+      href: "/assets/papers/OptFantasy.pdf",
+    },
     metrics: [
       { value: "2,089", label: "out-of-sample points" },
       { value: "<0.1s", label: "solve time" },
@@ -210,7 +192,6 @@ export const projects: Project[] = [
     technologies: ["Python", "Gurobi", "Pandas", "NumPy", "Matplotlib"],
     links: [
       { label: "GitHub", href: "https://github.com/SamvritS/OptFantasy", external: true },
-      { label: "Paper", href: "/assets/papers/OptFantasy.pdf", external: true },
     ],
     sections: [
       {
@@ -221,31 +202,18 @@ export const projects: Project[] = [
         ],
       },
       {
-        type: "diagram",
-        heading: "Pipeline",
-        diagram: {
-          title: "From data to lineup",
-          nodes: [
-            { id: "stats", label: "STATS", sublabel: "projections + variance", kind: "source" },
-            { id: "cov", label: "COVARIANCE", sublabel: "player-by-player", kind: "process" },
-            { id: "form", label: "FORMULATE", sublabel: "MIQCP / MILP / QCP", kind: "process" },
-            { id: "solve", label: "SOLVE", sublabel: "Gurobi", kind: "process" },
-            { id: "lineup", label: "LINEUP", sublabel: "salary-cap legal", kind: "output" },
-          ],
-          edges: [
-            ["stats", "cov"],
-            ["cov", "form"],
-            ["form", "solve"],
-            ["solve", "lineup"],
-          ],
-        },
-      },
-      {
         type: "prose",
         heading: "What won",
         body: [
           "The ADP heuristic — a greedy, admissible line construction with iterative refinement — beat every exact method on out-of-sample score while solving in microseconds. It exposes the real tradeoff: exact solvers minimize the wrong objective (in-sample variance) while the heuristic balances risk and ceiling week to week.",
         ],
+      },
+      {
+        type: "visual",
+        heading: "Decision landscape",
+        visual: "optfantasy-comparison",
+        caption:
+          "Every method plotted by solve time against out-of-sample score — the ADP heuristic wins on both axes.",
       },
       {
         type: "figure",
@@ -255,6 +223,16 @@ export const projects: Project[] = [
           alt: "Player value frontier for lineup selection",
           caption: "Expected points against cost, showing the efficient frontier the optimizer navigates.",
           source: "OptFantasy",
+        },
+      },
+      {
+        type: "paper",
+        heading: "Research note",
+        paper: {
+          title: "OptFantasy",
+          venue: "CSE 203B · Winter 2026",
+          year: "2026",
+          href: "/assets/papers/OptFantasy.pdf",
         },
       },
       {
@@ -324,6 +302,13 @@ export const projects: Project[] = [
         body: [
           "Most physics simulators hand-write the equations of motion. LomaVerse instead starts from the Hamiltonian — the system's total energy — and lets automatic differentiation produce the gradients that drive time integration. Change the potential, and the dynamics follow automatically.",
         ],
+      },
+      {
+        type: "visual",
+        heading: "Orbital mechanics",
+        visual: "lomaverse-orbit",
+        caption:
+          "A stable solar system holding its orbits for thousands of steps — the differentiable Hamiltonian core keeps trajectories honest.",
       },
       {
         type: "prose",
@@ -398,6 +383,12 @@ export const projects: Project[] = [
     featured: true,
     cover: "/assets/projects/interview-site/SystemDesign.jpg",
     coverAlt: "HoneyLLM system design diagram",
+    paper: {
+      title: "HoneyLLM",
+      venue: "Research report",
+      year: "2025",
+      href: "/assets/projects/interview-site/HoneyLLM.pdf",
+    },
     metrics: [
       { value: "5", label: "detection modalities" },
       { value: "multi", label: "LLM providers" },
@@ -411,7 +402,6 @@ export const projects: Project[] = [
         href: "https://interview-platform-ecru-gamma.vercel.app",
         external: true,
       },
-      { label: "Paper", href: "/assets/projects/interview-site/HoneyLLM.pdf", external: true },
     ],
     sections: [
       {
@@ -422,26 +412,11 @@ export const projects: Project[] = [
         ],
       },
       {
-        type: "diagram",
+        type: "visual",
         heading: "Defense modalities",
-        diagram: {
-          title: "Canary-based detection",
-          nodes: [
-            { id: "content", label: "CONTENT", sublabel: "canary-injected", kind: "source" },
-            { id: "smuggle", label: "SMUGGLE", sublabel: "invisible ASCII traps", kind: "process" },
-            { id: "visit", label: "VISIT", sublabel: "unique URL pings", kind: "process" },
-            { id: "watermark", label: "WATERMARK", sublabel: "solution fingerprints", kind: "process" },
-            { id: "signal", label: "SIGNAL", sublabel: "deterrence verdict", kind: "output" },
-          ],
-          edges: [
-            ["content", "smuggle"],
-            ["content", "visit"],
-            ["content", "watermark"],
-            ["smuggle", "signal"],
-            ["visit", "signal"],
-            ["watermark", "signal"],
-          ],
-        },
+        visual: "honeyllm-flow",
+        caption:
+          "Canary content fans out into three independent detection channels that converge on a single deterrence signal.",
       },
       {
         type: "prose",
@@ -516,6 +491,12 @@ export const projects: Project[] = [
     featured: true,
     cover: "/assets/projects/traceroutes/heatmap_violators.png",
     coverAlt: "Heatmap of countries appearing on government network paths",
+    paper: {
+      title: "Country-in-the-Middle",
+      venue: "IMC '25",
+      year: "2025",
+      href: "/assets/papers/gov_traceroutes_paper.pdf",
+    },
     metrics: [
       { value: "9,000+", label: "IP paths analyzed" },
       { value: "11", label: "countries measured" },
@@ -523,13 +504,7 @@ export const projects: Project[] = [
       { value: "ERSP", label: "UCSD program" },
     ],
     technologies: ["Python", "Pandas", "RIPE Atlas API"],
-    links: [
-      {
-        label: "Paper",
-        href: "/assets/papers/gov_traceroutes_paper.pdf",
-        external: true,
-      },
-    ],
+    links: [],
     sections: [
       {
         type: "prose",
@@ -539,6 +514,13 @@ export const projects: Project[] = [
         ],
       },
       {
+        type: "visual",
+        heading: "On the path",
+        visual: "citm-topology",
+        caption:
+          "A request to a government website can pass through a third country's infrastructure — the country in the middle.",
+      },
+      {
         type: "figure",
         heading: "Path analysis",
         figure: {
@@ -546,6 +528,16 @@ export const projects: Project[] = [
           alt: "Country-in-the-Middle methodology diagram",
           caption: "Methodology for attributing IP hops to countries and flagging in-between exposure.",
           source: "Country-in-the-Middle",
+        },
+      },
+      {
+        type: "paper",
+        heading: "Research note",
+        paper: {
+          title: "Country-in-the-Middle",
+          venue: "IMC '25",
+          year: "2025",
+          href: "/assets/papers/gov_traceroutes_paper.pdf",
         },
       },
       {
@@ -598,6 +590,12 @@ export const projects: Project[] = [
     featured: false,
     cover: "/assets/projects/gpu-kernels/Llama.jpg",
     coverAlt: "Llama kernel memory analysis in ThunderKittens",
+    paper: {
+      title: "Deep Dive into ThunderKittens",
+      venue: "Research report",
+      year: "2025",
+      href: "/assets/projects/gpu-kernels/Paper.pdf",
+    },
     metrics: [
       { value: "Llama-8B", label: "kernel analysis" },
       { value: "CUDA", label: "implementation" },
@@ -605,13 +603,7 @@ export const projects: Project[] = [
       { value: "TK", label: "ThunderKittens" },
     ],
     technologies: ["CUDA", "C++", "ThunderKittens", "GPU Programming"],
-    links: [
-      {
-        label: "Paper",
-        href: "/assets/projects/gpu-kernels/Paper.pdf",
-        external: true,
-      },
-    ],
+    links: [],
     sections: [
       {
         type: "prose",
@@ -619,6 +611,13 @@ export const projects: Project[] = [
         body: [
           "Megakernels keep an entire LLM step resident on the GPU, avoiding kernel-launch overhead but straining shared memory. This work introduces a runtime-managed shared-memory allocator so ops can hand memory to each other directly instead of bouncing through global memory.",
         ],
+      },
+      {
+        type: "visual",
+        heading: "Anatomy",
+        visual: "megakernel-anatomy",
+        caption:
+          "A runtime-managed shared-memory allocator lets SMs hand buffers to each other over a shared bus instead of bouncing through global memory.",
       },
       {
         type: "figure",
@@ -668,6 +667,12 @@ export const projects: Project[] = [
     featured: false,
     cover: "/assets/research/ITiCSE/LLM_workflow_image.png",
     coverAlt: "LLM workflow diagram for CS1 students",
+    paper: {
+      title: "CS1-LLM Experience Report",
+      venue: "ITiCSE '24",
+      year: "2024",
+      href: "/assets/papers/CS1_LLM_Experience_Report__ITiCSE_2024_.pdf",
+    },
     metrics: [
       { value: "ITiCSE", label: "2024 publication" },
       { value: "CS1", label: "course context" },
@@ -676,11 +681,6 @@ export const projects: Project[] = [
     ],
     technologies: ["Curriculum Design", "Python", "Pandas"],
     links: [
-      {
-        label: "Paper (ITiCSE '24)",
-        href: "/assets/papers/CS1_LLM_Experience_Report__ITiCSE_2024_.pdf",
-        external: true,
-      },
       {
         label: "arXiv",
         href: "https://arxiv.org/abs/2406.15379",
@@ -750,6 +750,12 @@ export const projects: Project[] = [
     featured: false,
     cover: "/assets/research/ITiCSE/divergent_column_percent_small.png",
     coverAlt: "Assessment results for problem decomposition questions",
+    paper: {
+      title: "Assessing Problem Decomposition in the GenAI Era",
+      venue: "arXiv",
+      year: "2025",
+      href: "https://arxiv.org/abs/2511.05764",
+    },
     metrics: [
       { value: "QA", label: "Question Suites" },
       { value: "CS1", label: "target course" },
@@ -757,13 +763,7 @@ export const projects: Project[] = [
       { value: "2025", label: "arXiv" },
     ],
     technologies: ["Python", "Pandas", "Curriculum Design", "Assessment"],
-    links: [
-      {
-        label: "arXiv",
-        href: "https://arxiv.org/abs/2511.05764",
-        external: true,
-      },
-    ],
+    links: [],
     sections: [
       {
         type: "prose",

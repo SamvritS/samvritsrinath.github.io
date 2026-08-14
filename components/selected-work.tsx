@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { featuredProjects, projects, spotlightProject } from "@/data/projects";
 import { SectionHeading } from "@/components/section-heading";
 import { MetricRow } from "@/components/metric";
-import { Diagram } from "@/components/diagram";
+import { Visual } from "@/components/visuals/registry";
 import { ProjectCard } from "@/components/project-card";
 import { ProjectCover } from "@/components/project-cover";
 import { Reveal } from "@/components/reveal";
@@ -11,7 +11,7 @@ import { Reveal } from "@/components/reveal";
 export function SelectedWork() {
   const featured = featuredProjects.slice(1, 5);
   const spotlight = spotlightProject;
-  const pipeline = spotlight?.sections.find((s) => s.type === "diagram");
+  const spotlightVisual = spotlight?.sections.find((s) => s.type === "visual");
   const featuredSlugs = new Set(featuredProjects.map((p) => p.slug));
   const moreProjects = projects.filter((p) => !featuredSlugs.has(p.slug)).slice(0, 4);
 
@@ -50,9 +50,9 @@ export function SelectedWork() {
             <MetricRow metrics={spotlight.metrics} />
           </div>
 
-          {pipeline?.type === "diagram" && (
+          {spotlightVisual && (
             <div className="mt-12 rounded-2xl border border-line bg-surface/60 p-6 md:p-10">
-              <Diagram data={pipeline.diagram} />
+              <Visual id={spotlightVisual.visual} />
             </div>
           )}
           </Link>

@@ -1,9 +1,11 @@
 import { ArrowUpRight } from "lucide-react";
 import type { ContentSection } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { Diagram } from "@/components/diagram";
+import { Visual } from "@/components/visuals/registry";
+import { VisualFrame } from "@/components/visuals/visual-frame";
 import { Figure } from "@/components/figure";
 import { MetricRow } from "@/components/metric";
+import { PaperLink } from "@/components/paper-link";
 import { Reveal } from "@/components/reveal";
 
 function SectionShell({
@@ -73,14 +75,26 @@ export function VisualStory({ sections }: { sections: ContentSection[] }) {
               </SectionShell>
             );
             break;
-          case "diagram":
+          case "visual":
             inner = (
               <SectionShell index={i} wide>
                 {section.heading && (
                   <SectionHeading>{section.heading}</SectionHeading>
                 )}
-                <div className="glass-card rounded-2xl p-6 md:p-10">
-                  <Diagram data={section.diagram} />
+                <VisualFrame caption={section.caption}>
+                  <Visual id={section.visual} />
+                </VisualFrame>
+              </SectionShell>
+            );
+            break;
+          case "paper":
+            inner = (
+              <SectionShell index={i}>
+                {section.heading && (
+                  <SectionHeading>{section.heading}</SectionHeading>
+                )}
+                <div className="max-w-sm">
+                  <PaperLink paper={section.paper} />
                 </div>
               </SectionShell>
             );

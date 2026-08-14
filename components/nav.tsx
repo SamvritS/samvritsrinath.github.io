@@ -91,7 +91,6 @@ export function Nav() {
         </div>
       </nav>
 
-      {/* Mobile sheet */}
       <div
         className={cn(
           "fixed inset-0 z-40 flex flex-col justify-end bg-void/90 backdrop-blur-2xl transition-all duration-300 md:hidden",

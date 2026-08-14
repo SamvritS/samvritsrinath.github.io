@@ -9,21 +9,6 @@ export type Metric = {
   label: string;
 };
 
-export type DiagramNodeKind = "source" | "process" | "storage" | "output";
-
-export type DiagramNode = {
-  id: string;
-  label: string;
-  sublabel?: string;
-  kind?: DiagramNodeKind;
-};
-
-export type DiagramData = {
-  title?: string;
-  nodes: DiagramNode[];
-  edges: [string, string][];
-};
-
 export type Figure = {
   src: string;
   alt: string;
@@ -31,13 +16,30 @@ export type Figure = {
   source?: string;
 };
 
+export type Paper = {
+  title: string;
+  venue: string;
+  year?: string;
+  href: string;
+};
+
+export type VisualId =
+  | "ownership-pipeline"
+  | "specsplit-topology"
+  | "honeyllm-flow"
+  | "citm-topology"
+  | "optfantasy-comparison"
+  | "lomaverse-orbit"
+  | "megakernel-anatomy";
+
 export type ContentSection =
   | { type: "prose"; heading: string; body: string[] }
   | { type: "metrics"; heading?: string; metrics: Metric[] }
-  | { type: "diagram"; heading?: string; diagram: DiagramData }
+  | { type: "visual"; heading?: string; visual: VisualId; caption?: string }
   | { type: "figure"; heading?: string; figure: Figure }
   | { type: "gallery"; heading?: string; images: Figure[] }
-  | { type: "links"; heading?: string; links: Link[] };
+  | { type: "links"; heading?: string; links: Link[] }
+  | { type: "paper"; heading?: string; paper: Paper };
 
 export type Project = {
   slug: string;
@@ -50,6 +52,7 @@ export type Project = {
   featured: boolean;
   cover?: string;
   coverAlt?: string;
+  paper?: Paper;
   metrics: Metric[];
   technologies: string[];
   links: Link[];

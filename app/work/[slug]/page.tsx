@@ -6,6 +6,7 @@ import { bySlug, projects } from "@/data/projects";
 import { MetricRow } from "@/components/metric";
 import { Figure } from "@/components/figure";
 import { VisualStory } from "@/components/visual-story";
+import { PaperLink, PaperPill } from "@/components/paper-link";
 
 export const dynamicParams = false;
 
@@ -83,6 +84,7 @@ export default async function ProjectPage({
       </div>
 
       <div className="mt-6 flex flex-wrap gap-3">
+        {project.paper && <PaperPill paper={project.paper} />}
         {project.links.map((link) => (
           <a
             key={link.href}
@@ -113,6 +115,17 @@ export default async function ProjectPage({
       <div className="mt-10 border-t border-line pt-10">
         <VisualStory sections={project.sections} />
       </div>
+
+      {project.paper && (
+        <div className="mt-24 max-w-4xl">
+          <h2 className="font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-ink-faint">
+            Primary sources
+          </h2>
+          <div className="mt-6 max-w-md">
+            <PaperLink paper={project.paper} />
+          </div>
+        </div>
+      )}
 
       <div className="mt-24 flex justify-between border-t border-line pt-10">
         <Link

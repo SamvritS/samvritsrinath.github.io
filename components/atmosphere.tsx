@@ -95,11 +95,9 @@ export function Atmosphere() {
       className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
       style={{ backgroundColor: "var(--void)" }}
     >
-      {/* Base gradient wash */}
       <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_0%,color-mix(in_srgb,var(--accent-indigo)_20%,transparent)_0%,transparent_60%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(90%_70%_at_85%_100%,color-mix(in_srgb,var(--accent-violet)_17%,transparent)_0%,transparent_60%)]" />
 
-      {/* Cursor-responsive nebula field */}
       <div
         ref={nebulaRef}
         className={cn(
@@ -118,7 +116,6 @@ export function Atmosphere() {
         />
       </div>
 
-      {/* Pointer-follow glow */}
       <div
         ref={glowRef}
         aria-hidden
@@ -134,7 +131,6 @@ export function Atmosphere() {
         }}
       />
 
-      {/* Faint coordinate grid */}
       <div
         className="absolute inset-0 opacity-60"
         style={{
@@ -148,7 +144,6 @@ export function Atmosphere() {
         }}
       />
 
-      {/* Star field */}
       <div className="absolute inset-0">
         {stars.map((s) => (
           <span
@@ -168,7 +163,6 @@ export function Atmosphere() {
         ))}
       </div>
 
-      {/* Constellations */}
       <svg
         aria-hidden
         className="absolute inset-0 h-full w-full"
@@ -204,7 +198,6 @@ export function Atmosphere() {
         ))}
       </svg>
 
-      {/* Orbit rings */}
       <div
         aria-hidden
         className={cn("absolute -left-32 top-10 h-[26rem] w-[26rem]", reduced && "animate-none")}
@@ -226,7 +219,6 @@ export function Atmosphere() {
         <div className="absolute left-[30%] top-[30%] h-[40%] w-[40%] rounded-full border border-[color-mix(in_srgb,var(--accent-blue)_14%,transparent)]" />
       </div>
 
-      {/* Shooting stars */}
       {!reduced &&
         shooting.map((s, i) => (
           <span
@@ -246,7 +238,6 @@ export function Atmosphere() {
           />
         ))}
 
-      {/* Bottom vignette */}
       <div className="absolute inset-0 bg-[radial-gradient(100%_50%_at_50%_110%,color-mix(in_srgb,var(--void)_60%,transparent)_0%,transparent_60%)]" />
     </div>
   );
