@@ -6,6 +6,7 @@ import { site } from "@/data/site";
 import { Atmosphere } from "@/components/atmosphere";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
+import { ScrollProgress } from "@/components/scroll-progress";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -64,6 +65,7 @@ export default function RootLayout({
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} font-sans`}>
         <Atmosphere />
+        <ScrollProgress />
         <Nav />
         <main className="relative z-0">{children}</main>
         <Footer />

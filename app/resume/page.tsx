@@ -51,7 +51,7 @@ function PaperEntry({
 export default function ResumePage() {
   return (
     <div className="mx-auto max-w-4xl px-6 pb-28 pt-32 md:pt-36">
-      <div className="mb-10 flex items-center justify-between">
+      <div className="mb-10 flex items-center justify-between print:hidden">
         <p className="eyebrow flex items-center gap-3">
           <span className="text-ink-faint">Résumé</span>
           <span className="h-px w-8 bg-current opacity-40" />
@@ -69,7 +69,7 @@ export default function ResumePage() {
       </div>
 
       {/* Paper sheet — intentionally stays warm-white in both themes */}
-      <article className="overflow-hidden rounded-2xl bg-[#fbfaf6] text-black shadow-[0_32px_80px_-40px_rgba(0,0,0,0.5)]">
+      <article className="print-sheet overflow-hidden rounded-2xl bg-[#fbfaf6] text-black shadow-[0_32px_80px_-40px_rgba(0,0,0,0.5)]">
         <div className="px-8 py-12 md:px-16 md:py-16">
           <header>
             <h1 className="text-3xl font-semibold tracking-tight text-black md:text-4xl">

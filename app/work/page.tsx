@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { projects } from "@/data/projects";
-import { ProjectCard } from "@/components/project-card";
+import { WorkArchive } from "@/components/work-archive";
 
 export const metadata: Metadata = {
   title: "Work",
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function WorkPage() {
   return (
     <div className="mx-auto max-w-6xl px-6 pb-28 pt-36 md:pt-44">
-      <header className="mb-14 max-w-3xl">
+      <header className="mb-16 max-w-3xl">
         <p className="eyebrow mb-5 flex items-center gap-3">
           <span className="text-ink-faint">Work</span>
           <span className="h-px w-8 bg-current opacity-40" />
@@ -26,11 +26,7 @@ export default function WorkPage() {
         </p>
       </header>
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {projects.map((project) => (
-          <ProjectCard key={project.slug} project={project} />
-        ))}
-      </div>
+      <WorkArchive projects={projects} />
     </div>
   );
 }

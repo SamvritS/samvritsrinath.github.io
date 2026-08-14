@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { Reveal } from "@/components/reveal";
 
 type SectionHeadingProps = {
   index?: string;
@@ -18,7 +19,7 @@ export function SectionHeading({
   className,
 }: SectionHeadingProps) {
   return (
-    <div
+    <Reveal
       className={cn(
         "mb-12 max-w-3xl md:mb-16",
         align === "center" && "mx-auto text-center",
@@ -38,6 +39,6 @@ export function SectionHeading({
           {description}
         </p>
       )}
-    </div>
+    </Reveal>
   );
 }

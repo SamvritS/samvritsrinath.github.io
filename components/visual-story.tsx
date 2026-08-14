@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { Diagram } from "@/components/diagram";
 import { Figure } from "@/components/figure";
 import { MetricRow } from "@/components/metric";
+import { Reveal } from "@/components/reveal";
 
 function SectionShell({
   index,
@@ -42,10 +43,12 @@ export function VisualStory({ sections }: { sections: ContentSection[] }) {
   return (
     <div className="flex flex-col gap-14 md:gap-20">
       {sections.map((section, i) => {
+        let inner: React.ReactNode;
+
         switch (section.type) {
           case "prose":
-            return (
-              <SectionShell key={i} index={i}>
+            inner = (
+              <SectionShell index={i}>
                 <SectionHeading>{section.heading}</SectionHeading>
                 <div className="flex flex-col gap-4">
                   {section.body.map((p, j) => (
@@ -59,18 +62,20 @@ export function VisualStory({ sections }: { sections: ContentSection[] }) {
                 </div>
               </SectionShell>
             );
+            break;
           case "metrics":
-            return (
-              <SectionShell key={i} index={i}>
+            inner = (
+              <SectionShell index={i}>
                 {section.heading && (
                   <SectionHeading>{section.heading}</SectionHeading>
                 )}
                 <MetricRow metrics={section.metrics} />
               </SectionShell>
             );
+            break;
           case "diagram":
-            return (
-              <SectionShell key={i} index={i} wide>
+            inner = (
+              <SectionShell index={i} wide>
                 {section.heading && (
                   <SectionHeading>{section.heading}</SectionHeading>
                 )}
@@ -79,9 +84,10 @@ export function VisualStory({ sections }: { sections: ContentSection[] }) {
                 </div>
               </SectionShell>
             );
+            break;
           case "figure":
-            return (
-              <SectionShell key={i} index={i} wide>
+            inner = (
+              <SectionShell index={i} wide>
                 {section.heading && (
                   <SectionHeading>{section.heading}</SectionHeading>
                 )}
@@ -91,9 +97,10 @@ export function VisualStory({ sections }: { sections: ContentSection[] }) {
                 />
               </SectionShell>
             );
+            break;
           case "links":
-            return (
-              <SectionShell key={i} index={i}>
+            inner = (
+              <SectionShell index={i}>
                 {section.heading && (
                   <SectionHeading>{section.heading}</SectionHeading>
                 )}
@@ -113,9 +120,16 @@ export function VisualStory({ sections }: { sections: ContentSection[] }) {
                 </div>
               </SectionShell>
             );
+            break;
           default:
-            return null;
+            inner = null;
         }
+
+        return (
+          <Reveal key={i} delay={Math.min(i * 0.04, 0.24)}>
+            {inner}
+          </Reveal>
+        );
       })}
     </div>
   );

@@ -202,3 +202,22 @@
   border: 2px solid transparent;
   background-clip: content-box;
 }
+
+/* Print — the résumé page is the target; strip the app chrome */
+@media print {
+  body {
+    background: #ffffff !important;
+  }
+  header,
+  footer,
+  .fixed {
+    display: none !important;
+  }
+  .print-sheet {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+  .print-sheet section {
+    break-inside: avoid;
+  }
+}

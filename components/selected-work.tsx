@@ -5,6 +5,7 @@ import { SectionHeading } from "@/components/section-heading";
 import { MetricRow } from "@/components/metric";
 import { Diagram } from "@/components/diagram";
 import { ProjectCard } from "@/components/project-card";
+import { Reveal } from "@/components/reveal";
 
 export function SelectedWork() {
   const more = featuredProjects.slice(1, 5);
@@ -21,10 +22,11 @@ export function SelectedWork() {
       />
 
       {spotlight && (
-        <Link
-          href={`/work/${spotlight.slug}`}
-          className="group block rounded-3xl border border-line bg-surface/60 p-8 transition-all duration-300 hover:border-line-strong hover:shadow-[0_32px_80px_-48px_var(--glow)] md:p-14"
-        >
+        <Reveal>
+          <Link
+            href={`/work/${spotlight.slug}`}
+            className="group block rounded-3xl border border-line bg-surface/60 p-8 transition-all duration-300 hover:border-line-strong hover:shadow-[0_32px_80px_-48px_var(--glow)] md:p-14"
+          >
           <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
             <div>
               <p className="eyebrow mb-4">{spotlight.eyebrow}</p>
@@ -50,12 +52,15 @@ export function SelectedWork() {
               <Diagram data={pipeline.diagram} />
             </div>
           )}
-        </Link>
+          </Link>
+        </Reveal>
       )}
 
       <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {more.map((project) => (
-          <ProjectCard key={project.slug} project={project} />
+        {more.map((project, i) => (
+          <Reveal key={project.slug} delay={i * 0.06} className="h-full">
+            <ProjectCard project={project} />
+          </Reveal>
         ))}
       </div>
 
