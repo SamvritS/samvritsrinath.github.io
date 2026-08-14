@@ -1,0 +1,63 @@
+import { experience } from "@/data/experience";
+import { SectionHeading } from "@/components/section-heading";
+
+export function ExperienceSection() {
+  return (
+    <section id="experience" className="border-t border-line">
+      <div className="mx-auto max-w-6xl px-6 py-24 md:py-36">
+        <SectionHeading
+          index="03"
+          kicker="Experience"
+          title="Production systems, and the teaching that feeds them."
+        />
+
+        <div className="flex flex-col gap-16">
+          {experience.map((company) => (
+            <div key={company.company}>
+              <div className="flex flex-wrap items-baseline justify-between gap-2">
+                <h3 className="text-xl font-semibold tracking-tight text-ink md:text-2xl">
+                  {company.company}
+                </h3>
+                {company.location && (
+                  <span className="font-mono text-xs tracking-widest text-ink-faint">
+                    {company.location}
+                  </span>
+                )}
+              </div>
+
+              <div className="mt-6 flex flex-col gap-8">
+                {company.roles.map((role) => (
+                  <div
+                    key={role.role}
+                    className="grid gap-2 md:grid-cols-[1fr_auto] md:gap-8"
+                  >
+                    <div className="border-l-2 border-line pl-5 md:pl-6">
+                      <h4 className="text-[15px] font-medium text-ink">
+                        {role.role}
+                      </h4>
+                      {role.description.length > 0 && (
+                        <ul className="mt-3 flex flex-col gap-2">
+                          {role.description.slice(0, 3).map((d, i) => (
+                            <li
+                              key={i}
+                              className="text-sm leading-relaxed text-ink-soft"
+                            >
+                              {d}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                    <span className="font-mono text-xs tracking-widest text-ink-faint md:pt-1 md:text-right">
+                      {role.duration}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
