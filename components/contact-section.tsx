@@ -12,7 +12,7 @@ export function ContactSection() {
           Contact
         </p>
         <h2 className="max-w-3xl text-4xl font-semibold leading-tight tracking-tight text-ink md:text-6xl">
-          Open to research collaborations and systems work.
+          Open to industry work.
         </h2>
 
         <div className="mt-12 flex flex-wrap items-center gap-4">

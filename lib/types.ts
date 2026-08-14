@@ -74,16 +74,18 @@ export type ResearchArea = {
   title: string;
   description: string;
   projects: string[];
+  papers: Publication[];
 };
 
 export type Publication = {
   title: string;
-  authors: string[];
+  authors?: string[];
   venue: string;
   year: string;
   href: string;
   abstract: string;
   tags: string[];
+  note?: string;
 };
 
 export type Club = {

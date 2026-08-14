@@ -3,7 +3,7 @@ import { Download, Mail, ArrowUpRight } from "lucide-react";
 import { site } from "@/data/site";
 import { education, skills, teaching } from "@/data/education";
 import { experience } from "@/data/experience";
-import { publications } from "@/data/research";
+import { researchAreas } from "@/data/research";
 import { clubs } from "@/data/education";
 
 export const metadata: Metadata = {
@@ -84,7 +84,7 @@ export default function ResumePage() {
                 {site.contact.email}
               </a>
               <a href={site.contact.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-black">
-                github.com/SamvritSrinath
+                {site.contact.github.replace("https://", "")}
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
               <a href={site.contact.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-black">
@@ -126,11 +126,16 @@ export default function ResumePage() {
           </PaperSection>
 
           <PaperSection title="Research & Publications">
-            {publications.map((pub) => (
+            {researchAreas.flatMap((area) => area.papers).map((pub) => (
               <PaperEntry key={pub.href} title={pub.title} meta={`${pub.year} · ${pub.venue}`}>
-                <p className="mt-1.5 text-sm text-black/60">
-                  {pub.authors.join(", ")}
-                </p>
+                {pub.authors && pub.authors.length > 0 && (
+                  <p className="mt-1.5 text-sm text-black/60">
+                    {pub.authors.join(", ")}
+                  </p>
+                )}
+                {pub.note && (
+                  <p className="mt-1 text-sm text-black/60">{pub.note}</p>
+                )}
               </PaperEntry>
             ))}
           </PaperSection>

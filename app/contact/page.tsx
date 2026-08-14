@@ -51,7 +51,7 @@ export default function ContactPage() {
           Say hello.
         </h1>
         <p className="mt-5 max-w-xl text-base leading-relaxed text-ink-soft md:text-lg">
-          Research collaborations, systems work, or teaching — I read
+          Software engineering roles, systems work, or research — I read
           everything. Prefer email? Write to{" "}
           <a
             href={`mailto:${site.contact.email}`}

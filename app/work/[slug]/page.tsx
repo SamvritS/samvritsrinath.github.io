@@ -50,7 +50,7 @@ export default async function ProjectPage({
         className="mb-14 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-ink-soft transition-colors hover:text-ink"
       >
         <ArrowLeft className="h-4 w-4" />
-        All work
+        All projects
       </Link>
 
       <header className="max-w-4xl">
@@ -120,7 +120,7 @@ export default async function ProjectPage({
           className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-ink-soft transition-colors hover:text-ink"
         >
           <ArrowLeft className="h-4 w-4" />
-          All work
+          All projects
         </Link>
         <Link
           href={`/work/${next.slug}`}

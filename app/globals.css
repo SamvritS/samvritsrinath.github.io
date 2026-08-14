@@ -74,6 +74,8 @@
   --animate-dash: dash 2.4s linear infinite;
   --animate-drift: drift 26s ease-in-out infinite;
   --animate-pulse-soft: pulse-soft 3.6s ease-in-out infinite;
+  --animate-spin-slow: spin 90s linear infinite;
+  --animate-shoot: shoot 9s ease-in infinite;
 
   --radius-2xl: 1.25rem;
 }
@@ -96,6 +98,26 @@
 @keyframes pulse-soft {
   0%, 100% { opacity: 0.5; }
   50% { opacity: 1; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shoot {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(var(--shoot-angle, -18deg));
+    opacity: 0;
+  }
+  4% { opacity: 1; }
+  16% {
+    transform: translate3d(var(--shoot-distance, 24rem), var(--shoot-fall, 8rem), 0) rotate(var(--shoot-angle, -18deg));
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(var(--shoot-distance, 24rem), var(--shoot-fall, 8rem), 0) rotate(var(--shoot-angle, -18deg));
+    opacity: 0;
+  }
 }
 
 @layer base {

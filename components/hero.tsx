@@ -31,7 +31,7 @@ export function Hero() {
               href="/work"
               className="flex items-center gap-2 rounded-full bg-indigo px-7 py-3.5 text-sm font-medium text-white shadow-[0_8px_32px_-12px_var(--glow)] transition-all duration-300 hover:bg-indigo/90 hover:shadow-[0_12px_40px_-12px_var(--glow)]"
             >
-              Explore work
+              Explore projects
               <ArrowUpRight className="h-4 w-4" />
             </Link>
             <Link

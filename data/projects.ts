@@ -39,19 +39,22 @@ export const projects: Project[] = [
         type: "diagram",
         heading: "System",
         diagram: {
-          title: "Attribution pipeline",
+          title: "Attribution architecture",
           nodes: [
-            { id: "censys", label: "CENSYS", sublabel: "domain lookup", kind: "source" },
+            { id: "censys", label: "CENSYS", sublabel: "domain + TLS + WHOIS", kind: "source" },
             { id: "prune", label: "PRUNE", sublabel: "cloud / CDN / 404", kind: "process" },
             { id: "interpret", label: "INTERPRET", sublabel: "LLM classification", kind: "process" },
-            { id: "cache", label: "CACHE", sublabel: "reuse operators", kind: "storage" },
+            { id: "guard", label: "GUARDRAILS", sublabel: "structured fallbacks", kind: "process" },
+            { id: "cache", label: "CACHE", sublabel: "BigQuery operator store", kind: "storage" },
             { id: "owner", label: "OPERATOR", sublabel: "1.2.3.4 → owner", kind: "output" },
           ],
           edges: [
             ["censys", "prune"],
             ["prune", "interpret"],
-            ["interpret", "cache"],
+            ["interpret", "guard"],
+            ["guard", "cache"],
             ["cache", "owner"],
+            ["owner", "cache"],
           ],
         },
       },
@@ -59,8 +62,8 @@ export const projects: Project[] = [
         type: "prose",
         heading: "How it works",
         body: [
-          "Each IP is resolved to its hosting domains via Censys, then aggressively pruned — cloud providers, CDNs, parked domains, and 404s never reach the expensive step. The surviving evidence is interpreted by an LLM into an operator classification, with structured fallbacks when the model is uncertain.",
-          "Because adjacent addresses almost always share an operator, every answer is written to a BigQuery-backed cache. The cache turns the worst-case cold lookup into a single key scan, which is what makes the full 238M-address sweep tractable.",
+          "Each IP is resolved to its hosting domains via Censys, then aggressively pruned — cloud providers, CDNs, parked domains, and 404s never reach the expensive step. The surviving evidence is interpreted by an LLM into an operator classification, with structured guardrails when the model is uncertain.",
+          "Because adjacent addresses almost always share an operator, every answer is written back to a BigQuery-backed cache. The cache turns the worst-case cold lookup into a single key scan, which is what makes the full 238M-address sweep tractable.",
         ],
       },
       {
@@ -72,16 +75,6 @@ export const projects: Project[] = [
           { value: "66%", label: "coverage improvement" },
           { value: "13.7K", label: "operators identified" },
         ],
-      },
-      {
-        type: "figure",
-        heading: "Evidence",
-        figure: {
-          src: "/assets/projects/ip-sage/ip-sage-1.webp",
-          alt: "IP-Sage CLI resolving operators across a network range",
-          caption: "The IP-Sage command-line interface attributing operators across scanned ranges.",
-          source: "IP-Sage",
-        },
       },
     ],
   },
@@ -105,7 +98,7 @@ export const projects: Project[] = [
     ],
     technologies: ["Python", "PyTorch", "gRPC", "CUDA", "NVIDIA DGX"],
     links: [
-      { label: "GitHub", href: "https://github.com/SamvritSrinath/SpecSplit", external: true },
+      { label: "GitHub", href: "https://github.com/SamvritS/SpecSplit", external: true },
       { label: "Paper", href: "/assets/papers/SpecSplit.pdf", external: true },
     ],
     sections: [
@@ -205,7 +198,7 @@ export const projects: Project[] = [
       "A convex quadratic optimization framework that casts lineup selection as an MIQCP with player covariance modeling. Six methods — MILP, LP rounding, an ADP heuristic, McCormick linearization, QCP, and baselines — are compared across the full 2024 NFL season; the ADP heuristic scores 2,089 points out-of-sample in under 0.1 seconds.",
     category: "AI/ML",
     year: "2025",
-    featured: true,
+    featured: false,
     cover: "/assets/projects/optfantasy/method_score_comparison.png",
     coverAlt: "Method score comparison chart for OptFantasy",
     metrics: [
@@ -216,7 +209,7 @@ export const projects: Project[] = [
     ],
     technologies: ["Python", "Gurobi", "Pandas", "NumPy", "Matplotlib"],
     links: [
-      { label: "GitHub", href: "https://github.com/SamvritSrinath/OptFantasy", external: true },
+      { label: "GitHub", href: "https://github.com/SamvritS/OptFantasy", external: true },
       { label: "Paper", href: "/assets/papers/OptFantasy.pdf", external: true },
     ],
     sections: [
@@ -322,7 +315,7 @@ export const projects: Project[] = [
     ],
     technologies: ["Loma", "Python", "Three.js", "Flask"],
     links: [
-      { label: "GitHub", href: "https://github.com/SamvritSrinath/LomaVerse", external: true },
+      { label: "GitHub", href: "https://github.com/SamvritS/LomaVerse", external: true },
     ],
     sections: [
       {
@@ -520,7 +513,7 @@ export const projects: Project[] = [
       "An internet measurement study identifying countries that sit on the network path between users and their governments. Analyzing 9,000+ IP-level paths to government websites from 11 countries, the work examines data sovereignty and foreign surveillance exposure. Part of UCSD's Early Research Scholars Program.",
     category: "Research",
     year: "2024",
-    featured: false,
+    featured: true,
     cover: "/assets/projects/traceroutes/heatmap_violators.png",
     coverAlt: "Heatmap of countries appearing on government network paths",
     metrics: [

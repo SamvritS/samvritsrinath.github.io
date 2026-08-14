@@ -1,14 +1,14 @@
 export const site = {
   name: "Samvrit Srinath",
   shortName: "SS",
-  tagline: "Research · Systems · Software",
+  tagline: "Software Engineer · Research · Systems",
   location: "San Diego / San Jose",
-  bio: "I build systems that make computers understand the world — internet measurement, distributed systems, and machine learning infrastructure at the intersection of research and production engineering.",
+  bio: "Software engineer building networking, distributed systems, and machine-learning infrastructure — from Ethernet switch software at Arista to large-scale internet measurement research at UCSD.",
   headline: "Software Engineer · Researcher",
   contact: {
-    email: "sasrinath@ucsd.edu",
+    email: "samvrit@gmail.com",
     linkedin: "https://linkedin.com/in/samvrit-srinath",
-    github: "https://github.com/SamvritSrinath",
+    github: "https://github.com/SamvritS",
   },
   resume: {
     label: "Download PDF",
@@ -18,7 +18,7 @@ export const site = {
 } as const;
 
 export const nav = [
-  { label: "Work", href: "/work" },
+  { label: "Projects", href: "/work" },
   { label: "Research", href: "/research" },
   { label: "About", href: "/about" },
   { label: "Resume", href: "/resume" },
