@@ -1,7 +1,7 @@
 import type { DiagramData, DiagramNode, DiagramNodeKind } from "@/lib/types";
 
 const kindColor: Record<DiagramNodeKind, string> = {
-  source: "var(--accent-azure)",
+  source: "var(--accent-blue)",
   process: "var(--accent-indigo)",
   storage: "var(--accent-violet)",
   output: "var(--accent-gold)",

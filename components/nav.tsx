@@ -31,7 +31,7 @@ export function Nav() {
     <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4">
       <nav
         className={cn(
-          "glass-nav flex h-14 w-full max-w-2xl items-center justify-between rounded-full pl-5 pr-3 transition-shadow duration-300",
+          "glass-nav relative z-50 flex h-14 w-full max-w-2xl items-center justify-between rounded-full pl-5 pr-3 transition-shadow duration-300",
           scrolled && "shadow-[0_8px_40px_-12px_var(--glow)]",
         )}
         aria-label="Primary"
