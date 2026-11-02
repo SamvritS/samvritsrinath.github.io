@@ -7,23 +7,34 @@ export function Reveal({
   children,
   className,
   delay = 0,
+  mask = false,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
+  mask?: boolean;
 }) {
   const reduced = useReducedMotion();
 
   return (
     <motion.div
+      data-testid="reveal"
       className={className}
-      initial={reduced ? false : { opacity: 0, y: 22 }}
-      whileInView={reduced ? undefined : { opacity: 1, y: 0 }}
+      initial={
+        mask
+          ? { clipPath: "inset(0 0 100% 0)" }
+          : { opacity: 0, transform: "translateY(22px)" }
+      }
+      whileInView={
+        mask
+          ? { clipPath: "inset(0 0 -15% 0)" }
+          : { opacity: 1, transform: "translateY(0px)" }
+      }
       viewport={{ once: true, margin: "0px 0px -10% 0px" }}
       transition={{
-        duration: 0.55,
+        duration: reduced ? 0 : 0.55,
         ease: [0.16, 1, 0.3, 1],
-        delay,
+        delay: reduced ? 0 : delay,
       }}
     >
       {children}

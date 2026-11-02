@@ -1,126 +1,173 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import { featuredProjects, projects, spotlightProject } from "@/data/projects";
-import { SectionHeading } from "@/components/section-heading";
+import { ArrowUpRight, FileText } from "@/components/ui-icons";
+import {
+  featuredProjects,
+  projects,
+  spotlightProject,
+} from "@/data/projects";
+import { clean } from "@/lib/copy";
 import { MetricRow } from "@/components/metric";
-import { Visual } from "@/components/visuals/registry";
-import { ProjectCard } from "@/components/project-card";
 import { ProjectCover } from "@/components/project-cover";
-import { Reveal } from "@/components/reveal";
+import { SectionHeading } from "@/components/section-heading";
 
 export function SelectedWork() {
-  const featured = featuredProjects.slice(1, 5);
+  if (!spotlightProject) return null;
+
   const spotlight = spotlightProject;
-  const spotlightVisual = spotlight?.sections.find((s) => s.type === "visual");
-  const featuredSlugs = new Set(featuredProjects.map((p) => p.slug));
-  const moreProjects = projects.filter((p) => !featuredSlugs.has(p.slug)).slice(0, 4);
+  const ledger = featuredProjects
+    .filter((project) => project.slug !== spotlight.slug)
+    .slice(0, 4);
 
   return (
-    <section id="work" className="mx-auto max-w-6xl px-6 py-24 md:py-36">
-      <SectionHeading
-        index="03"
-        kicker="Selected Projects"
-        title="Projects with papers, benchmarks, and shipped systems."
-        description="Research and systems engineering with measurable outcomes — each case study links to its source, dataset, or paper."
-      />
+    <SectionHeading
+      id="work"
+      rail="03 / SELECTED PROJECTS"
+      kicker="Work"
+      title="Selected work"
+      atmosphere="work"
+      register="seam"
+      divider
+    >
+      <article
+        data-testid="work-lead"
+        data-hue={spotlight.hue}
+        style={{ "--hue": spotlight.hue } as React.CSSProperties}
+      >
+        {spotlight.cover && (
+          <Image
+            src={spotlight.cover}
+            alt={spotlight.coverAlt ?? spotlight.title}
+            width={5834}
+            height={1675}
+            sizes="(min-width: 1024px) 840px, 100vw"
+            className="h-auto w-full border border-line bg-surface"
+          />
+        )}
 
-      {spotlight && (
-        <Reveal>
-          <Link
-            href={`/work/${spotlight.slug}`}
-            className="glass-card group relative block overflow-hidden rounded-3xl p-8 transition-all duration-300 hover:border-line-strong hover:shadow-[0_32px_80px_-48px_var(--glow)] md:p-14"
-          >
-          <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
-            <div>
-              <p className="eyebrow mb-4">{spotlight.eyebrow}</p>
-              <h3 className="text-3xl font-semibold tracking-tight text-ink md:text-5xl">
-                {spotlight.title}
-              </h3>
-              <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-soft md:text-lg">
-                {spotlight.tagline}
-              </p>
+        <div className="mt-8 grid gap-8 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-7">
+            <p className="eyebrow hue-text">{clean(spotlight.eyebrow)}</p>
+            <h3 className="mt-3 text-3xl font-semibold tracking-tight text-ink md:text-4xl">
+              {clean(spotlight.title)}
+            </h3>
+            <p className="read mt-4">{clean(spotlight.tagline)}</p>
+
+            <dl className="mt-6 grid gap-4 sm:grid-cols-2">
+              <div>
+                <dt className="font-mono text-[0.6875rem] uppercase tracking-[0.16em] text-ink-faint">
+                  Role
+                </dt>
+                <dd className="mt-1 text-sm text-ink">
+                  {clean(spotlight.role)}
+                </dd>
+              </div>
+              <div>
+                <dt className="font-mono text-[0.6875rem] uppercase tracking-[0.16em] text-ink-faint">
+                  Record
+                </dt>
+                <dd className="mt-1 text-sm text-ink">{spotlight.year}</dd>
+              </div>
+            </dl>
+
+            <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <Link
+                href={`/work/${spotlight.slug}`}
+                className="inline-flex items-center gap-1.5 border border-ink bg-ink px-5 py-2.5 text-sm font-medium text-void transition-colors hover:border-wavelength hover:bg-wavelength"
+              >
+                Details
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
+              {spotlight.paper && (
+                <a
+                  href={spotlight.paper.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.18em] text-ink transition-colors hover:text-wavelength"
+                >
+                  <FileText className="h-3.5 w-3.5" aria-hidden />
+                  {clean(spotlight.paper.venue)} paper
+                  <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+                </a>
+              )}
             </div>
-            <span className="flex shrink-0 items-center gap-1.5 self-start font-mono text-xs uppercase tracking-[0.18em] text-indigo">
-              Case study
-              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </span>
           </div>
 
-          <div className="mt-12 border-t border-line pt-10">
-            <MetricRow metrics={spotlight.metrics} />
+          <div className="lg:col-span-5">
+            <MetricRow
+              metrics={spotlight.metrics.slice(0, 4)}
+              tone="hue"
+              className="grid-cols-2 gap-x-6 gap-y-6 md:grid-cols-2"
+            />
           </div>
+        </div>
+      </article>
 
-          {spotlightVisual && (
-            <div className="mt-12 rounded-2xl border border-line bg-surface/60 p-6 md:p-10">
-              <Visual id={spotlightVisual.visual} />
-            </div>
-          )}
-          </Link>
-        </Reveal>
-      )}
+      <div data-testid="work-ledger" className="mt-16">
+        {ledger.map((project, index) => (
+          <article key={project.slug}>
+            <Link
+              href={`/work/${project.slug}`}
+              style={{ "--hue": project.hue } as React.CSSProperties}
+              className="group grid gap-6 border-t border-line py-8 md:grid-cols-12 md:gap-8"
+            >
+              <div className="md:col-span-3">
+                <ProjectCover
+                  project={project}
+                  sizes="(min-width: 768px) 240px, 100vw"
+                />
+              </div>
 
-      <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {featured.map((project, i) => (
-          <Reveal key={project.slug} delay={i * 0.06} className="h-full">
-            <ProjectCard project={project} />
-          </Reveal>
+              <div className="md:col-span-9">
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-ink-faint">
+                  <span className="text-ink">
+                    {String(index + 2).padStart(2, "0")}
+                  </span>
+                  <span>{project.year}</span>
+                  <span>{clean(project.category)}</span>
+                </div>
+
+                <h3 className="mt-3 pr-6 text-xl font-semibold tracking-tight text-ink transition-colors group-hover:text-wavelength md:text-2xl">
+                  {clean(project.title)}
+                </h3>
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-soft">
+                  {clean(project.tagline)}
+                </p>
+
+                <div className="mt-5 flex flex-wrap gap-x-8 gap-y-3">
+                  {project.metrics.slice(0, 2).map((metric) => (
+                    <div key={metric.label}>
+                      <p className="font-mono text-sm font-medium tabular-nums text-ink">
+                        {metric.value}
+                      </p>
+                      <p className="mt-0.5 font-mono text-[0.625rem] uppercase tracking-[0.14em] text-ink-faint">
+                        {metric.label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                <p className="mt-4 font-mono text-xs tracking-[0.12em] text-ink-faint">
+                  {project.technologies.slice(0, 5).join(" · ")}
+                </p>
+              </div>
+            </Link>
+          </article>
         ))}
       </div>
 
-      <div className="mt-16">
-        <div className="mb-6 flex items-center justify-between">
-          <h3 className="text-lg font-semibold tracking-tight text-ink">
-            More projects
-          </h3>
-          <Link
-            href="/work"
-            className="flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.18em] text-indigo"
-          >
-            View all
-            <ArrowUpRight className="h-3.5 w-3.5" />
-          </Link>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {moreProjects.map((project, i) => (
-            <Reveal key={project.slug} delay={i * 0.04}>
-              <Link
-                href={`/work/${project.slug}`}
-                className="glass-card group relative flex items-center gap-4 overflow-hidden rounded-2xl p-4 transition-all duration-300 hover:border-line-strong hover:shadow-[0_20px_50px_-32px_var(--glow)]"
-              >
-                <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded-lg bg-space">
-                  <ProjectCover
-                    project={project}
-                    sizes="96px"
-                  />
-                </div>
-                <div className="min-w-0">
-                  <div className="flex items-baseline justify-between gap-3">
-                    <h4 className="truncate text-[15px] font-semibold tracking-tight text-ink transition-colors group-hover:text-indigo">
-                      {project.title}
-                    </h4>
-                    <span className="shrink-0 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-ink-faint">
-                      {project.year}
-                    </span>
-                  </div>
-                  <p className="mt-1 line-clamp-2 text-sm text-ink-soft">
-                    {project.tagline}
-                  </p>
-                </div>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-
-      <div className="mt-14 flex justify-center">
+      <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6">
+        <p className="font-mono text-xs uppercase tracking-[0.18em] text-ink-faint">
+          {projects.length} records in the archive
+        </p>
         <Link
           href="/work"
-          className="glass-float flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium text-ink transition-all duration-300 hover:border-line-strong"
+          className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.18em] text-ink transition-colors hover:text-wavelength"
         >
-          View all projects
-          <ArrowUpRight className="h-4 w-4" />
+          All work
+          <ArrowUpRight className="h-3.5 w-3.5" />
         </Link>
       </div>
-    </section>
+    </SectionHeading>
   );
 }

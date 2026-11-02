@@ -1,6 +1,6 @@
 "use client";
 
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun } from "@/components/ui-icons";
 import { cn } from "@/lib/utils";
 
 export function ThemeToggle({ className }: { className?: string }) {
@@ -19,7 +19,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       onClick={toggle}
       aria-label="Toggle theme"
       className={cn(
-        "relative flex h-9 w-9 items-center justify-center rounded-full text-ink-soft transition-colors hover:text-ink",
+        "relative flex h-9 w-9 items-center justify-center text-ink-soft transition-colors hover:text-ink",
         className,
       )}
     >

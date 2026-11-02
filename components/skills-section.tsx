@@ -1,42 +1,48 @@
-import { skills } from "@/data/education";
-import { SectionHeading } from "@/components/section-heading";
 import { TechIcon } from "@/components/tech-icon";
+import { skills } from "@/data/education";
+import { Reveal } from "@/components/reveal";
+import { SectionHeading } from "@/components/section-heading";
 
 export function SkillsSection() {
   return (
-    <section id="skills" className="border-t border-line">
-      <div className="mx-auto max-w-6xl px-6 py-24 md:py-36">
-        <SectionHeading
-          index="02"
-          kicker="Skills"
-          title="Tools I reach for in production."
-          description="Languages, infrastructure, ML frameworks, and the debugging tooling that keeps systems honest."
-        />
-
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <SectionHeading
+      id="skills"
+      rail="02 / SKILLS"
+      kicker="Instruments"
+      title="Skills"
+    >
+      <Reveal>
+        <dl className="flex flex-col">
           {skills.map((group) => (
             <div
               key={group.group}
-              className="glass-card rounded-2xl p-6"
+              data-testid="skill-group"
+              className="grid gap-2 border-t border-line py-5 md:grid-cols-[220px_1fr] md:gap-8"
             >
-              <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-indigo">
+              <dt className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-ink">
                 {group.group}
-              </h3>
-              <div className="mt-4 flex flex-col gap-2.5">
-                {group.items.map((item) => (
-                  <div
-                    key={item}
-                    className="flex items-center gap-2.5 text-sm text-ink-soft"
-                  >
-                    <TechIcon name={item} className="h-4 w-4 text-ink-faint" />
-                    {item}
-                  </div>
-                ))}
-              </div>
+              </dt>
+              <dd className="text-sm leading-relaxed text-ink-soft">
+                <ul className="flex flex-wrap gap-x-5 gap-y-3">
+                  {group.items.map((item) => (
+                    <li
+                      key={item}
+                      data-testid="skill-item"
+                      className="flex items-center gap-2"
+                    >
+                      <TechIcon
+                        name={item}
+                        className="h-4 w-4 shrink-0 text-ink-faint"
+                      />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </dd>
             </div>
           ))}
-        </div>
-      </div>
-    </section>
+        </dl>
+      </Reveal>
+    </SectionHeading>
   );
 }

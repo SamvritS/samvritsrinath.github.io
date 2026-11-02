@@ -1,0 +1,1 @@
+{"nodes": [{"id": "public_assets_projects_optfantasy_method_score_comparison", "label": "OptFantasy Out-of-Sample Score Comparison", "file_type": "image", "source_file": "public/assets/projects/optfantasy/method_score_comparison.png", "rationale": "Bar chart comparing total weekly-lineup points across different heuristic and MILP methods."}], "edges": [], "hyperedges": []}

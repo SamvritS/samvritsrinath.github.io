@@ -3,10 +3,11 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowUpRight, List, X } from "@/components/ui-icons";
 import { nav, site } from "@/data/site";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { SiteSearch } from "@/components/site-search";
 
 export function Nav() {
   const pathname = usePathname();
@@ -40,8 +41,8 @@ export function Nav() {
     <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4">
       <nav
         className={cn(
-          "glass-nav relative z-50 flex h-14 w-full max-w-2xl items-center justify-between rounded-full pl-5 pr-3 transition-shadow duration-300",
-          scrolled && "shadow-[0_8px_40px_-12px_var(--glow)]",
+          "site-nav relative z-50 flex h-14 w-full max-w-[720px] items-center justify-between border border-line pl-5 pr-3",
+          scrolled && "border-line-strong",
         )}
         aria-label="Primary"
       >
@@ -52,13 +53,17 @@ export function Nav() {
           {site.shortName}
         </Link>
 
+        <div className="ml-auto flex items-center">
+          <SiteSearch />
+        </div>
+
         <div className="hidden items-center gap-1 md:flex">
           {nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "rounded-full px-4 py-2 text-sm text-ink-soft transition-colors hover:text-ink",
+                "px-4 py-2 text-sm text-ink-soft transition-colors hover:text-ink",
                 pathname === item.href && "text-ink",
               )}
             >
@@ -69,7 +74,7 @@ export function Nav() {
             <ThemeToggle />
             <Link
               href="/resume"
-              className="flex items-center gap-1 rounded-full bg-indigo/12 px-4 py-2 text-sm text-indigo transition-colors hover:bg-indigo/20"
+              className="flex items-center gap-1 border border-line px-4 py-2 font-mono text-xs uppercase tracking-[0.18em] text-ink transition-colors hover:border-wavelength"
             >
               Résumé
               <ArrowUpRight className="h-3.5 w-3.5" />
@@ -84,16 +89,16 @@ export function Nav() {
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
             aria-expanded={open}
-            className="flex h-9 w-9 items-center justify-center rounded-full text-ink transition-colors hover:bg-ink/5"
+            className="flex h-9 w-9 items-center justify-center text-ink transition-colors hover:bg-transparent"
           >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {open ? <X className="h-5 w-5" /> : <List className="h-5 w-5" />}
           </button>
         </div>
       </nav>
 
       <div
         className={cn(
-          "fixed inset-0 z-40 flex flex-col justify-end bg-void/90 backdrop-blur-2xl transition-all duration-300 md:hidden",
+          "fixed inset-0 z-40 flex flex-col justify-end bg-void transition-colors md:hidden",
           open ? "visible opacity-100" : "invisible opacity-0",
         )}
       >
@@ -104,8 +109,8 @@ export function Nav() {
               href={item.href}
               onClick={() => setOpen(false)}
               className={cn(
-                "rounded-2xl px-4 py-4 text-2xl font-medium text-ink transition-colors",
-                pathname === item.href && "bg-ink/5 text-indigo",
+                "px-4 py-4 text-2xl font-medium text-ink transition-colors",
+                pathname === item.href && "bg-transparent text-ink",
               )}
               style={{ transitionDelay: open ? `${i * 40}ms` : "0ms" }}
             >

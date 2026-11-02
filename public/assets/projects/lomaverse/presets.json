@@ -1,0 +1,253 @@
+{
+  "G": 1,
+  "dt": 0.0008,
+  "stepsPerFrame": 6,
+  "warmup": 4000,
+  "presets": [
+    {
+      "id": "solar",
+      "title": "Stable solar system",
+      "bodies": [
+        {
+          "name": "Sun",
+          "mass": 1000,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ],
+          "radius": 0.15,
+          "trailColor": "#ff2a2a",
+          "provenance": "representative initial conditions of the validated class, seeded by the circular-orbit rule; not a paper run"
+        },
+        {
+          "name": "Planet A",
+          "mass": 1,
+          "position": [
+            2.5,
+            0,
+            0
+          ],
+          "velocity": [
+            0,
+            20,
+            0
+          ],
+          "radius": 0.06,
+          "trailColor": "#8b5cf6",
+          "provenance": "representative initial conditions of the validated class, seeded by the circular-orbit rule; not a paper run"
+        },
+        {
+          "name": "Planet B",
+          "mass": 0.8,
+          "position": [
+            4.2,
+            0,
+            0
+          ],
+          "velocity": [
+            0,
+            15.5,
+            0
+          ],
+          "radius": 0.05,
+          "trailColor": "#8b5cf6",
+          "provenance": "representative initial conditions of the validated class, seeded by the circular-orbit rule; not a paper run"
+        },
+        {
+          "name": "Planet C",
+          "mass": 0.5,
+          "position": [
+            6,
+            0,
+            0
+          ],
+          "velocity": [
+            0,
+            13,
+            0
+          ],
+          "radius": 0.04,
+          "trailColor": "#8b5cf6",
+          "provenance": "representative initial conditions of the validated class, seeded by the circular-orbit rule; not a paper run"
+        }
+      ]
+    },
+    {
+      "id": "binary",
+      "title": "Bound binary",
+      "bodies": [
+        {
+          "name": "Primary",
+          "mass": 1000,
+          "position": [
+            2.222222,
+            0,
+            0
+          ],
+          "velocity": [
+            0,
+            8.43274,
+            0
+          ],
+          "radius": 0.18,
+          "trailColor": "#ff2a2a",
+          "provenance": "representative initial conditions of the validated class, seeded by the circular-orbit rule; not a paper run"
+        },
+        {
+          "name": "Companion",
+          "mass": 800,
+          "position": [
+            -2.777778,
+            0,
+            0
+          ],
+          "velocity": [
+            0,
+            -10.540926,
+            0
+          ],
+          "radius": 0.14,
+          "trailColor": "#ff6a2a",
+          "provenance": "representative initial conditions of the validated class, seeded by the circular-orbit rule; not a paper run"
+        }
+      ]
+    },
+    {
+      "id": "chaos",
+      "title": "Three-body chaos",
+      "bodies": [
+        {
+          "name": "Primary",
+          "mass": 1000,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ],
+          "radius": 0.15,
+          "trailColor": "#ff2a2a",
+          "provenance": "representative initial conditions of the validated class, seeded by the circular-orbit rule; not a paper run"
+        },
+        {
+          "name": "Trio 1",
+          "mass": 1,
+          "position": [
+            2.5,
+            0,
+            0
+          ],
+          "velocity": [
+            0,
+            20,
+            0
+          ],
+          "radius": 0.05,
+          "trailColor": "#8b5cf6",
+          "provenance": "representative initial conditions of the validated class, seeded by the circular-orbit rule; not a paper run"
+        },
+        {
+          "name": "Trio 2",
+          "mass": 0.8,
+          "position": [
+            3.9,
+            0,
+            0
+          ],
+          "velocity": [
+            0,
+            15.984001,
+            0.960193
+          ],
+          "radius": 0.05,
+          "trailColor": "#8b5cf6",
+          "provenance": "representative initial conditions of the validated class, seeded by the circular-orbit rule; not a paper run"
+        },
+        {
+          "name": "Trio 3",
+          "mass": 0.5,
+          "position": [
+            6,
+            0,
+            0
+          ],
+          "velocity": [
+            0,
+            12.896875,
+            -0.580751
+          ],
+          "radius": 0.05,
+          "trailColor": "#8b5cf6",
+          "provenance": "representative initial conditions of the validated class, seeded by the circular-orbit rule; not a paper run"
+        }
+      ]
+    },
+    {
+      "id": "lagrange",
+      "title": "Lagrange configuration",
+      "bodies": [
+        {
+          "name": "Primary",
+          "mass": 1000,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "velocity": [
+            0,
+            0,
+            0
+          ],
+          "radius": 0.2,
+          "trailColor": "#ff2a2a",
+          "provenance": "representative initial conditions of the validated class, seeded by the circular-orbit rule; not a paper run"
+        },
+        {
+          "name": "Secondary",
+          "mass": 12,
+          "position": [
+            6,
+            0,
+            0
+          ],
+          "velocity": [
+            0,
+            12.909944,
+            0
+          ],
+          "radius": 0.07,
+          "trailColor": "#ff6a2a",
+          "provenance": "representative initial conditions of the validated class, seeded by the circular-orbit rule; not a paper run"
+        },
+        {
+          "name": "Test particle at L4",
+          "mass": 0.0001,
+          "position": [
+            3,
+            0,
+            5.196152
+          ],
+          "velocity": [
+            -11.18034,
+            0,
+            6.454972
+          ],
+          "radius": 0.03,
+          "trailColor": "#22d3ee",
+          "provenance": "representative initial conditions of the validated class, seeded by the circular-orbit rule; not a paper run; mass ratio mu=0.0119 is the triangular (Routh) critical ratio"
+        }
+      ]
+    }
+  ]
+}

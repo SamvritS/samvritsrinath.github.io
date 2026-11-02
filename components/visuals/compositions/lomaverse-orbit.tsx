@@ -1,92 +1,109 @@
 "use client";
 
-import Image from "next/image";
-import { VisualAnnotation } from "@/components/visuals/primitives";
+import {
+  VisualAnnotation,
+  VisualArrows,
+  VisualEdge,
+  VisualMeasurementRail,
+} from "@/components/visuals/primitives";
+import { LomaVerseLazy } from "@/components/demos/lazy";
+import bodiesData from "@/public/assets/projects/lomaverse/bodies.json";
+import type { VisualMode } from "@/lib/types";
 
-const W = 640;
+const W = 1180;
 const H = 420;
-const CX = W / 2;
-const CY = H / 2;
 
-const RINGS = [100, 150, 200];
+const CHAIN = ["HAMILTONIAN", "AUTODIFF", "VELOCITY-VERLET", "2D · 3D"];
 
-export function LomaVerseOrbit() {
-  return (
-    <div className="relative mx-auto" style={{ width: W, height: H }}>
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-        <div
-          className="overflow-hidden rounded-full"
-          style={{
-            width: 132,
-            height: 132,
-            border: "1px solid var(--line-strong)",
-            boxShadow: "0 0 48px -12px var(--glow)",
-          }}
-        >
-          <Image
-            src="/assets/projects/lomaverse/SolarSystem3D.jpg"
-            alt="Stable solar system rendered in LomaVerse"
-            width={132}
-            height={132}
-            className="h-full w-full object-cover"
-          />
-        </div>
+const RAIL = [
+  { value: "VELOCITY-VERLET", label: "integrator" },
+  { value: String(bodiesData.bodies.length), label: "bodies in preset" },
+  { value: `G=${bodiesData.G ?? 1}`, label: "gravitational constant" },
+  { value: "LIVE", label: "simulation above" },
+];
+
+export function LomaVerseOrbit({ mode = "diagram" }: { mode?: VisualMode }) {
+  if (mode === "case-study") {
+    return (
+      <div className="relative mx-auto min-h-[300px] w-full md:min-h-[420px]">
+        <LomaVerseLazy className="h-full min-h-[300px] w-full md:min-h-[420px]" />
       </div>
-      <svg
-        role="img"
-        aria-label="Orbital anatomy of a LomaVerse solar system"
-        width="100%"
-        height="100%"
-        viewBox={`0 0 ${W} ${H}`}
-        className="absolute inset-0"
-      >
-        {RINGS.map((r) => (
-          <ellipse
-            key={r}
-            cx={CX}
-            cy={CY}
-            rx={r}
-            ry={r * 0.42}
-            fill="none"
-            stroke="var(--line-strong)"
-            strokeWidth={1}
-            strokeDasharray="3 7"
-            opacity={0.6}
-          />
-        ))}
-        <VisualAnnotation x={CX + RINGS[0] + 18} y={CY - RINGS[0] * 0.42 - 8} size={9}>
-          inner orbit
-        </VisualAnnotation>
-        <VisualAnnotation x={CX + RINGS[2] + 18} y={CY - RINGS[2] * 0.42 - 8} size={9}>
-          stable · thousands of steps
-        </VisualAnnotation>
+    );
+  }
 
-        <g transform={`translate(${CX} ${CY})`}>
-          <g transform="scale(1 0.42)">
-            <g className="animate-spin-slow">
-              <circle cx={120} cy={0} r={4.5} fill="var(--accent-blue)" opacity={0.9} />
-            </g>
-            <g
-              className="animate-spin-slow"
-              style={{ animationDuration: "62s" }}
+  const stepX = 240;
+  const x0 = 80;
+  const midY = 150;
+
+  return (
+    <svg
+      role="img"
+      aria-label="LomaVerse integrator chain and preset bodies"
+      viewBox={`0 0 ${W} ${H}`}
+      className="h-auto w-full"
+    >
+      <defs>
+        <VisualArrows id="arrow-lomaverse" />
+      </defs>
+
+      {CHAIN.map((stage, i) => {
+        const x = x0 + i * stepX;
+        return (
+          <g key={stage}>
+            <rect
+              x={x}
+              y={midY - 34}
+              width={200}
+              height={68}
+              fill="var(--surface)"
+              stroke={i === 2 ? "var(--wavelength)" : "var(--line-strong)"}
+              strokeWidth={i === 2 ? 1.5 : 1}
+            />
+            <text
+              x={x + 100}
+              y={midY + 4}
+              textAnchor="middle"
+              fontSize={11}
+              fontFamily="var(--font-jetbrains-mono)"
+              letterSpacing="0.08em"
+              fontWeight={600}
+              fill="var(--ink)"
             >
-              <circle cx={-150} cy={0} r={3.5} fill="var(--accent-indigo)" opacity={0.8} />
-            </g>
-            <g
-              className="animate-spin-slow"
-              style={{ animationDuration: "140s" }}
-            >
-              <circle cx={200} cy={0} r={5} fill="var(--accent-gold)" opacity={0.85} />
-            </g>
-            <g
-              className="animate-spin-slow"
-              style={{ animationDuration: "200s" }}
-            >
-              <circle cx={-80} cy={0} r={3} fill="var(--accent-violet)" opacity={0.7} />
-            </g>
+              {stage}
+            </text>
+            {i < CHAIN.length - 1 && (
+              <VisualEdge
+                d={`M ${x + 200} ${midY} L ${x + stepX} ${midY}`}
+                markerId="arrow-lomaverse"
+                dashed={false}
+                width={1.5}
+              />
+            )}
           </g>
-        </g>
-      </svg>
-    </div>
+        );
+      })}
+      <VisualAnnotation x={x0} y={midY - 52} anchor="start" size={9}>
+        EQUATIONS FROM ENERGY · NO HAND-WRITTEN UPDATES
+      </VisualAnnotation>
+
+      <g fontFamily="var(--font-jetbrains-mono)">
+        <text x={x0} y={268} fontSize={9} letterSpacing="0.12em" fill="var(--ink-faint)">
+          PRESET BODIES · BODIES.JSON
+        </text>
+        <text x={x0} y={292} fontSize={9} fill="var(--ink-faint)">
+          {"NAME".padEnd(12)} {"MASS".padEnd(8)} {"POSITION".padEnd(18)} VELOCITY
+        </text>
+        {bodiesData.bodies.map((b, i) => {
+          const v = Math.hypot(...(b.velocity as [number, number, number])).toFixed(1);
+          return (
+            <text key={b.name} x={x0} y={314 + i * 20} fontSize={10} fill="var(--ink-soft)" className="tabular-nums">
+              {(b.name as string).padEnd(12)} {String(b.mass).padEnd(8)} {(b.position as number[]).join(", ").padEnd(18)} {v}
+            </text>
+          );
+        })}
+      </g>
+
+      <VisualMeasurementRail x={24} y={372} width={1132} items={RAIL} />
+    </svg>
   );
 }

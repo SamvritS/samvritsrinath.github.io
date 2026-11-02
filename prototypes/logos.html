@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Logo tile prototype</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #d8d2c6;
+        color: #0f1722;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+      }
+
+      .page {
+        width: 100%;
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 2rem 1.5rem 4rem;
+      }
+
+      .page > header {
+        margin-bottom: 1.5rem;
+      }
+
+      .page h1 {
+        margin: 0;
+        font-size: 1.5rem;
+        letter-spacing: -0.02em;
+      }
+
+      .page p {
+        margin: 0.5rem 0 0;
+        max-width: 62ch;
+        font-size: 0.875rem;
+        line-height: 1.6;
+      }
+
+      .panel {
+        margin-top: 1.25rem;
+        border: 1px solid rgba(15, 23, 34, 0.18);
+        padding: 1.5rem;
+      }
+
+      .theme-light {
+        --void: #f4ecdf;
+        --surface: #fdf9f1;
+        --ink: #0f1722;
+        --ink-soft: #3f4b5a;
+        --ink-faint: #4b5766;
+        --line: rgba(15, 23, 34, 0.1);
+        --logo-plate: #fdf9f1;
+        --logo-border: rgba(15, 23, 34, 0.18);
+        background: var(--void);
+        color: var(--ink);
+      }
+
+      .theme-dark {
+        --void: #040a12;
+        --surface: #08111d;
+        --ink: #f5f8fc;
+        --ink-soft: #b0bccb;
+        --ink-faint: #8c98aa;
+        --line: rgba(245, 248, 252, 0.09);
+        --logo-plate: #f2ece1;
+        --logo-border: rgba(15, 23, 34, 0.18);
+        background: var(--void);
+        color: var(--ink);
+      }
+
+      .panel-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 0.5rem 1rem;
+        margin-bottom: 1.25rem;
+      }
+
+      .panel-head h2 {
+        margin: 0;
+        font-size: 1rem;
+        letter-spacing: -0.01em;
+      }
+
+      .panel-head span {
+        color: var(--ink-faint);
+        font-family: ui-monospace, SFMono-Regular, monospace;
+        font-size: 0.625rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .tile-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .tile-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        min-width: 0;
+      }
+
+      .logo-tile {
+        display: inline-flex;
+        width: 3.5rem;
+        height: 3.5rem;
+        flex: none;
+        align-items: center;
+        justify-content: center;
+        aspect-ratio: 1;
+        border: 1px solid var(--logo-border);
+        background: var(--logo-plate);
+        padding: 0.5rem;
+      }
+
+      .logo-tile img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .tile-item span {
+        min-width: 0;
+        color: var(--ink-soft);
+        font-size: 0.75rem;
+        line-height: 1.35;
+      }
+
+      .bare-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .bare-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        min-width: 0;
+      }
+
+      .bare-item img {
+        width: 4rem;
+        height: 4rem;
+        flex: none;
+        object-fit: contain;
+      }
+
+      .bare-item span {
+        color: var(--ink-soft);
+        font-size: 0.75rem;
+        line-height: 1.35;
+      }
+
+      @media (max-width: 760px) {
+        .tile-grid,
+        .bare-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header>
+        <h1>Company and club logos</h1>
+        <p>
+          Company logos are bare and larger. Club logos use the shared tile:
+          square, zero radius, one-pixel hairline border, and a light plate in
+          dark mode so white-background PNGs do not read as broken images. The
+          production component is <code>components/logo-tile.tsx</code>.
+        </p>
+      </header>
+
+      <section class="panel theme-light">
+        <div class="panel-head">
+          <h2>Light</h2>
+          <span>Bare companies, tiled clubs</span>
+        </div>
+        <div class="bare-grid">
+          <div class="bare-item"><img src="../public/assets/companies/Arista.png" alt="Arista Networks logo" width="100" height="100" /><span>Arista Networks</span></div>
+          <div class="bare-item"><img src="../public/assets/companies/UCSD.png" alt="UC San Diego logo" width="100" height="100" /><span>UC San Diego</span></div>
+          <div class="bare-item"><img src="../public/assets/companies/CSE_UCSD.png" alt="CSE UCSD logo" width="100" height="100" /><span>CSE UCSD</span></div>
+          <div class="bare-item"><img src="../public/assets/companies/CSE_PACE.png" alt="CSE PACE logo" width="100" height="100" /><span>CSE PACE</span></div>
+        </div>
+        <div class="tile-grid">
+          <div class="tile-item">
+            <span class="logo-tile"><img src="../public/assets/clubs/acm-ai.png" alt="ACM AI logo" width="100" height="100" /></span>
+            <span>ACM AI</span>
+          </div>
+          <div class="tile-item">
+            <span class="logo-tile"><img src="../public/assets/clubs/cses.png" alt="CSES logo" width="100" height="100" /></span>
+            <span>CSES</span>
+          </div>
+          <div class="tile-item">
+            <span class="logo-tile"><img src="../public/assets/clubs/tse.png" alt="Triton Software Engineering logo" width="100" height="100" /></span>
+            <span>TSE</span>
+          </div>
+          <div class="tile-item">
+            <span class="logo-tile"><img src="../public/assets/clubs/tuas.png" alt="Triton Unmanned Aerial Systems logo" width="100" height="100" /></span>
+            <span>Triton UAS</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel theme-dark">
+        <div class="panel-head">
+          <h2>Dark</h2>
+          <span>Bare companies, tiled clubs</span>
+        </div>
+        <div class="bare-grid">
+          <div class="bare-item"><img src="../public/assets/companies/Arista.png" alt="Arista Networks logo" width="100" height="100" /><span>Arista Networks</span></div>
+          <div class="bare-item"><img src="../public/assets/companies/UCSD.png" alt="UC San Diego logo" width="100" height="100" /><span>UC San Diego</span></div>
+          <div class="bare-item"><img src="../public/assets/companies/CSE_UCSD.png" alt="CSE UCSD logo" width="100" height="100" /><span>CSE UCSD</span></div>
+          <div class="bare-item"><img src="../public/assets/companies/CSE_PACE.png" alt="CSE PACE logo" width="100" height="100" /><span>CSE PACE</span></div>
+        </div>
+        <div class="tile-grid">
+          <div class="tile-item">
+            <span class="logo-tile"><img src="../public/assets/clubs/acm-ai.png" alt="ACM AI logo" width="100" height="100" /></span>
+            <span>ACM AI</span>
+          </div>
+          <div class="tile-item">
+            <span class="logo-tile"><img src="../public/assets/clubs/cses.png" alt="CSES logo" width="100" height="100" /></span>
+            <span>CSES</span>
+          </div>
+          <div class="tile-item">
+            <span class="logo-tile"><img src="../public/assets/clubs/tse.png" alt="Triton Software Engineering logo" width="100" height="100" /></span>
+            <span>TSE</span>
+          </div>
+          <div class="tile-item">
+            <span class="logo-tile"><img src="../public/assets/clubs/tuas.png" alt="Triton Unmanned Aerial Systems logo" width="100" height="100" /></span>
+            <span>Triton UAS</span>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

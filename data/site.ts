@@ -2,8 +2,8 @@ export const site = {
   name: "Samvrit Srinath",
   shortName: "SS",
   tagline: "Software Engineer · Research · Systems",
-  location: "San Diego / San Jose",
-  bio: "Software engineer building networking, distributed systems, and machine-learning infrastructure — from Ethernet switch software at Arista to large-scale internet measurement research at UCSD.",
+  location: "San Jose, CA",
+  bio: "Software engineer. Ethernet switch software at Arista. Large-scale internet measurement research at UCSD.",
   headline: "Software Engineer · Researcher",
   contact: {
     email: "samvrit@gmail.com",
@@ -14,7 +14,7 @@ export const site = {
     label: "Download PDF",
     href: "/Samvrit_Srinath_Resume.pdf",
   },
-  url: "https://samvrit.vercel.app",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://samvrit.vercel.app",
 } as const;
 
 export const nav = [
