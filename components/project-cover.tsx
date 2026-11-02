@@ -31,8 +31,8 @@ function MetricPlate({ project }: { project: Project }) {
         className="mt-4 h-11 w-full"
       >
         <line x1="0" y1="1" x2="200" y2="1" stroke="var(--line)" strokeWidth="1" />
-        <rect x="0" y="10" width="128" height="7" fill="var(--hue)" />
-        <rect x="0" y="21" width="76" height="7" fill="var(--hue)" opacity="0.45" />
+        <rect x="0" y="10" width="128" height="7" fill="var(--project-accent, var(--hue))" />
+        <rect x="0" y="21" width="76" height="7" fill="var(--project-accent, var(--hue))" opacity="0.45" />
         <line x1="0" y1="36" x2="200" y2="36" stroke="var(--line)" strokeWidth="1" />
       </svg>
       <div className="mt-3 flex items-end justify-between gap-4">
@@ -70,10 +70,8 @@ export function ProjectCover({
 
   return (
     <div
-      className={cn(
-        "hue-line relative overflow-hidden border-b bg-surface",
-        featured ? "aspect-[21/9]" : "aspect-[16/9]",
-      )}
+      className="cover-frame project-accent-line"
+      data-featured={featured ? "true" : undefined}
     >
       {project.cover ? (
         <>

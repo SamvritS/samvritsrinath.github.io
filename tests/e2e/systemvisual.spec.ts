@@ -17,7 +17,7 @@ test("hotspot click isolates a path", async ({ page }) => {
   await page.goto("/work/specsplit");
   await page.getByTestId("topology-node").first().click();
   const lit = page.locator(
-    '[data-testid="topology-edge"][stroke="var(--wavelength)"]',
+    '[data-testid="topology-edge"][stroke="var(--accent)"]',
   );
   await expect(lit.first()).toBeAttached();
   await expect(page.getByTestId("topology-selection")).toBeVisible();

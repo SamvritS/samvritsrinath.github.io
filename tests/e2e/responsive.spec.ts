@@ -71,7 +71,7 @@ test("experience keeps the date rail and readable content at tablet widths", asy
   }
 });
 
-test("keyboard focus shows the wavelength ring", async ({ page }) => {
+test("keyboard focus shows the accent ring", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/");
 

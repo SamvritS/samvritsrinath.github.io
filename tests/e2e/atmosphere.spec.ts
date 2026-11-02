@@ -1,33 +1,66 @@
 import { expect, test } from "@playwright/test";
 
-const variants = ["hero", "experience", "work", "research", "contact"];
-
-test("atmospheric fields are decorative and never take a pointer", async ({
+test("section atmospheres are decorative and never take a pointer", async ({
   page,
 }) => {
   await page.goto("/");
-  await expect(page.getByTestId("ambient-field")).toHaveCount(variants.length);
+  const fields = page.locator(
+    '[data-testid="atmosphere"][data-variant]:not([data-variant="ambient"])',
+  );
+  await expect(fields).toHaveCount(5);
 
-  for (const variant of variants) {
-    const field = page.locator(
-      `[data-testid="ambient-field"][data-variant="${variant}"]`,
-    );
-    await expect(field).toHaveCount(1);
-    await expect(field).toHaveAttribute("aria-hidden", "true");
-
-    const styles = await field.evaluate((node) => {
+  const rows = await fields.evaluateAll((nodes) =>
+    nodes.map((node) => {
       const computed = getComputedStyle(node);
       return {
+        variant: node.getAttribute("data-variant"),
+        hidden: node.getAttribute("aria-hidden"),
         pointerEvents: computed.pointerEvents,
         position: computed.position,
         top: computed.top,
       };
-    });
+    }),
+  );
 
-    expect(styles.pointerEvents).toBe("none");
-    expect(styles.position).toBe("absolute");
-    expect(styles.top).toBe("0px");
-  }
+  expect(rows.map((row) => row.variant).sort()).toEqual([
+    "article",
+    "article",
+    "article",
+    "footer",
+    "hero",
+  ]);
+  expect(
+    rows.every(
+      (row) =>
+        row.hidden === "true" &&
+        row.pointerEvents === "none" &&
+        row.position === "absolute" &&
+        row.top === "0px",
+    ),
+  ).toBe(true);
+});
+
+test("the site atmosphere is a fixed, decorative particle field", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const site = page.getByTestId("site-atmosphere");
+  await expect(site).toHaveCount(1);
+  await expect(site).toHaveAttribute("aria-hidden", "true");
+  await expect(site.locator('[data-variant="ambient"]')).toHaveCount(1);
+  await expect(site.locator('[data-testid="atmosphere-particles"]')).toHaveCount(1);
+
+  const styles = await site.evaluate((node) => {
+    const computed = getComputedStyle(node);
+    return {
+      pointerEvents: computed.pointerEvents,
+      position: computed.position,
+      zIndex: computed.zIndex,
+    };
+  });
+  expect(styles.pointerEvents).toBe("none");
+  expect(styles.position).toBe("fixed");
+  expect(styles.zIndex).toBe("0");
 });
 
 test("section headings remain the topmost hit target", async ({ page }) => {
@@ -76,16 +109,29 @@ test("harmonic registers are decorative and share one vocabulary", async ({
   ).toBe(true);
 });
 
-test("reduced motion removes the atmosphere drift and register draw", async ({
+test("reduced motion stops the atmosphere drift and particle layer", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
 
-  const animation = await page
-    .locator(".atmosphere-hero .atmosphere-field")
-    .evaluate((node) => getComputedStyle(node).animationName);
-  expect(animation).toBe("none");
+  const animations = await page.evaluate(() => {
+    const contour = document.querySelector(
+      ".ds-atmosphere-hero .ds-atmosphere-contour-layer--a",
+    );
+    const field = document.querySelector(
+      ".ds-atmosphere-article .ds-atmosphere-field",
+    );
+    const particles = document.querySelector(".ds-atmosphere-particle-layer");
+    return {
+      contour: contour ? getComputedStyle(contour).animationName : null,
+      field: field ? getComputedStyle(field, "::before").animationName : null,
+      particles: particles ? getComputedStyle(particles).animationName : null,
+    };
+  });
+  expect(animations.contour).toBe("none");
+  expect(animations.field).toBe("none");
+  expect(animations.particles).toBe("none");
 
   const line = await page
     .locator(".harmonic-line")

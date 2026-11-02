@@ -31,7 +31,7 @@ export function WorkArchive({ projects }: { projects: Project[] }) {
 
   return (
     <>
-      <div className="hue-line sticky top-16 z-30 -mx-6 mb-12 border-y bg-surface px-6 py-3">
+      <div className="project-accent-line sticky top-20 z-30 -mx-6 mb-12 border-y border-t-accent bg-surface px-6 py-3">
         <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
         <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by category">
           {categories.map((c) => (
@@ -41,10 +41,10 @@ export function WorkArchive({ projects }: { projects: Project[] }) {
               onClick={() => setActive(c)}
               aria-pressed={active === c}
               className={cn(
-                " border px-4 py-2 font-mono text-xs uppercase tracking-wider transition-colors",
+                "min-h-11 border px-4 py-2 font-mono text-xs uppercase tracking-wider transition-colors",
                 active === c
-                  ? "border-ink bg-ink text-void"
-                  : "border-line text-ink-soft hover:border-wavelength hover:text-ink",
+                  ? "border-accent bg-accent text-accent-contrast"
+                  : "border-line text-ink-soft hover:border-accent hover:text-ink",
               )}
             >
               {c}
@@ -60,7 +60,7 @@ export function WorkArchive({ projects }: { projects: Project[] }) {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search projects…"
             aria-label="Search projects"
-            className="w-full border border-line bg-surface py-2.5 pl-10 pr-4 text-sm text-ink placeholder:text-ink-faint focus:border-line-strong"
+            className="min-h-11 w-full border border-line bg-surface py-2.5 pl-10 pr-4 text-sm text-ink placeholder:text-ink-faint focus:border-accent"
           />
         </div>
         </div>

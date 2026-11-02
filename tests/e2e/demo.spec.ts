@@ -88,7 +88,7 @@ test("topology hover highlights the connected path", async ({ page }) => {
   await page.goto("/work/specsplit");
   await page.getByTestId("topology-node").first().hover();
   const lit = page.locator(
-    '[data-testid="topology-edge"][stroke="var(--wavelength)"]',
+    '[data-testid="topology-edge"][stroke="var(--accent)"]',
   );
   await expect(lit.first()).toBeAttached();
 });

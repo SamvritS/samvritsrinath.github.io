@@ -16,7 +16,7 @@ const inputClass =
 const FAQS = [
   {
     q: "Are you open to work?",
-    a: "Yes. Industry software engineering roles, systems work, and research collaboration.",
+    a: "Yes. Industry software engineering roles, Networking or ML Inference Work, Or potential research collaboration.",
   },
   {
     q: "Where are you based?",
@@ -29,10 +29,6 @@ const FAQS = [
   {
     q: "How do I cite your papers?",
     a: "Use the Cite button on research cards, or open the PDF for the full reference.",
-  },
-  {
-    q: "Do you reply to every message?",
-    a: "Every message is read. Replies go to the address you provide.",
   },
   {
     q: "What should I include?",
@@ -138,14 +134,14 @@ export default function ContactPage() {
         index="04"
         kicker="Contact"
         title="Say hello."
-        description="Software engineering roles, systems work, or research. I read everything."
+        description="Software engineering roles, Networking or ML Inference Work, Or potential research collaboration."
       />
 
       <div className="mt-6 grid gap-4 lg:grid-cols-12 lg:gap-12">
         <div className="flex flex-wrap items-center gap-3 lg:col-span-9 lg:col-start-4">
           <a
             href={`mailto:${site.contact.email}`}
-            className="font-mono text-sm text-ink transition-colors hover:text-wavelength"
+            className="font-mono text-sm text-ink transition-colors hover:text-accent"
           >
             {site.contact.email}
           </a>
@@ -197,7 +193,7 @@ export default function ContactPage() {
             rows={6}
             value={form.message}
             onChange={update("message")}
-            placeholder="Tell me about what you are building."
+            placeholder="Tell me about what you are interested in."
             className={cn(inputClass, "resize-y")}
           />
         </label>
@@ -224,7 +220,7 @@ export default function ContactPage() {
             ref={submitRef}
             data-testid="contact-submit"
             disabled={status === "sending"}
-            className="flex items-center gap-2 border border-ink bg-ink px-8 py-3.5 font-mono text-sm text-void transition-colors hover:border-wavelength disabled:cursor-not-allowed disabled:opacity-60"
+            className="flex items-center gap-2 border border-ink bg-ink px-8 py-3.5 font-mono text-sm text-void transition-colors hover:border-accent disabled:cursor-not-allowed disabled:opacity-60"
           >
             {status === "sending" ? "Sending" : "Send message"}
           </button>
@@ -236,7 +232,7 @@ export default function ContactPage() {
             </span>
           )}
           {status === "error" && (
-            <span className="flex items-center gap-2 text-sm text-wavelength">
+            <span className="flex items-center gap-2 text-sm text-accent">
               <Warning className="h-4 w-4" />
               Could not send. Email me directly instead.
             </span>
@@ -319,7 +315,7 @@ export default function ContactPage() {
                 data-testid="confirm-send"
                 autoFocus
                 onClick={send}
-                className="border border-ink bg-ink px-6 py-2.5 font-mono text-sm text-void transition-colors hover:border-wavelength hover:bg-wavelength"
+                className="border border-ink bg-ink px-6 py-2.5 font-mono text-sm text-void transition-colors hover:border-accent hover:bg-accent"
               >
                 Send
               </button>
@@ -327,7 +323,7 @@ export default function ContactPage() {
                 type="button"
                 ref={cancelRef}
                 onClick={closeConfirm}
-                className="border border-line-strong px-6 py-2.5 font-mono text-sm text-ink transition-colors hover:border-wavelength"
+                className="border border-line-strong px-6 py-2.5 font-mono text-sm text-ink transition-colors hover:border-accent"
               >
                 Cancel
               </button>

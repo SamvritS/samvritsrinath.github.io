@@ -25,7 +25,7 @@ export function Playground() {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const cs = getComputedStyle(wrap);
     const baseColor = cs.getPropertyValue("--ink-faint").trim();
-    const accentColor = cs.getPropertyValue("--wavelength").trim();
+    const accentColor = cs.getPropertyValue("--accent").trim();
     const m = baseColor.match(/^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i);
     const linkRGB = m
       ? `${parseInt(m[1], 16)}, ${parseInt(m[2], 16)}, ${parseInt(m[3], 16)}`

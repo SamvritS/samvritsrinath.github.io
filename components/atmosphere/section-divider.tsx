@@ -18,7 +18,7 @@ export function SectionDivider({ className }: { className?: string }) {
       >
         <path d="M0 12h28" stroke="var(--line-strong)" />
         <circle cx="40" cy="12" r="5" stroke="var(--line-strong)" />
-        <circle cx="40" cy="12" r="1.5" fill="var(--wavelength)" />
+        <circle cx="40" cy="12" r="1.5" fill="var(--accent)" />
         <path
           d="M45 12h18"
           stroke="var(--line-strong)"

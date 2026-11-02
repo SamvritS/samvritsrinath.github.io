@@ -125,7 +125,7 @@ export function CitmTopology() {
               data-testid="citm-edge"
               opacity={lit ? 1 : 0.15}
               fill="none"
-              stroke={active === s.name ? "var(--wavelength)" : "var(--hue)"}
+              stroke={active === s.name ? "var(--accent)" : "var(--hue)"}
               strokeOpacity={lit ? 0.85 : 0.4}
             >
               <path d={b.in} strokeWidth={w} vectorEffect="non-scaling-stroke" />
@@ -154,8 +154,8 @@ export function CitmTopology() {
       <g>
         {SOURCES.map((s, i) => (
           <g key={s.name} opacity={active && active !== s.name && active !== "COUNTRY X" ? 0.4 : 1}>
-            <line x1={SRC_X - 22} y1={srcY(i)} x2={SRC_X} y2={srcY(i)} stroke={active === s.name ? "var(--wavelength)" : "var(--line-strong)"} strokeWidth={2} />
-            <circle cx={SRC_X - 26} cy={srcY(i)} r={3} fill={active === s.name ? "var(--wavelength)" : "var(--surface)"} stroke={active === s.name ? "var(--wavelength)" : "var(--ink-faint)"} />
+            <line x1={SRC_X - 22} y1={srcY(i)} x2={SRC_X} y2={srcY(i)} stroke={active === s.name ? "var(--accent)" : "var(--line-strong)"} strokeWidth={2} />
+            <circle cx={SRC_X - 26} cy={srcY(i)} r={3} fill={active === s.name ? "var(--accent)" : "var(--surface)"} stroke={active === s.name ? "var(--accent)" : "var(--ink-faint)"} />
             <text x={SRC_X - 36} y={srcY(i) + 3} textAnchor="end" fontSize={9} fontFamily="var(--font-jetbrains-mono)" letterSpacing="0.06em" fill="var(--ink)">
               {s.name}
             </text>
@@ -190,7 +190,7 @@ export function CitmTopology() {
           fontSize={11}
           fontFamily="var(--font-jetbrains-mono)"
           letterSpacing="0.08em"
-          fill="var(--wavelength)"
+          fill="var(--accent)"
         >
           inspecting {selection}
         </text>

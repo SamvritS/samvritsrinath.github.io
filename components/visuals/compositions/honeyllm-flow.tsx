@@ -103,7 +103,7 @@ export function HoneyLlmFlow() {
           fontSize={11}
           fontFamily="var(--font-jetbrains-mono)"
           letterSpacing="0.08em"
-          fill="var(--wavelength)"
+          fill="var(--accent)"
         >
           inspecting {active}
         </text>
@@ -121,7 +121,7 @@ export function HoneyLlmFlow() {
           <rect key={i} x={330} y={52 + i * 12} width={560 - i * 90} height={5} fill="var(--line)" opacity={0.7} />
         ))}
         {[360, 590, 810].map((x) => (
-          <path key={x} d={`M ${x} 56 l 6 6 l -6 6 l -6 -6 Z`} fill="var(--wavelength)" />
+          <path key={x} d={`M ${x} 56 l 6 6 l -6 6 l -6 -6 Z`} fill="var(--accent)" />
         ))}
         <VisualAnnotation x={940} y={78} anchor="start" size={9}>
           3 injection points · per-session token
@@ -152,13 +152,13 @@ export function HoneyLlmFlow() {
                 y={230}
                 width={12}
                 height={26}
-                fill={lit ? "var(--wavelength)" : "var(--surface)"}
+                fill={lit ? "var(--accent)" : "var(--surface)"}
                 fillOpacity={lit ? 0.85 : 1}
                 stroke="var(--line-strong)"
                 strokeWidth={0.75}
               />
               {trap && (
-                <path d={`M ${44 + i * 15 + 6} 214 l 5 5 l -5 5 l -5 -5 Z`} fill="var(--wavelength)" opacity={lit ? 1 : 0.45} />
+                <path d={`M ${44 + i * 15 + 6} 214 l 5 5 l -5 5 l -5 -5 Z`} fill="var(--accent)" opacity={lit ? 1 : 0.45} />
               )}
             </g>
           );
@@ -172,7 +172,7 @@ export function HoneyLlmFlow() {
         <path
           d={`M ${laneCX(1)} 180 C ${laneCX(1)} 230, ${laneCX(1)} 250, ${laneCX(1)} 268`}
           fill="none"
-          stroke={active === "VISIT" ? "var(--wavelength)" : "var(--line-strong)"}
+          stroke={active === "VISIT" ? "var(--accent)" : "var(--line-strong)"}
           strokeWidth={1.5}
         />
         {[18, 12, 6].map((r) => (
@@ -182,12 +182,12 @@ export function HoneyLlmFlow() {
             cy={296}
             r={r}
             fill="none"
-            stroke={active === "VISIT" ? "var(--wavelength)" : "var(--line-strong)"}
+            stroke={active === "VISIT" ? "var(--accent)" : "var(--line-strong)"}
             strokeWidth={1}
             opacity={r === 6 ? 1 : 0.5}
           />
         ))}
-        <circle cx={laneCX(1)} cy={296} r={3} fill="var(--wavelength)" />
+        <circle cx={laneCX(1)} cy={296} r={3} fill="var(--accent)" />
         <text x={laneCX(1)} y={332} textAnchor="middle" fontSize={10} fontFamily="var(--font-jetbrains-mono)" fill="var(--ink)">
           tok/9f2c41 · per-session
         </text>
@@ -224,11 +224,11 @@ export function HoneyLlmFlow() {
       </g>
 
       {LANES.map((lane, i) => (
-        <g key={`edge-${lane.label}`} data-testid="topology-edge" stroke={active === lane.label ? "var(--wavelength)" : undefined}>
+        <g key={`edge-${lane.label}`} data-testid="topology-edge" stroke={active === lane.label ? "var(--accent)" : undefined}>
           <VisualEdge
             d={`M ${laneCX(i)} ${LANE_Y + LANE_H} L ${laneCX(i)} 402 Q ${laneCX(i)} 420, ${i === 1 ? laneCX(i) : 584} 420`}
             markerId={arrowId}
-            color={active === lane.label ? "var(--wavelength)" : "var(--line-strong)"}
+            color={active === lane.label ? "var(--accent)" : "var(--line-strong)"}
             opacity={active === lane.label ? 1 : 0.45}
             width={1.5}
           />

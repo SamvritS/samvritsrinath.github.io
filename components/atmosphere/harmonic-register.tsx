@@ -82,7 +82,7 @@ export function HarmonicRegister({
             "M0 48C48 48 70 44 104 44S148 50 160 47",
           ]}
         />
-        <circle cx="100" cy="24" r="2" fill="var(--wavelength)" />
+        <circle cx="100" cy="24" r="2" fill="var(--accent)" />
       </svg>
     );
   }
@@ -98,7 +98,7 @@ export function HarmonicRegister({
         className={classes}
       >
         <Lines
-          tone="var(--hue, var(--field-teal))"
+          tone="var(--hue, var(--atmosphere-echo))"
           paths={[
             "M0 12C60 12 84 6 140 6S232 16 292 16S394 8 480 12",
             "M0 22C58 22 88 14 146 14S238 26 298 26S398 18 480 22",
@@ -107,7 +107,7 @@ export function HarmonicRegister({
             "M0 52C70 52 98 44 164 44S256 56 316 56S410 48 480 52",
           ]}
         />
-        <circle cx="146" cy="14" r="2.5" fill="var(--wavelength)" />
+        <circle cx="146" cy="14" r="2.5" fill="var(--accent)" />
       </svg>
     );
   }

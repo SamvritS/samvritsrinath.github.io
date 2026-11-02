@@ -22,7 +22,8 @@ export function ProjectCard({
       style={{ "--hue": project.hue } as React.CSSProperties}
       data-hue={project.hue}
       className={cn(
-        "group grid min-w-0 gap-6 border-t border-line py-7 transition-colors hover:border-wavelength",
+        "project-card group grid min-w-0 gap-6 border-t border-line py-7 transition-colors",
+        `project-accent-${project.slug}`,
         row
           ? "md:grid-cols-[280px_minmax(0,1fr)] md:gap-10 md:py-9"
           : "grid-cols-1",
@@ -35,14 +36,14 @@ export function ProjectCard({
       />
       <div className="flex min-w-0 flex-col">
         <div className="mb-3 flex items-center justify-between gap-3">
-          <span className="flex items-center gap-3 font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-ink-faint">
+          <span className="project-accent-text flex items-center gap-3 font-mono text-[0.6875rem] uppercase tracking-[0.2em]">
             {clean(project.category)}
           </span>
           <span className="font-mono text-xs text-ink-faint tabular-nums">
             {project.year}
           </span>
         </div>
-        <h3 className="pr-6 text-lg font-semibold tracking-tight text-ink">
+        <h3 className="project-card-title type-h4 pr-6 text-ink">
           {clean(project.title)}
         </h3>
         <p className="mt-2 text-sm leading-relaxed text-ink-soft">
@@ -53,7 +54,7 @@ export function ProjectCard({
             {tech.join(" + ")}
           </p>
         )}
-        <span className="mt-5 flex items-center gap-1 font-mono text-xs uppercase tracking-[0.18em] text-ink">
+        <span className="project-accent-text mt-5 flex items-center gap-1 font-mono text-xs uppercase tracking-[0.18em]">
           Details
           <ArrowUpRight className="h-3.5 w-3.5" />
         </span>

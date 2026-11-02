@@ -1,4 +1,10 @@
-export function CoordinateMarks({ className }: { className?: string }) {
+export function CoordinateMarks({
+  className,
+  tone = "var(--accent)",
+}: {
+  className?: string;
+  tone?: string;
+}) {
   return (
     <svg
       aria-hidden="true"
@@ -11,7 +17,7 @@ export function CoordinateMarks({ className }: { className?: string }) {
         stroke="var(--line-strong)"
       />
       <circle cx="48" cy="48" r="10" stroke="var(--line)" />
-      <circle cx="48" cy="48" r="2" fill="var(--wavelength)" />
+      <circle cx="48" cy="48" r="2" fill={tone} />
       <path
         d="M20 20h8M20 20v8M76 76h-8M76 76v-8"
         stroke="var(--line-strong)"

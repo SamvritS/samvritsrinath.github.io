@@ -21,7 +21,7 @@ function PaperSection({
 }) {
   return (
     <section className="mt-10">
-      <h2 className="border-b border-black/15 pb-1 font-mono text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-black/70">
+      <h2 className="border-b border-print-ink/15 pb-1 font-mono text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-print-ink/70">
         {title}
       </h2>
       <div className="mt-5 flex flex-col gap-6">{children}</div>
@@ -41,8 +41,8 @@ function PaperEntry({
   return (
     <div>
       <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-        <h3 className="text-[15px] font-semibold text-black">{title}</h3>
-        <span className="font-mono text-[0.72rem] text-black/60">{meta}</span>
+        <h3 className="text-[15px] font-semibold text-print-ink">{title}</h3>
+        <span className="font-mono text-[0.72rem] text-print-ink/60">{meta}</span>
       </div>
       {children}
     </div>
@@ -62,7 +62,7 @@ export default function ResumePage() {
           href={site.resume.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 border border-ink bg-ink px-6 py-3 font-mono text-sm text-void transition-colors hover:border-wavelength"
+          className="flex items-center gap-2 border border-ink bg-ink px-6 py-3 font-mono text-sm text-void transition-colors hover:border-accent"
         >
           <Download className="h-4 w-4" />
           Download PDF
@@ -70,25 +70,25 @@ export default function ResumePage() {
       </div>
 
       {/* Paper sheet, literal warm white for print fidelity in both themes */}
-      <article className="print-sheet overflow-hidden border border-line bg-[#fbfaf6] text-black">
+      <article className="print-sheet overflow-hidden border border-line bg-print-sheet text-print-ink">
         <div className="px-8 py-12 md:px-16 md:py-16">
           <header>
-            <h1 className="text-3xl font-semibold tracking-tight text-black md:text-4xl">
+            <h1 className="text-3xl font-semibold tracking-tight text-print-ink md:text-4xl">
               {site.name}
             </h1>
-            <p className="mt-1.5 text-sm text-black/70">
+            <p className="mt-1.5 text-sm text-print-ink/70">
               Software Engineer · Researcher · {site.location}
             </p>
-            <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-[0.72rem] text-black/60">
-              <a href={`mailto:${site.contact.email}`} className="flex items-center gap-1.5 hover:text-black">
+            <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-[0.72rem] text-print-ink/60">
+              <a href={`mailto:${site.contact.email}`} className="flex items-center gap-1.5 hover:text-print-ink">
                 <Envelope className="h-3.5 w-3.5" />
                 {site.contact.email}
               </a>
-              <a href={site.contact.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-black">
+              <a href={site.contact.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-print-ink">
                 {site.contact.github.replace("https://", "")}
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
-              <a href={site.contact.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-black">
+              <a href={site.contact.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-print-ink">
                 linkedin.com/in/samvrit-srinath
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
@@ -100,7 +100,7 @@ export default function ResumePage() {
               title={`${education.university}, ${education.degree}`}
               meta={education.duration}
             >
-              <p className="mt-1.5 text-sm leading-relaxed text-black/75">
+              <p className="mt-1.5 text-sm leading-relaxed text-print-ink/75">
                 {education.details}. Focus: {education.focus}. Regents Scholar.
               </p>
             </PaperEntry>
@@ -115,7 +115,7 @@ export default function ResumePage() {
                   meta={role.duration}
                 >
                   {role.description.length > 0 && (
-                    <ul className="mt-2 flex list-disc flex-col gap-1.5 pl-5 text-sm leading-relaxed text-black/75">
+                    <ul className="mt-2 flex list-disc flex-col gap-1.5 pl-5 text-sm leading-relaxed text-print-ink/75">
                       {role.description.map((d, i) => (
                         <li key={i}>{d}</li>
                       ))}
@@ -130,12 +130,12 @@ export default function ResumePage() {
             {researchAreas.flatMap((area) => area.papers).map((pub) => (
               <PaperEntry key={pub.href} title={pub.title} meta={`${pub.year} · ${pub.venue}`}>
                 {pub.authors && pub.authors.length > 0 && (
-                  <p className="mt-1.5 text-sm text-black/60">
+                  <p className="mt-1.5 text-sm text-print-ink/60">
                     {pub.authors.join(", ")}
                   </p>
                 )}
                 {pub.note && (
-                  <p className="mt-1 text-sm text-black/60">{pub.note}</p>
+                  <p className="mt-1 text-sm text-print-ink/60">{pub.note}</p>
                 )}
               </PaperEntry>
             ))}
@@ -149,7 +149,7 @@ export default function ResumePage() {
                   title={`${company.company}, ${role.role}`}
                   meta={role.duration}
                 >
-                  <ul className="mt-2 flex list-disc flex-col gap-1.5 pl-5 text-sm leading-relaxed text-black/75">
+                  <ul className="mt-2 flex list-disc flex-col gap-1.5 pl-5 text-sm leading-relaxed text-print-ink/75">
                     {role.description.slice(0, 2).map((d, i) => (
                       <li key={i}>{d}</li>
                     ))}
@@ -163,10 +163,10 @@ export default function ResumePage() {
             <div className="flex flex-col gap-3">
               {skills.map((s) => (
                 <div key={s.group} className="flex flex-wrap items-baseline gap-x-3 gap-y-1 text-sm">
-                  <span className="w-44 shrink-0 font-mono text-[0.72rem] font-semibold uppercase tracking-wider text-black/60">
+                  <span className="w-44 shrink-0 font-mono text-[0.72rem] font-semibold uppercase tracking-wider text-print-ink/60">
                     {s.group}
                   </span>
-                  <span className="text-black/80">{s.items.join(", ")}</span>
+                  <span className="text-print-ink/80">{s.items.join(", ")}</span>
                 </div>
               ))}
             </div>

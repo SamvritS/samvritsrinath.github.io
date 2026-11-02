@@ -17,7 +17,7 @@ export function ResearchArchive({ level = 3 }: { level?: 2 | 3 }) {
           style={{ "--hue": area.hue } as React.CSSProperties}
         >
           <div className="border-t hue-line pt-6">
-            <AreaHeading className="text-xl font-semibold tracking-tight text-ink md:text-2xl">
+            <AreaHeading className="type-h3 hue-text">
               {clean(area.title)}
             </AreaHeading>
             <p className="read mt-3">{clean(area.description)}</p>
@@ -39,7 +39,7 @@ export function ResearchArchive({ level = 3 }: { level?: 2 | 3 }) {
                   className="grid gap-4 border-t border-line py-7 md:grid-cols-[160px_1fr] md:gap-8"
                 >
                   <div>
-                    <p className="font-mono text-[0.6875rem] uppercase tracking-[0.16em] text-ink">
+                    <p className="font-mono text-[0.6875rem] uppercase tracking-[0.16em] text-accent">
                       {clean(paper.venue)}
                     </p>
                     <p className="mt-1 font-mono text-xs tabular-nums text-ink-faint">
@@ -48,7 +48,7 @@ export function ResearchArchive({ level = 3 }: { level?: 2 | 3 }) {
                   </div>
 
                   <div>
-                    <PaperHeading className="max-w-3xl text-lg font-semibold leading-snug tracking-tight text-ink">
+                    <PaperHeading className="type-h4 max-w-3xl leading-snug text-ink">
                       {clean(paper.title)}
                     </PaperHeading>
                     {paper.authors && paper.authors.length > 0 && (
@@ -72,7 +72,7 @@ export function ResearchArchive({ level = 3 }: { level?: 2 | 3 }) {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`${pdf ? "PDF" : "arXiv"}: ${paper.title}`}
-                        className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.18em] text-ink transition-colors hover:text-wavelength"
+                        className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.18em] text-ink transition-colors hover:text-accent"
                       >
                         {pdf && <FileText className="h-3.5 w-3.5" aria-hidden />}
                         {pdf ? "PDF" : "arXiv"}

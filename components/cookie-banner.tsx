@@ -45,7 +45,7 @@ export function CookieBanner() {
           type="button"
           data-testid="cookie-accept"
           onClick={accept}
-          className="border border-line-strong px-5 py-2 font-mono text-xs uppercase tracking-[0.18em] text-ink transition-colors hover:border-wavelength"
+          className="border border-line-strong px-5 py-2 font-mono text-xs uppercase tracking-[0.18em] text-ink transition-colors hover:border-accent"
         >
           Accept
         </button>

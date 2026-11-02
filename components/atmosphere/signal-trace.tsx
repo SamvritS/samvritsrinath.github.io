@@ -15,14 +15,14 @@ export function SignalTrace({ className }: { className?: string }) {
       />
       <path
         d="M450 96c30 0 42-12 62-12"
-        stroke="var(--wavelength)"
+        stroke="var(--accent)"
         strokeWidth="1"
         pathLength={1}
         className="signal-trace-path signal-trace-accent"
       />
-      <circle cx="220" cy="24" r="2.5" fill="var(--field-teal)" />
-      <circle cx="360" cy="94" r="2.5" fill="var(--field-blue)" />
-      <circle cx="512" cy="84" r="3" fill="var(--wavelength)" />
+      <circle cx="220" cy="24" r="2.5" fill="var(--atmosphere-echo)" />
+      <circle cx="360" cy="94" r="2.5" fill="var(--atmosphere)" />
+      <circle cx="512" cy="84" r="3" fill="var(--accent)" />
     </svg>
   );
 }

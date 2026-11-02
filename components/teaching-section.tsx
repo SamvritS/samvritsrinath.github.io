@@ -10,8 +10,8 @@ export function TeachingSection() {
       id="teaching"
       rail="06 / TEACHING"
       kicker="Teaching"
-      title="Head tutor, DSA tutor, systems tutor, peer mentor."
-      description="Four instructional roles, 200 plus students mentored, and a curriculum built around problem decomposition."
+      title="Instructional Assistant"
+      description="Variety of Educational Roles spanning various course domains, including Intro to Programming, to Advanced Data Structures and Algorithms."
     >
       <MetricRow metrics={[...teachingStats]} className="mb-12" />
       <Reveal>

@@ -96,7 +96,7 @@ function FieldDots() {
           cx={d.x}
           cy={d.y}
           r={d.hit ? 1.8 : 1.1}
-          fill={d.hit ? "var(--wavelength)" : "var(--hue, var(--ink-faint))"}
+          fill={d.hit ? "var(--accent)" : "var(--hue, var(--ink-faint))"}
           opacity={d.hit ? 0.95 : d.o}
         />
       ))}
@@ -159,7 +159,7 @@ function RegionRect({
         width={REGION_W}
         height={h}
         fill="var(--surface)"
-        stroke={lit ? "var(--wavelength)" : "var(--line-strong)"}
+        stroke={lit ? "var(--accent)" : "var(--line-strong)"}
         strokeWidth={lit ? 1.5 : 1}
       />
       <text
@@ -235,7 +235,7 @@ export function OwnershipPipeline({
           fontSize={11}
           fontFamily="var(--font-jetbrains-mono)"
           letterSpacing="0.08em"
-          fill="var(--wavelength)"
+          fill="var(--accent)"
         >
           inspecting {activeStage.label} · STAGE {stageIndex.get(activeStage.id)! + 1}/6
         </text>
@@ -366,7 +366,7 @@ export function OwnershipPipeline({
         <path
           d={`M ${OUTPUT.x} ${OUTPUT.y} H ${OUTPUT.x + OUTPUT.w} V ${OUTPUT.y + 30} M ${OUTPUT.x + OUTPUT.w} ${OUTPUT.y + 54} V ${OUTPUT.y + OUTPUT.h} H ${OUTPUT.x} V ${OUTPUT.y}`}
           fill="var(--surface)"
-          stroke={focus === "owner" ? "var(--wavelength)" : "var(--line-strong)"}
+          stroke={focus === "owner" ? "var(--accent)" : "var(--line-strong)"}
           strokeWidth={focus === "owner" ? 1.5 : 1}
         />
         <text
@@ -391,7 +391,7 @@ export function OwnershipPipeline({
         >
           13.7K
         </text>
-        <circle cx={OUTPUT.x + OUTPUT.w - 14} cy={OUTPUT.y + OUTPUT.h / 2} r={3} fill="var(--wavelength)" />
+        <circle cx={OUTPUT.x + OUTPUT.w - 14} cy={OUTPUT.y + OUTPUT.h / 2} r={3} fill="var(--accent)" />
       </g>
       <g data-testid="topology-edge">
         <VisualEdge d="M 993 356 L 993 372" markerId="arrow-ownership" dashed={false} width={1.5} />
@@ -399,7 +399,7 @@ export function OwnershipPipeline({
 
       <g opacity={dim("cache") ? 0.18 : 1}>
         <rect x={CACHE.x + 6} y={CACHE.y - 6} width={CACHE.w} height={CACHE.h} fill="var(--void)" stroke="var(--line)" strokeWidth={1} />
-        <rect x={CACHE.x} y={CACHE.y} width={CACHE.w} height={CACHE.h} fill="var(--surface)" stroke={focus === "cache" ? "var(--wavelength)" : "var(--line-strong)"} strokeWidth={focus === "cache" ? 1.5 : 1} />
+        <rect x={CACHE.x} y={CACHE.y} width={CACHE.w} height={CACHE.h} fill="var(--surface)" stroke={focus === "cache" ? "var(--accent)" : "var(--line-strong)"} strokeWidth={focus === "cache" ? 1.5 : 1} />
         <text
           x={CACHE.x + 14}
           y={CACHE.y + 28}

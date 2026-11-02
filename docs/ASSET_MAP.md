@@ -1,8 +1,8 @@
 # Public Asset Map
 
-Generated 2026-10-29 for R1.1 item 4. Every file under `public/assets` is listed.
+Generated 2026-11-01 for the Color Pop design pass. Every file under `public/assets` is listed.
 
-Used: 68. Unused: 16. Total: 84.
+Used: 68. Unused: 18. Total: 86.
 
 ## Used assets
 
@@ -13,8 +13,8 @@ Used: 68. Unused: 16. Total: 84.
 | `/assets/clubs/tse.png` | LogoTile in ClubList | Homepage and About |
 | `/assets/clubs/tuas.png` | LogoTile in ClubList | Homepage and About |
 | `/assets/companies/Arista.png` | LogoTile in ExperienceSection | Also EducationSection for UCSD.png |
-| `/assets/companies/CSE_PACE.png` | LogoTile in TeachingList | Each teaching role |
-| `/assets/companies/CSE_UCSD.png` | LogoTile in TeachingList | Each teaching role |
+| `/assets/companies/CSE_PACE-transparent.png` | LogoTile in TeachingList | Transparent copy; each teaching role |
+| `/assets/companies/CSE_UCSD-transparent.png` | LogoTile in TeachingList and Education | Transparent copy; each teaching role |
 | `/assets/companies/UCSD.png` | LogoTile in ExperienceSection | Also EducationSection for UCSD.png |
 | `/assets/papers/CS1_LLM_Experience_Report__ITiCSE_2024_.pdf` | PaperLink, ResearchArchive | Case studies and research archive |
 | `/assets/papers/OperatorLLMs_IMC25.pdf` | PaperLink, ResearchArchive | Case studies and research archive |
@@ -97,5 +97,7 @@ Used: 68. Unused: 16. Total: 84.
 | `/assets/projects/traceroutes/heatmap_violators.png` | duplicate of the used heatmap_violators.webp cover |
 | `/assets/research/ITiCSE/LLM_workflow_image.png` | duplicate of the used LLM_workflow_image.webp |
 | `/assets/research/ITiCSE/divergent_column_percent_small.png` | duplicate of the used divergent_column_percent_small.webp |
+| `/assets/companies/CSE_PACE.png` | replaced by CSE_PACE-transparent.png |
+| `/assets/companies/CSE_UCSD.png` | replaced by CSE_UCSD-transparent.png |
 
 No unused asset was deleted.

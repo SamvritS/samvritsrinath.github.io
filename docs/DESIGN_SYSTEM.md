@@ -1,343 +1,537 @@
-# Network Observatory Design System
+# Design System - Color Pop
 
-Status: Phase 2 complete; C1 Warm selected and implemented
-Date: 2026-10-27
-Base: `restore-character` after the Q1 accessibility fixes
-Prototype: `/prototypes/palette.html`
-Scope: palette, identity, type, spacing, numbering, and library decision
+Status: DS-4 applied; DS-5 verification in progress
+Date: 2026-11-01
+Branch: `feat/ui/color-pop`
+Scope: tokens, typography, layout, atmosphere, motion, article structure, evidence placement, and verification.
+Source of truth: `design/tokens.ts`
+Generator: `scripts/build-tokens.ts`
+Prototype: `prototypes/design-system.html`
+Contrast gate: `scripts/verify-contrast.ts`
+Skill policy: Project Taste v2 only. The global taste copy is read but not used. `docs/MOTION.md` has been removed; motion rules live in this document.
 
-Gate 2 decision: C1 Warm. Numbering confirmed. A26 approved and fixed. No
-new UI library. `.env.example` is tracked. C2 Signal and C3 Starlight remain
-reference prototypes.
+## 0. Design read and decisions
 
-The selected C1 tokens are implemented in `app/globals.css`. C2 and C3 are
-not shipped.
-
-## 1. Design read
-
-Reading this as: developer portfolio for hiring managers, research
-collaborators, and systems engineers, with an editorial observatory language,
-leaning toward the existing warm-paper and blue-black system, refined rather
-than replaced.
+Reading this as: an editorial-observatory portfolio design system for hiring managers, research collaborators, and systems engineers, with a warm-paper and blue-night language, leaning toward CSS-first tokens, Outfit and JetBrains Mono, and a token-bounded SVG atmosphere with a slow particle field.
 
 Dials:
 
 | Dial | Value | Reason |
 | --- | --- | --- |
-| `DESIGN_VARIANCE` | 7 | The site uses a 6/6 hero, 3/9 rails, and a full-width Experience section. Keep the rail asymmetry; do not add chaos. |
-| `MOTION_INTENSITY` | 6 | The user set 6. Meaning-bearing motion only: traceroute packet, constellation twinkle, page transitions, and reveals. |
-| `VISUAL_DENSITY` | 4 | Editorial portfolio density. The data is evidence, not a dashboard. |
+| `DESIGN_VARIANCE` | 7 | Keep the 6/6 hero, 3/9 rail, and full-width Experience section. |
+| `MOTION_INTENSITY` | 6 | Dynamic is allowed. The ambient field drifts slowly; section variants add one local animated layer. |
+| `VISUAL_DENSITY` | 4 | Editorial density. Evidence is not a dashboard. |
 
-The brief overrides several defaults in the loaded skills:
+Round 1 decisions:
 
-- `design-taste-frontend` bans section-number eyebrows and locale strips. The
-  brief's `01 / EXPERIENCE` rail is core design language, so it stays. The
-  coordinate line is removed; the base is San Jose, CA.
-- `design-taste-frontend` prefers one accent. C2 and C3 add semantic
-  secondary accents. The brief and the user's palette choice win; the usage
-  rules below keep them from becoming decoration.
-- `apple-design` recommends translucent materials. The brief keeps zero
-  radius, no glass, and gradients only in the atmosphere block. Use its
-  typography and motion guidance, not its materials.
-- `brandkit` is an image-generation workflow. It informs the mark and OG
-  strategy below; no generated brand board is committed at this gate.
+| # | Decision | Result |
+| --- | --- | --- |
+| 1 | Token naming | Rename `--wavelength` to `--accent` globally in DS-4. No alias. |
+| 2 | Project accents | Add optional `projectAccent: { light, dark }`. Keep existing `hue` unchanged. Scope `--project-accent` to `/work/[slug]`. |
+| 3 | Atmosphere | Use ultramarine as the primary field, keep teal and warm as low-alpha echoes, and add the warm counter-glow. |
+| 4 | Reading face | Option A selected: Outfit throughout. Source Serif 4 was evaluated at 121,412 B initial (+48,704 B) and rejected by the owner after review. |
+| 5 | Contrast scope | Meaningful graphics and focus at 3:1. Decorative hairlines stay exempt. Image aspects must be measured, not guessed. |
+| 6 | Existing ornaments | Keep `HarmonicRegister`, `SignalTrace`, `SectionDivider`, and `CoordinateMarks` in the catalogue, two per page maximum. |
+| 7 | Token architecture | Single TypeScript source, generated CSS, and the OG route imports the same source. No drift test, no duplicated literal sheet. |
 
-## 2. Palette
+## 1. Color
 
-### 2.1 Current base C
+### 1.1 Three layers
+
+Color is split into three layers. A layer may not borrow another layer's role.
+
+| Layer | Token family | Use |
+| --- | --- | --- |
+| Neutrals | `--void`, `--surface`, `--surface-2`, `--ink`, `--ink-soft`, `--ink-faint`, `--line`, `--line-strong` | Page ground, plates, type, hairlines |
+| Accent | `--accent`, `--accent-contrast` | Links, focus ring, scroll line, active nav, one key number per view |
+| Atmosphere | `--atmosphere`, `--atmosphere-echo`, `--atmosphere-warm` | Hero and decorative artifacts only. Never text. |
+| Project | `--project-accent` | `/work/[slug]` only. Not global. |
+| Data ink | `--data-slate`, `--data-ochre`, `--data-sage` | Figure strokes, chart series, measurement marks |
+
+### 1.2 Neutrals
 
 | Token | Light | Dark |
 | --- | --- | --- |
-| `--void` | `#f2ece1` | `#060a11` |
-| `--surface` | `#fbf7ef` | `#0a1019` |
-| `--surface-2` | `#f7f1e7` | `#0d1622` |
-| `--ink` | `#121821` | `#f1f4f8` |
-| `--ink-soft` | `#47515f` | `#a8b3c2` |
-| `--ink-faint` | `#515b69` | `#8a95a6` |
-| `--wavelength` | `#ad1526` | `#ff5a4d` |
-| `--field-blue` | `#5b7fa6` | `#17324f` |
-| `--field-teal` | `#2f7a72` | `#123c3a` |
-| `--field-warm` | `#c98a3b` | `#c98a3b` |
+| `--void` | `#F4ECDF` | `#040A12` |
+| `--surface` | `#FDF9F1` | `#08111D` |
+| `--surface-2` | `#F7EFE2` | `#0B1623` |
+| `--ink` | `#0F1722` | `#F5F8FC` |
+| `--ink-soft` | `#3F4B5A` | `#B0BCCB` |
+| `--ink-faint` | `#4B5766` | `#8C98AA` |
+| `--line` | `rgba(15, 23, 34, 0.10)` | `rgba(245, 248, 252, 0.09)` |
+| `--line-strong` | `rgba(15, 23, 34, 0.18)` | `rgba(245, 248, 252, 0.18)` |
 
-### 2.2 C1 Warm
+The neutrals are today's values. They already pass. `--line` and `--line-strong` are decorative separators; they are not gated at 3:1 because they carry no information. Focus and meaningful graphics are gated.
 
-C1 is the selected implementation palette. It keeps the hues, raises chroma,
-and makes the red stronger. The neutrals move slightly cooler and cleaner;
-the field colors become more saturated.
+### 1.3 Accent
 
 | Token | Light | Dark |
 | --- | --- | --- |
-| `--void` | `#f4ecdf` | `#040a12` |
-| `--surface` | `#fdf9f1` | `#08111d` |
-| `--surface-2` | `#f7efe2` | `#0b1623` |
-| `--ink` | `#0f1722` | `#f5f8fc` |
-| `--ink-soft` | `#3f4b5a` | `#b0bccb` |
-| `--ink-faint` | `#4b5766` | `#8c98aa` |
-| `--wavelength` | `#b00f24` | `#ff4638` |
-| `--field-blue` | `#3f7aa8` | `#16446b` |
-| `--field-teal` | `#18786f` | `#0d4a44` |
-| `--field-warm` | `#d08a2f` | `#d89a3f` |
-| `--field-slate` | `#7f8ea8` | `#2b3a4f` |
+| `--accent` | `#B00F24` | `#FF4638` |
+| `--accent-contrast` | `#F4ECDF` | `#040A12` |
 
-Red is the primary action, focus, selected, and error color. It is the only
-accent in C1. Project hues stay project-specific. The atmosphere fields carry
-the higher chroma, but no gradient sits behind body text.
+Vermilion is the only global accent. It is used for:
 
-### 2.3 C2 Signal
+- inline links and link underlines on hover;
+- the focus ring;
+- the scroll progress line;
+- the active nav item;
+- one key number or one key label per view.
 
-C2 is C1 plus a data accent:
+It is not used for every heading, every metric, or every border. `--accent-contrast` is the text colour on a filled accent surface.
 
-| Token | Light | Dark | Use |
-| --- | --- | --- | --- |
-| `--signal` | `#08706a` | `#5fe0d4` | Stat values, live indicators, measurement lines |
-| `--signal-soft` | `rgba(8,112,106,0.12)` | `rgba(95,224,212,0.12)` | Selected data rows, sparkline fills |
-| `--signal-glow` | `rgba(8,112,106,0.28)` | `rgba(95,224,212,0.28)` | One live node, one focus halo |
+### 1.4 Atmosphere
 
-Signal teal is the global data accent. It does not carry prose. A project card
-keeps its own project hue for project-specific metrics. Signal teal is for
-project values, measurement traces, live status, and cross-archive
-data counts.
+| Token | Light | Dark |
+| --- | --- | --- |
+| `--atmosphere` | `#5B72D6` | `#2B3A9E` |
+| `--atmosphere-echo` | `#6FB3A8` | `#0D4A44` |
+| `--atmosphere-warm` | `#E0A45A` | `#D89A3F` |
+| `--atmo-field-alpha` | 17% | 26% |
+| `--atmo-echo-alpha` | 6% | 8% |
+| `--atmo-warm-alpha` | 3% | 3% |
+| `--atmo-contour-alpha` | 20% | 35% |
+| `--atmo-halftone-alpha` | 4% | 6% |
+| `--atmo-grain-alpha` | 4% | 2% |
+| `--atmo-grid-alpha` | 3% | 4% |
+| `--site-field-alpha` | 12% | 18% |
+| `--site-echo-alpha` | 5% | 8% |
+| `--site-warm-alpha` | 2% | 3% |
+| `--site-particle-alpha` | 10% | 15% |
 
-### 2.4 C3 Starlight
+Ultramarine is the primary field. Teal and warm are retained as low-alpha echoes of the previous multi-hue atmosphere; the warm layer is the counter-glow. The contour stroke cap is 20% light and 35% dark. The field alphas are lower so text remains legible in the worst composite. The site-wide fixed field uses the lower `site-*` alphas; the section fields use the `atmo-*` alphas.
 
-C3 is C2 plus a highlight accent:
+Rules:
 
-| Token | Light | Dark | Use |
-| --- | --- | --- | --- |
-| `--starlight` | `#8a620f` | `#e8b96a` | One highlight line |
-| `--starlight-bright` | `#c9973e` | `#ffd88a` | Glow, non-text highlight only |
-| `--starlight-soft` | `rgba(138,98,15,0.12)` | `rgba(232,185,106,0.12)` | Highlight panel tint |
-| `--starlight-glow` | `rgba(201,151,62,0.28)` | `rgba(255,216,138,0.28)` | Highlight halo |
+- Atmosphere is never text.
+- Section atmosphere never sits behind the article reading column, the Experience list, the research abstracts, or any body-text zone. A mask fades the field to `--void` before text begins.
+- The site-wide ambient field is a fixed, low-alpha layer behind all content. The contrast gate measures the worst text composite over its field, echo, warm, and particle layers; the current worst is 4.62:1 in light and 4.71:1 in dark.
+- The particle field is 60 deterministic dots in one slow group. It is decorative, reduced-motion static, and under 20 KB.
+- The halftone, grain, and grid layers are decorative and masked away from text in the section variants.
 
-Gold is for one highlight at a time. It is not a body-copy color.
-`--starlight-bright` is decorative only; the text-safe value is
-`--starlight`.
+### 1.5 Project accents
 
-### 2.5 Accent hierarchy
+`--project-accent` is set by a generated class on project cards, the archive, the spotlight, and the `/work/[slug]` root. It carries category labels, card titles on hover, figure labels, links, and metric values. The existing `hue` values still drive the `hue-field`, `hue-line`, and `hue-text` classes.
 
-1. Wavelength red: action, focus, error, selected.
-2. Signal teal: measured data and live status.
-3. Starlight gold: one highlight.
-4. Project hues: project identity in fields, lines, and text.
+| Project | Light | Dark |
+| --- | --- | --- |
+| SpecSplit | `#A24A1F` | `#E08A5A` |
+| LomaVerse | `#4B3FA8` | `#A99CFF` |
+| IP-Sage | `#0C6F61` | `#4FC2AE` |
+| HoneyLLM | `#8A5A00` | `#D9A441` |
+| Country-in-the-Middle | `#A3245F` | `#E06A9A` |
+| OptFantasy | `#2F6B2F` | `#7FC77F` |
+| All other projects | `--accent` | `--accent` |
 
-The three semantic accents are not interchangeable. A data value does not
-become red because it is important. A primary action does not become teal
-because it is measured. Gold never replaces red for focus or action.
+IP-Sage is 2% darker than the brief's starting value (`#0E7466` to `#0C6F61`) because the original measured 4.40:1 on its own 7% field. The adjusted value measures 4.70:1 on the field and 5.17:1 on `--void`.
 
-## 3. Measured contrast
+The existing `hue` values in `data/projects.ts` are unchanged. They continue to drive the hue field, hue line, and hue text classes. `projectAccent` is additive and now used on cards and detail pages.
 
-The prototype measures every pair in the browser and renders the table. All
-pairs below pass WCAG AA normal text at 4.5:1.
+### 1.6 Data ink
 
-| Pair | C1 light | C1 dark | C2 light | C2 dark | C3 light | C3 dark |
-| --- | --- | --- | --- | --- | --- | --- |
-| ink on void | 15.36 | 18.65 | 15.36 | 18.65 | 15.36 | 18.65 |
-| ink on surface | 17.15 | 17.79 | 17.15 | 17.79 | 17.15 | 17.79 |
-| ink-soft on void | 7.57 | 10.31 | 7.57 | 10.31 | 7.57 | 10.31 |
-| ink-soft on surface | 8.45 | 9.84 | 8.45 | 9.84 | 8.45 | 9.84 |
-| ink-faint on void | 6.27 | 6.80 | 6.27 | 6.80 | 6.27 | 6.80 |
-| ink-faint on surface | 7.01 | 6.48 | 7.01 | 6.48 | 7.01 | 6.48 |
-| wavelength on void | 6.09 | 5.85 | 6.09 | 5.85 | 6.09 | 5.85 |
-| wavelength on surface | 6.80 | 5.58 | 6.80 | 5.58 | 6.80 | 5.58 |
-| void on wavelength | 6.09 | 5.85 | 6.09 | 5.85 | 6.09 | 5.85 |
-| project hue on void | 5.61 | 10.55 | 5.61 | 10.55 | 5.61 | 10.55 |
-| project hue on hue field | 5.29 | 9.80 | 5.29 | 9.80 | 5.29 | 9.80 |
-| signal on void | - | - | 5.06 | 12.39 | 5.06 | 12.39 |
-| signal on surface | - | - | 5.66 | 11.82 | 5.66 | 11.82 |
-| void on signal | - | - | 5.06 | 12.39 | 5.06 | 12.39 |
-| starlight on void | - | - | - | - | 4.67 | 10.95 |
-| starlight on surface | - | - | - | - | 5.21 | 10.45 |
-| void on starlight | - | - | - | - | 4.67 | 10.95 |
+| Token | Light | Dark |
+| --- | --- | --- |
+| `--data-slate` | `#5B6B7F` | `#9DAEC4` |
+| `--data-ochre` | `#8A5A00` | `#D9A441` |
+| `--data-sage` | `#2F6B2F` | `#7FC77F` |
 
-The tightest pair is C3 light starlight on void at 4.67:1. Gold is therefore
-reserved for short labels and non-text highlights.
+Data ink is for figures: chart strokes, series, axes, and measurement marks. It is not a page accent. Every data ink value passes 4.5:1 as text and 3:1 as a graphic on `--void` and `--surface`.
 
-The app's atmosphere gate measures the worst field composite, not only the
-solid surfaces. C1's brighter dark fields originally failed: wavelength was
-3.50:1 on `atmo-blue`, and ink-faint was 4.07:1. The C1 dark atmosphere alphas
-are now 19 percent wash blue, 10 percent wash teal, 30 percent field blue, and
-21 percent field teal. That restores the worst composite to 4.70:1 for
-wavelength and 5.46:1 for ink-faint. The light alphas stay at 6, 5, 18, and
-16 percent. `verify:contrast` records the result.
+### 1.7 Contrast result
 
-### 3.1 Project hue text
+`bun scripts/verify-contrast.ts` measures 178 pairs:
 
-A26 is fixed. `app/globals.css` uses a theme-aware weight:
+- text at 4.5:1;
+- graphics and focus at 3:1;
+- accent over the worst section-atmosphere composite;
+- accent over the worst site-wide atmosphere and particle composite;
+- every project accent on `--void`, `--surface`, and its own 7% field;
+- the existing project hue text on `--void`, `--surface`, and `--hue-field`.
 
-```css
---hue-text-weight: 50%;
+Current result:
+
+```
+OK: 178 pairs pass (text 4.5:1, graphics 3:1)
 ```
 
-with `65%` in dark mode. The app's `.hue-text` class mixes each project hue
-with ink at that weight. `verify:contrast` now gates every project hue against
-`void`, `surface`, and its own hue field. All project hues pass. The worst is
-LomaVerse `#84cc16` at 4.82:1 on void and 4.65:1 on its hue field. IP-Sage
-`#14b8a6` is 5.61:1 and 5.29:1.
+Key rows:
 
-The previous 65 percent light mix failed for IP-Sage at 4.08:1 on void and
-3.85:1 on the hue field, and for OptFantasy, LomaVerse, and the GPU hue on the
-field as well.
-
-## 4. Gradient placements
-
-Gradients remain inside the marked `atmosphere:allow-begin` and
-`atmosphere:allow-end` block in `app/globals.css`. Components consume classes;
-they do not declare gradient utilities.
-
-| Placement | Field | Text rule |
+| Pair | Light | Dark |
 | --- | --- | --- |
-| Home hero | Radial field on the portrait side only, using `--field-blue`, `--field-teal`, and `--field-warm` | Left copy stays on solid `--void`. No gradient under the copy. |
-| Project detail header | Project hue band at 7 percent with a top rule and one corner field | Title may sit on the hue band; reading copy sits on `--surface`. |
-| Playground | Dark field with signal teal and wavelength particles | Labels sit on a solid bar above or below the field. |
-| OG image | 1200 x 630 dark field with one accent corner and a signal line | Name and role sit on the solid dark area. |
+| `ink` on `void` | 15.36 | 18.65 |
+| `ink-soft` on `void` | 7.57 | 10.31 |
+| `ink-faint` on `void` | 6.27 | 6.80 |
+| `accent` on `void` | 6.09 | 5.85 |
+| `accent-contrast` on `accent` | 6.09 | 5.85 |
+| focus `accent` on `surface` | 6.80 | 5.58 |
+| worst section atmosphere text | 4.78 (accent on void) | 4.58 (accent on surface) |
+| worst site atmosphere text | 4.62 (accent on void) | 4.71 (accent on void) |
+| IP-Sage on project field | 4.70 | 8.39 |
 
-The prototype shows all four placements. It does not place body text on a
-gradient.
+The current CSS and the TypeScript token source both pass 178 pairs. The legacy `--wavelength` token has been removed.
 
-## 5. Identity
+### 1.8 Image treatment
 
-The `brandkit` guidance is used for strategy and construction. No generated
-brand board is committed at this gate.
+- Matplotlib PNGs with white backgrounds use `mix-blend-mode: multiply` on paper. White becomes paper; the black plot marks remain.
+- In dark mode, the same figure sits on `--figure-plate` (`#F2ECE1`) with a hairline. It is not inverted.
+- Photos, screenshots, and renders are not multiplied. They use their own plate and `object-cover` or `object-contain` as declared by `coverFit` or `figure.fit`.
+- Cover images share the 16:10 frame. A cover with `coverFit: "contain"` letterboxes on the plate; a cover with `coverFit: "cover"` crops. Charts never use `cover`.
+- Logos use the shared `LogoTile`. Company logos use bare mode; club logos use the tiled mode.
 
-- `SS` mark: two offset arcs on a 6 by 6 grid, forming a signal path and a
-  monogram. One terminal node uses `--wavelength`. The C1 favicon uses the
-  mark on `#040a12`; the nav wordmark stays as `SS` text for now.
-- Favicon: 64 by 64, mark on the C1 dark field. The current `app/icon.svg`
-  uses the new mark and terminal node.
-- OG art: 1200 by 630 dark field, name and role, the mark, a corner field,
-  one signal rule, and one accent line. `app/opengraph-image.tsx` uses the C1
-  literal values because Satori cannot resolve CSS variables.
-- No photographic or stock assets are introduced. The prototype uses the real
-  portrait and real project covers.
+## 2. Typography
 
-## 6. Typography
+### 2.1 Loaded fonts today
 
-Keep Outfit for display and body, JetBrains Mono for labels, coordinates,
-metrics, and code.
+| Family | Axes | Subsets in the build | Latin file | Total files |
+| --- | --- | --- | --- | --- |
+| Outfit | 100-900 variable | latin, latin-ext | 32,228 B | 46,988 B |
+| JetBrains Mono | 100-800 variable | latin, latin-ext, cyrillic, cyrillic-ext, greek, vietnamese | 40,480 B | 86,320 B |
 
-- Display: `text-4xl` to `text-8xl`, tracking `-0.03em` to `-0.045em`,
-  leading `1.02` to `1.08`.
-- Section titles: `text-3xl` to `text-5xl`.
-- Reading prose: `.read` at 17 px mobile and 18 px desktop with a 68ch cap.
-- Labels: mono, 11 px, uppercase, 0.18 to 0.22em tracking.
-- Numbers: `tabular-nums` everywhere.
-- Add `text-wrap: balance` to display headings and `text-wrap: pretty` to
-  reading prose. This closes audit finding A18.
-- Do not introduce a serif. The current sans system is the brand.
+Routes preload only the two latin files: 72,708 B. `font-display: swap`. Both use the Next.js font loader and Arial fallbacks with size-adjust.
 
-## 7. Spacing, radius, elevation, z-index
+### 2.2 Reading face
 
-- One container: `mx-auto max-w-6xl px-6`.
-- Section padding: `py-20 md:py-28`; separators are `border-t border-line`.
-  Work, Observation, and Contact replace the plain border with `SectionDivider`,
-  a full-width hairline carrying the orbit-and-signal motif.
-- Experience date rail: `180px minmax(0,1fr)`.
-- Zero radius except the portrait.
-- No shadows, no glass, no blur. Gradients live only in the atmosphere block.
-- Proposed z-index scale:
-  - 0 field
-  - 10 content
-  - 30 sticky archive bar
-  - 40 mobile menu overlay
-  - 50 nav
-  - 60 scroll progress
-  - 65 shell actions
-  - 70 search
-  - 80 confirm dialog
-  - 90 figure lightbox
-  - 100 skip link
-- Token cleanup: `--surface-2` and `--field-slate` are currently unused.
-  Use them or remove them. Add `--signal`, `--signal-soft`, `--signal-glow`,
-  `--starlight`, `--starlight-bright`, `--starlight-soft`, `--starlight-glow`,
-  and `--hue-text-weight` only if the chosen variant needs them.
+Option A is selected. Outfit carries display, headings, UI, and article body. JetBrains Mono carries labels, coordinates, metrics, and code. Initial font transfer is 72,708 B.
 
-## 8. Section numbering
+Option B was evaluated with Source Serif 4 static weight 400, latin subset, 48,704 B under the SIL Open Font License 1.1. It raised the initial transfer to 121,412 B (+48,704 B). The owner reviewed both and chose the single-family voice; Source Serif is not loaded and the local prototype asset has been removed.
 
-Proposal:
+### 2.3 Roles
 
-| Context | Scheme |
+| Role | Family | Size | Leading | Tracking | Measure | Use |
+| --- | --- | --- | --- | --- | --- | --- |
+| Display | Outfit 600 | `clamp(3.5rem, 7vw, 6rem)` | 1.02 | -0.03em | 2 lines max | Hero name |
+| H1 | Outfit 600 | `clamp(2.25rem, 4.5vw, 3.75rem)` | 1.05 | -0.03em | 2 lines max | Page and project title |
+| H2 | Outfit 600 | `clamp(1.875rem, 3.2vw, 3rem)` | 1.08 | -0.025em | 2 lines max | Section title |
+| H3 | Outfit 600 | `clamp(1.25rem, 2vw, 1.5rem)` | 1.2 | -0.01em | 2 lines max | Card and subsection title |
+| H4 | Outfit 600 | 1.125rem | 1.3 | 0 | 2 lines max | Small subsection |
+| Dek | Outfit 400 | `clamp(1.0625rem, 1.4vw, 1.25rem)` | 1.6 | 0 | 60ch | Page and project description |
+| Article body | Outfit 400 | 17px mobile, 18px desktop | 1.75 | 0 | 68ch | `.read` prose |
+| UI body | Outfit 400 | 1rem | 1.5 | 0 | 65ch | Forms, cards, nav |
+| Caption | Outfit 400 | 0.875rem | 1.5 | 0 | 70ch | Figure captions, sources |
+| Mono label | JetBrains Mono 500 | 0.6875rem | 1.4 | 0.18em, uppercase | 1 line | Coordinates, rail labels, Fig. N |
+| Stat numeral | JetBrains Mono 500 | `clamp(1.75rem, 4vw, 2.75rem)` | 1.0 | 0.02em, tabular | 1 line | Metric values |
+
+Rules:
+
+- `text-wrap: balance` on display through H3; `text-wrap: pretty` on paragraphs.
+- `font-variant-numeric: tabular-nums` on stats, tables, and metrics.
+- Article measure stays between 60 and 70 characters. The current `.read` cap is 68ch.
+- Outfit carries the reading role. There is no second body face.
+- No mixed-family emphasis inside a headline. Use weight or italic in the same family.
+- Italic display words with descenders need leading 1.1 and a 1px bottom reserve.
+
+## 3. Layout and bounding boxes
+
+### 3.1 Breakpoints and containers
+
+| Name | Width | Use |
+| --- | --- | --- |
+| `sm` | 640px | Large phone |
+| `md` | 768px | Tablet |
+| `lg` | 1024px | Desktop rail |
+| `xl` | 1280px | Wide desktop |
+| `2xl` | 1536px | Very wide |
+
+| Container | Width | Use |
+| --- | --- | --- |
+| Page | 72rem / 1152px | Nav, sections, footer |
+| Wide breakout | 90rem / 1440px | Figures and edge-to-edge artifacts |
+| Article | 42.5rem / 680px | Project facts, research abstract |
+| Reading measure | 68ch | `.read` prose |
+| Figure | 47.5rem / 760px | Case-study figure frame |
+| Hero copy | 6 of 12 columns | Copy |
+| Hero portrait | 6 of 12 columns | Portrait |
+
+Gutters are 24px. The page uses one container: `mx-auto max-w-6xl px-6`. Wide and full-bleed elements break out of the container only when the content is a figure or an atmosphere artifact.
+
+### 3.2 Rail
+
+The homepage section rail is `3 / 9` at `lg`: a sticky mono label and ornament in the first three columns, content in the remaining nine. Experience is the one full-width section with its own date rail at `180px minmax(0, 1fr)`.
+
+### 3.3 Spacing and rhythm
+
+The scale is 4px based:
+
+| Token | Value |
 | --- | --- |
-| Homepage | 01 Experience, 02 Skills, 03 Selected Projects, 04 Research, 05 Education, 06 Teaching, 07 Community, 08 Contact |
-| `/work` | 01 Work archive |
-| `/research` | 02 Research |
-| `/about` | 03 About; section numerals dropped |
-| `/contact` | 04 Contact |
-| `/playground` | 05 Interactive study |
-| `/work/[slug]` | No route index. Keep the project eyebrow and year. |
-| `/resume`, `/privacy`, `/terms` | No route index. Keep the document or policy label. |
+| `--space-1` | 4px |
+| `--space-2` | 8px |
+| `--space-3` | 12px |
+| `--space-4` | 16px |
+| `--space-5` | 20px |
+| `--space-6` | 24px |
+| `--space-8` | 32px |
+| `--space-10` | 40px |
+| `--space-12` | 48px |
+| `--space-16` | 64px |
+| `--space-20` | 80px |
+| `--space-24` | 96px |
+| `--space-28` | 112px |
+| `--space-32` | 128px |
 
-Homepage numbering follows the live sequence. About drops section numerals
-because it reuses Teaching and Community out of Home order. Route headers still
-follow the nav order.
+Sections use 80px mobile and 112px desktop, separated by a 1px `--line` border. The section gap is always larger than any gap inside a section.
 
-Implemented:
+### 3.4 Hairlines, radius, z-index
 
-- Homepage rails `01 / EXPERIENCE` through `08 / CONTACT`.
-- `/about` drops section numerals; Teaching and Community keep their kickers.
-- `/work`, `/research`, `/about`, `/contact`, and `/playground` keep the
-  route indices 01 through 05.
-- Project details, the résumé, privacy, and terms remain unnumbered.
+- Hairline: 1px. `--line` for quiet rules, `--line-strong` for structural edges and focus-adjacent boundaries.
+- Radius: 0 everywhere. The portrait is the only circle, at 50%.
+- Touch targets: 44px minimum.
+- Z-index scale:
 
-## 9. Library decision
+| Layer | Value |
+| --- | --- |
+| Atmosphere | 0 |
+| Content | 10 |
+| Sticky archive bar | 30 |
+| Mobile menu | 40 |
+| Nav | 50 |
+| Scroll progress | 60 |
+| Shell actions | 65 |
+| Search | 70 |
+| Confirm dialog | 80 |
+| Figure lightbox | 90 |
+| Skip link | 100 |
 
-Decision: no new UI dependency. This is confirmed.
+### 3.5 Figure frame
 
-The current stack is custom React components, Phosphor icons, Motion, clsx,
-cva, and Tailwind v4. `pick-ui-library` would suggest base-ui for accessible
-dialogs and popovers. After the Q1 fixes, the search and confirm dialogs have
-focus traps, return focus, live regions, and inert content. Base-ui would be
-a refactor with no visible gain at this size. Revisit if the dialog or popover
-surface grows.
+The figure frame is one component with three aspect modes:
 
-No shadcn/ui, next-themes, cmdk, Sonner, or chart library is added. The theme
-init is already no-FOUC, the search is small, and the data visuals are
-hand-built for the content.
+| Mode | Ratio | Use |
+| --- | --- | --- |
+| `16:10` | 1.6 | Covers and new figures without an intrinsic ratio |
+| `4:3` | 1.333 | Square-ish UI shots and crops where cropping is acceptable |
+| `free` | Intrinsic | Existing charts and screenshots. No forced crop. |
 
-## 10. Motion
+The frame:
 
-Motion intensity is 6. `docs/MOTION.md` specifies every animation and its
-reduced-motion fallback. The implemented direction is meaning-bearing only:
+- outer hairline on `--line`;
+- `--figure-plate` plate;
+- inner padding 12px mobile and 16px desktop;
+- image inside the padding, `object-contain` for charts and `object-cover` for photos;
+- caption below the frame, outside the plate;
+- `Fig. N` mono label above the caption;
+- optional corner crop marks on the plate corners;
+- lightbox at 94vw, max 1400px, with a hairline caption bar.
 
-- Page transitions fade content in over 220 ms. They are opacity only, so
-  sticky rails keep working.
-- The constellation component is not mounted on the homepage after R1.1. Its
-  draw, signal, and twinkle remain defined for the retained component; nothing
-  loops.
-- The hero title cycle pauses offscreen. The decorative 48 second atmosphere
-  drift is removed; the field is static.
-- The Country-in-the-Middle traceroute packet crosses the measured paths once,
-  on first view. It does not loop.
+Measured image aspects in the current content:
 
-Everything pauses offscreen and has a reduced-motion static fallback. No
-layout-shifting animation, no scroll hijacking, and no hover transforms above
-1 px.
+| Cluster | Range | Examples |
+| --- | --- | --- |
+| Portrait | 0.338-0.709 | LomaVerse UI, SpecSplit token chart, Psyches shots |
+| Square | 1.000 | Logos, portrait |
+| 4:3-ish | 1.041-1.500 | PAP shots, SpecSplit acceptance heatmap |
+| 16:10-ish | 1.584-1.721 | OptFantasy frontier, LomaVerse 2D, HoneyLLM shots |
+| 16:9-ish | 1.750-1.902 | SpecSplit tpot, GPU delay, HoneyLLM system design |
+| 2:1 | 2.000-2.154 | OptFantasy method cover, CS1 workflow |
+| Panoramic | 2.498-7.150 | Club wordmark, LomaVerse cover, IP-Sage cover, GPU matrices, research strips |
 
-### 10.1 Instrument motifs
+Consequences:
 
-- `SectionDivider` is a static orbit and signal mark on a full-width hairline.
-  It replaces the border on Work, Observation, and Contact only.
-- The traceroute packet is a `VisualSignal` in `once` mode. It stays hidden
-  until its diagram enters the viewport, then runs one 4 second pass and
-  freezes.
-- Diagrams remain real-data SVG. The Country-in-the-Middle bundles, labels,
-  and rail come from the project's measured table; no node is invented for
-  decoration.
+- Charts and screenshots use `free` and `contain`. The 16:10 frame is for covers and new figures only.
+- The existing `figure-optics` test measures the button box. Adding inner padding changes that box. DS-4 updates the test to measure the image, not the padded button.
+- Covers use the 16:10 frame and keep `coverFit`. A 3.48:1 cover with `contain` letterboxes; a 2.81:1 cover with `cover` crops. Neither is forced into a chart frame.
 
-## 11. Gate 2 decision
+### 3.6 Logo tile
 
-C1 Warm is selected and implemented.
+- Default tile: 48px square, 8px padding, hairline `--logo-border`, `--logo-plate`.
+- Large tile: 64px square, same padding.
+- Company logos: bare mode, 32-40px, no plate or border.
+- Club logos: tiled mode, 48px square, zero radius.
+- All logo images use `object-contain`.
 
-Confirmed:
+### 3.7 Table, callout, focus
 
-- Homepage numbering: 01 Field, 02 Work, 03 Observation, 04 Instruments,
-  05 Record, 06 Teaching, 07 Community, 08 Contact. About uses 03.1 Teaching
-  and 03.2 Community. Route headers follow the nav order.
-- A26: the project hue text weight is 50 percent light and 65 percent dark;
-  every project hue passes the extended contrast gate.
-- No new UI library.
-- `.env.example` is tracked with `NEXT_PUBLIC_SITE_URL`.
-- The C1 favicon and OG image use the new palette and mark.
+- Table: mono 11px uppercase header, 16px UI body, 1px row separators, tabular numerals, no zebra striping, caption above, horizontal scroll wrapper on mobile.
+- Callout: hairline frame, `--surface` plate, 16-24px padding, mono label. No coloured left stripe.
+- Focus: 2px `--accent` outline, 2px offset, radius 0.
+- Selection: `--accent` at 22% behind `--ink`.
 
-The prototype remains at `/prototypes/palette.html` as the C1/C2/C3 reference.
-The picker is fixed at the bottom of the viewport. Keys 1 to 3 and the arrow
-keys switch variants; the theme button is top-right.
+### 3.8 Elevation
+
+None. No shadows, no glass, no backdrop blur, no floating cards. Depth comes from hairlines and the step from `--void` to `--surface` and `--surface-2`.
+
+## 4. Motion
+
+Motion is dynamic, but it obeys these tokens and rules. The old `docs/MOTION.md` has been removed; this document is the motion source.
+
+| Token | Value | Use |
+| --- | --- | --- |
+| `--dur-micro` | 160ms | Press, hover, colour |
+| `--dur-ui` | 260ms | Menus, dialogs, state changes |
+| `--dur-page` | 320ms | Route transition |
+| `--dur-reveal` | 320ms | Scroll reveal |
+| `--dur-atmo` | 75s | Atmosphere drift |
+| `--ease-out` | `cubic-bezier(0.23, 1, 0.32, 1)` | Entrances, exits, draws |
+| `--ease-in-out` | `cubic-bezier(0.77, 0, 0.175, 1)` | On-screen movement |
+| `--ease-drawer` | `cubic-bezier(0.32, 0.72, 0, 1)` | Drawers and sheets |
+| `--ease-atmo` | `linear` | Constant atmosphere drift |
+
+Rules:
+
+- Animate `transform`, `opacity`, or `clip-path` only.
+- No `scale(0)` entrances. Start at `scale(0.95)` with opacity 0 when a scale is needed.
+- Hover motion is gated behind `@media (hover: hover) and (pointer: fine)`.
+- UI durations stay at or under 320ms. The page transition is 320ms. The old 550ms reveal is retired.
+- No layout-shifting animation. No scroll hijacking. Lenis remains smoothing only.
+- One animated atmosphere layer in view at a time. The other layers are static.
+- Atmosphere drift pauses offscreen and when the tab is hidden.
+- `prefers-reduced-motion: reduce` makes every atmosphere artifact static, removes the drift, and keeps content visible.
+- The portrait remains the LCP element. Atmosphere layers are absolutely positioned and add no layout shift.
+
+## 5. Atmosphere
+
+### 5.1 Component
+
+One server-rendered component:
+
+```tsx
+<Atmosphere variant="hero" | "article" | "footer" | "og" />
+```
+
+It renders an `aria-hidden`, `pointer-events: none`, absolutely positioned stack behind content. It uses `contain: paint`. It never wraps content and never creates a hit target.
+
+### 5.2 Artifact catalogue
+
+| Artifact | Variant | Budget | Motion |
+| --- | --- | --- | --- |
+| Flowing contour waves | hero, og | 2 layers max, 5 paths per layer, under 20 KB | 75s linear transform drift on hero; static on og |
+| Flowing gradient field | ambient, hero, article, footer, og | 3 radial layers: ultramarine, teal echo, warm counter-glow | 75s drift on article, 120s on ambient; static elsewhere |
+| Flowing particle field | ambient | 60 deterministic dots, under 20 KB | 90s linear drift; static under reduced motion |
+| Halftone fade | article, footer | radial-gradient dot grid masked by a linear gradient | static |
+| Grain | all | inline SVG `feTurbulence` at 4% light and 2% dark | static |
+| Registration marks | hero, article, og | `CoordinateMarks` plus corner crop marks | static |
+| Existing line art | article, footer | `HarmonicRegister`, `SignalTrace`, `SectionDivider` | draw once or static; two per page maximum |
+
+### 5.3 Variant mapping
+
+| Variant | Where | Animated layer |
+| --- | --- | --- |
+| `ambient` | Fixed site-wide backdrop in the root layout | Gradient drift and particle drift |
+| `hero` | Homepage hero | Contour drift |
+| `article` | Project detail header, research article header, homepage rail sections | Gradient field drift |
+| `footer` | Footer and contact close | None |
+| `og` | Open Graph art recipe | None |
+
+### 5.4 Masking and safety
+
+- Section atmosphere is masked to `--void` before the article reading column, Experience list, research abstracts, and any body-text zone.
+- The site-wide ambient field is fixed behind the content wrapper. It uses the lower `site-*` alphas and the particle layer, and the text gate covers the worst composite.
+- Contour, halftone, grain, and grid layers in the section variants are decorative and masked away from text.
+- No canvas on the homepage.
+- No layout shift: every layer is absolutely or fixed positioned and the component has no intrinsic height.
+- The portrait keeps `priority` and remains the LCP element.
+
+## 6. Verification
+
+### 6.1 Token generation
+
+`design/tokens.ts` is the single source. `scripts/build-tokens.ts` writes a marked block into `app/globals.css`. The prototype uses the standalone output from the same source:
+
+```bash
+bun run build:tokens
+bun scripts/build-tokens.ts --out prototypes/design-system.tokens.css --standalone
+```
+
+The generated block contains all light, dark, shared, and project-accent tokens. No component may declare a raw colour literal outside the token file.
+
+### 6.2 Contrast
+
+```bash
+bun scripts/verify-contrast.ts --tokens
+bun scripts/verify-contrast.ts
+```
+
+The first command gates the current generated CSS. The second gates the TypeScript token source directly. The current CSS and the candidate source both pass 178 pairs.
+
+### 6.3 Token literal gate
+
+`scripts/verify-tokens.ts` is active and wired to `bun run verify:tokens`:
+
+- fails on any raw colour literal in `components/`, `app/`, or `lib/`;
+- allows the token source (`design/tokens.ts`), the generated token block, `data/projects.ts` project accents, and SVG assets;
+- runs `build-tokens --check` so a stale generated block fails;
+- keeps the OG route literal-free by importing `design/tokens.ts`.
+
+### 6.4 Assets and content
+
+```bash
+bun run verify:assets
+bun test tests/content-depth.test.ts
+```
+
+`verify:assets` checks cover `coverFit`, figure dimensions, and the four LomaVerse presets. The article-structure test enforces prose depth, interleaved evidence, no end-of-article image dump, and no repeated headline metric. The content-depth test keeps every project traceable.
+
+### 6.5 Build and browser
+
+DS-4 runs:
+
+```bash
+bun run build
+bun run lint
+bun run typecheck
+bun run verify:trope
+bun run verify:contrast
+bun run verify:tokens
+bun run verify:assets
+bun test
+```
+
+DS-5 runs the Playwright matrix: Home, `/work`, one article, Research, About, Contact, Playground, 404, in light and dark, at 375, 768, 1280, and 1920. Assertions: no horizontal overflow, no console errors, CLS under 0.05, no atmosphere long tasks, reduced-motion fallback present.
+
+Live page checks completed:
+
+- 60 particle nodes in the fixed ambient layer.
+- `.read` computes to Outfit, 17px mobile and 18px desktop.
+- SpecSplit shows 74.6 once, in the product-stage readout.
+- Figure captions render as separate label, caption, and source lines.
+- No horizontal overflow on Home, `/work`, `/work/specsplit`, Research, About, Contact, or Playground.
+- Transparent PACE and CSE logos; originals retained.
+- Production matrix: 7 routes × 2 themes × 4 widths = 56 checks, 0 failures, max CLS 0.0334.
+- Production build: 30 pages, clean. Bundle 589,023 B gz across 25 chunks, +12,690 B gz over the 576,333 B baseline; the three/r3f chunk is unchanged at 237,449 B.
+
+## 7. DS-A evidence and DS-4 results
+
+| Item | Value |
+| --- | --- |
+| Prototype | `prototypes/design-system.html` |
+| Token file | `prototypes/design-system.tokens.css` (generated from `design/tokens.ts`) |
+| DS-A screenshots | `.review/design-system/` at 375 and 1280, light and dark, plus `#type`, `#figures`, and `#atmosphere` crops |
+| Live screenshots | `.review/site-after/` after a scroll-reveal pass |
+| Contrast | 178 pairs pass; worst section atmosphere 4.58:1; worst site atmosphere 4.62:1 |
+| Font cost | 72,708 B initial, Option A |
+| Rejected option | Source Serif 4 at 121,412 B (+48,704 B); evaluated, not loaded |
+| Atmosphere frame time | 16.67 ms average, 16.7-16.8 ms p95, 16.8 ms max at 375 and 1280 |
+| Atmosphere animations | `ds-atmosphere-contour`, `ds-atmosphere-drift`, and particle drift active; all `none` under reduced motion |
+| CLS | 0 at 375; 0.0001 at 1280 |
+| Overflow | 0 px at 375 and 1280 |
+| Console | No errors |
+| Unit and content tests | 143 pass across 10 files |
+| Playwright | Full dev suite 138/139, one transient dev-server session failure; the failing responsive spec passed alone. The two OptFantasy failures were fixed and 15/15 affected tests passed. |
+| Production matrix | 56/56 checks, max CLS 0.0334 |
+| Production build | 30 pages; bundle 589,023 B gz, +12,690 B over baseline |
+
+The `.light` class is a style-guide and QA reset, not a page mode. It exists so the token panels can show light and dark side by side. Pages still choose one theme.
+
+## 8. Post-gate decisions applied
+
+- Reading face: Option A, Outfit throughout. Source Serif 4 reverted.
+- Accent use broadened: project accents on cards, archive, spotlight, figure labels, detail links, and metrics.
+- Site-wide fixed ambient field with 60 particles and a slow drift.
+- Articles expanded, figures interleaved, end galleries removed, headline metrics no longer repeated.
+- Transparent PACE and CSE instructional logos; originals retained.
+- New unit tests for token generation, project accents, reading face, particles, article depth, image interleaving, and metric repetition.
+- `docs/MOTION.md` removed.
+- Reveal duration reduced to 320ms.
+
+## 9. DS-4 applied
+
+- Renamed `--wavelength` to `--accent`; no alias.
+- Generated the token block into `app/globals.css`; mapped `@theme inline` colours.
+- Added `projectAccent` classes to project cards and `/work/[slug]`.
+- Replaced `AmbientField` with `Atmosphere` and mounted hero, article, footer, and ambient variants.
+- Applied the type roles and reduced the reveal to 320ms.
+- Applied the figure frame, cover frame, focus ring, and figure caption roles.
+- Added `scripts/verify-tokens.ts`, `build:tokens`, `verify:tokens`, and `verify:contrast:tokens`.
+- Updated the affected Playwright tests: atmosphere variants, figure-optics plate measurement, hue/project-accent selectors, and OptFantasy visual coverage.
+- Removed `docs/MOTION.md`.
+- Transparent instructional logo copies added; the original PNGs remain in `public/assets/companies/`.

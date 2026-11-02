@@ -40,7 +40,7 @@ test("work lead carries the spotlight project's hue", async ({ page }) => {
   await page.goto("/");
   const lead = page.getByTestId("work-lead");
   await expect(lead).toHaveAttribute("data-hue", "#14b8a6");
-  await expect(lead.locator(".hue-text").first()).toBeVisible();
+  await expect(lead.locator(".project-accent-text").first()).toBeVisible();
   await expect(lead).toContainText("IP-Sage");
 });
 
@@ -62,11 +62,11 @@ test("about portrait is square, circular, and in colour", async ({ page }) => {
   expect(style.borderRadius).not.toBe("0px");
 });
 
-test("hue-text large type meets 3:1 contrast on specsplit", async ({
+test("project accent large type meets 3:1 contrast on specsplit", async ({
   page,
 }) => {
   await page.goto("/work/specsplit");
-  const el = page.locator("[data-hue] .hue-text").first();
+  const el = page.locator("[data-hue] .project-accent-text").first();
   await expect(el).toBeAttached();
   const [fg, bg] = await el.evaluate((node) => {
     const fgColor = getComputedStyle(node).color;

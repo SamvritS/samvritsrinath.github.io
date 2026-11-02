@@ -4,7 +4,16 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { X } from "@/components/ui-icons";
+import { cn } from "@/lib/utils";
 import type { Figure as FigureType } from "@/lib/types";
+
+function frameRatio(figure: FigureType) {
+  if (figure.aspect === "16:10") return "16 / 10";
+  if (figure.aspect === "4:3") return "4 / 3";
+  return figure.width && figure.height
+    ? `${figure.width} / ${figure.height}`
+    : "4 / 3";
+}
 
 export function Figure({
   figure,
@@ -19,10 +28,12 @@ export function Figure({
   const dialogRef = useRef<HTMLDivElement>(null);
   const label = number ? `Fig. ${String(number).padStart(2, "0")}` : null;
   const fit = figure.fit ?? "contain";
-  const ratio =
-    figure.width && figure.height
-      ? `${figure.width} / ${figure.height}`
-      : "4 / 3";
+  const ratio = frameRatio(figure);
+  const imageClass = cn(
+    "figure-frame__image",
+    fit === "cover" ? "object-cover" : "object-contain",
+    figure.blend === "multiply" && "figure-image--multiply",
+  );
 
   const openFrom = useCallback((trigger: HTMLButtonElement | null) => {
     triggerRef.current = trigger;
@@ -77,26 +88,30 @@ export function Figure({
           className="block w-full cursor-zoom-in text-left"
         >
           <div
-            className="relative overflow-hidden border border-line bg-surface"
-            style={{ aspectRatio: ratio }}
+            className={cn(
+              "figure-frame",
+              figure.cropMarks && "figure-frame--crop",
+            )}
           >
-            <Image
-              src={figure.src}
-              alt={figure.alt}
-              fill
-              sizes="(min-width: 1024px) 760px, 100vw"
-              className={fit === "cover" ? "object-cover" : "object-contain"}
-              priority={number === 1}
-            />
+            <div
+              className="figure-frame__plate"
+              style={{ aspectRatio: ratio }}
+              data-testid="figure-plate"
+            >
+              <Image
+                src={figure.src}
+                alt={figure.alt}
+                fill
+                sizes="(min-width: 1024px) 760px, 100vw"
+                className={imageClass}
+                priority={number === 1}
+              />
+            </div>
           </div>
         </button>
 
-        <figcaption className="mt-3 flex flex-col gap-1 text-sm leading-relaxed text-ink-soft">
-          {label && (
-            <span className="font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-ink">
-              {label}
-            </span>
-          )}
+        <figcaption className="figure-caption">
+          {label && <span className="figure-caption__label">{label}</span>}
           <span>{figure.caption}</span>
           {figure.source && (
             <span className="font-mono text-xs text-ink-faint">
@@ -122,7 +137,7 @@ export function Figure({
               type="button"
               onClick={close}
               aria-label="Close figure"
-              className="absolute right-5 top-5 z-10 flex h-10 w-10 items-center justify-center border border-line bg-surface text-ink transition-colors hover:border-wavelength"
+              className="absolute right-5 top-5 z-10 flex h-10 w-10 items-center justify-center border border-line bg-surface text-ink transition-colors hover:border-accent"
             >
               <X className="h-5 w-5" />
             </button>
@@ -131,23 +146,24 @@ export function Figure({
                 className="mx-auto w-fit max-w-[94vw]"
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className="border border-line bg-surface">
+                <div className="figure-frame">
                   <div
-                    className="relative w-[88vw] max-w-[1400px]"
+                    className="figure-frame__plate w-[88vw] max-w-[1400px]"
                     style={{ aspectRatio: ratio }}
+                    data-testid="figure-lightbox-plate"
                   >
                     <Image
                       src={figure.src}
                       alt={figure.alt}
                       fill
                       sizes="94vw"
-                      className={fit === "cover" ? "object-cover" : "object-contain"}
+                      className={imageClass}
                       priority
                     />
                   </div>
                   <div className="flex items-baseline justify-between gap-6 border-t border-line px-4 py-3">
                     {label && (
-                      <span className="shrink-0 font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-ink">
+                      <span className="figure-caption__label shrink-0">
                         {label}
                       </span>
                     )}

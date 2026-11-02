@@ -17,6 +17,9 @@ export type Figure = {
   width?: number;
   height?: number;
   fit?: "contain" | "cover";
+  aspect?: "16:10" | "4:3" | "free";
+  blend?: "multiply";
+  cropMarks?: boolean;
 };
 
 export type Paper = {
@@ -78,6 +81,10 @@ export type Project = {
   year: string;
   featured: boolean;
   hue: string;
+  projectAccent?: {
+    light: string;
+    dark: string;
+  };
   cover?: string;
   coverAlt?: string;
   coverFit?: "contain" | "cover";

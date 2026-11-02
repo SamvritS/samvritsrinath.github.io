@@ -26,7 +26,7 @@ function ArticleSection({
       className={cn("mx-auto w-full", wide ? "max-w-[760px]" : "max-w-[680px]")}
     >
       {heading && (
-        <h2 className="mb-5 text-2xl font-semibold tracking-tight text-ink md:text-3xl">
+        <h2 className="type-h3 mb-5 text-ink">
           {heading}
         </h2>
       )}
@@ -160,7 +160,7 @@ export function VisualStory({
                     href={link.href}
                     target={link.external ? "_blank" : undefined}
                     rel={link.external ? "noopener noreferrer" : undefined}
-                    className="flex items-center gap-1.5 border border-line px-5 py-2.5 text-sm text-ink-soft transition-colors hover:border-wavelength hover:text-ink"
+                    className="flex items-center gap-1.5 border border-line px-5 py-2.5 text-sm text-ink-soft transition-colors hover:border-accent hover:text-ink"
                   >
                     {link.label}
                     <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
@@ -177,7 +177,7 @@ export function VisualStory({
                     key={c.name}
                     className="grid gap-1 py-4 md:grid-cols-[180px_minmax(0,1fr)] md:gap-6"
                   >
-                    <dt className="font-mono text-xs uppercase tracking-[0.14em] text-ink">
+                    <dt className="project-accent-text font-mono text-xs uppercase tracking-[0.14em]">
                       {c.name}
                     </dt>
                     <dd className="text-sm leading-relaxed text-ink-soft">
@@ -199,7 +199,7 @@ export function VisualStory({
                     key={d.choice}
                     className="grid gap-1 py-4 md:grid-cols-[180px_minmax(0,1fr)] md:gap-6"
                   >
-                    <dt className="font-mono text-xs uppercase tracking-[0.14em] text-ink">
+                    <dt className="project-accent-text font-mono text-xs uppercase tracking-[0.14em]">
                       {d.choice}
                     </dt>
                     <dd className="text-sm leading-relaxed text-ink-soft">
@@ -218,7 +218,7 @@ export function VisualStory({
                     key={item.result}
                     className="grid gap-1 py-4 md:grid-cols-[180px_minmax(0,1fr)] md:gap-6"
                   >
-                    <dt className="font-mono text-sm font-medium tabular-nums hue-text">
+                    <dt className="project-accent-text font-mono text-sm font-medium tabular-nums">
                       {item.result}
                     </dt>
                     <dd className="text-sm leading-relaxed text-ink-soft">

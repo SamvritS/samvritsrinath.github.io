@@ -14,7 +14,7 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            className="flex h-10 w-10 items-center justify-center border border-line text-ink-soft transition-colors hover:border-wavelength hover:text-ink"
+            className="flex h-10 w-10 items-center justify-center border border-line text-ink-soft transition-colors hover:border-accent hover:text-ink"
           >
             <GithubIcon className="h-[18px] w-[18px]" />
           </a>
@@ -23,14 +23,14 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="flex h-10 w-10 items-center justify-center border border-line text-ink-soft transition-colors hover:border-wavelength hover:text-ink"
+            className="flex h-10 w-10 items-center justify-center border border-line text-ink-soft transition-colors hover:border-accent hover:text-ink"
           >
             <LinkedinIcon className="h-[18px] w-[18px]" />
           </a>
           <a
             href={`mailto:${site.contact.email}`}
             aria-label="Email"
-            className="flex h-10 w-10 items-center justify-center border border-line text-ink-soft transition-colors hover:border-wavelength hover:text-ink"
+            className="flex h-10 w-10 items-center justify-center border border-line text-ink-soft transition-colors hover:border-accent hover:text-ink"
           >
             <Envelope className="h-4.5 w-4.5" />
           </a>
@@ -42,7 +42,7 @@ export function Footer() {
           </div>
           <div className="flex items-center gap-3 font-mono text-xs text-ink-soft">
             <span>
-              {site.name} · {site.contact.email}
+              {site.name} · <span className="text-accent">{site.contact.email}</span>
             </span>
             <CopyButton text={site.contact.email} />
           </div>

@@ -7,6 +7,7 @@ import * as THREE from "three";
 import bodiesData from "@/public/assets/projects/lomaverse/bodies.json";
 import { mulberry32 } from "@/components/visuals/primitives";
 import { swatch, type Swatch } from "@/lib/scene-color";
+import { themeTokens } from "@/design/tokens";
 import {
   makeSim,
   reset,
@@ -528,7 +529,7 @@ export function LomaVerseSim({
     if (!wrap) return null;
     const cs = getComputedStyle(wrap);
     const base = swatch(
-      cs.getPropertyValue("--ink-faint").trim() || "rgb(138, 148, 170)",
+      cs.getPropertyValue("--ink-faint").trim() || themeTokens.light["ink-faint"],
     );
     const read = (token: string) => {
       const value = cs.getPropertyValue(token).trim();
@@ -536,7 +537,7 @@ export function LomaVerseSim({
     };
     return {
       hue: read("--hue"),
-      accent: read("--wavelength"),
+      accent: read("--accent"),
       ink: read("--ink"),
       faint: base,
       line: read("--line-strong"),
@@ -652,7 +653,7 @@ export function LomaVerseSim({
                 value={speed}
                 onChange={(event) => setSpeed(Number(event.currentTarget.value))}
                 aria-label="Simulation step rate"
-                className="w-24 accent-wavelength"
+                className="w-24 accent-accent"
               />
             </label>
           )}
@@ -663,7 +664,7 @@ export function LomaVerseSim({
               type="button"
               data-testid="lomaverse-pause"
               onClick={() => setPaused((value) => !value)}
-              className="border border-line-strong px-3 py-2 text-ink-soft transition-colors hover:border-wavelength hover:text-ink"
+              className="border border-line-strong px-3 py-2 text-ink-soft transition-colors hover:border-accent hover:text-ink"
             >
               {paused ? "Resume" : "Pause"}
             </button>
@@ -671,7 +672,7 @@ export function LomaVerseSim({
               type="button"
               data-testid="lomaverse-reset"
               onClick={() => setResetKey((value) => value + 1)}
-              className="border border-line-strong px-3 py-2 text-ink-soft transition-colors hover:border-wavelength hover:text-ink"
+              className="border border-line-strong px-3 py-2 text-ink-soft transition-colors hover:border-accent hover:text-ink"
             >
               Reset
             </button>
@@ -705,7 +706,7 @@ export function LomaVerseSim({
                   cx={88 + body.position[0] * 48}
                   cy={180 - body.position[2] * 48}
                   r={Math.max(4, body.radius * 32)}
-                  fill={body.name === "Sun" ? "var(--wavelength)" : "var(--hue)"}
+                  fill={body.name === "Sun" ? "var(--accent)" : "var(--hue)"}
                   onPointerEnter={inspectable ? () => onInspect(i) : undefined}
                   onPointerLeave={inspectable ? () => onInspect(null) : undefined}
                 />

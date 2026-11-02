@@ -165,7 +165,7 @@ export function NetworkConstellation() {
             fill="none"
             strokeWidth={1.75}
             className="constellation-signal"
-            style={{ stroke: "var(--wavelength)" }}
+            style={{ stroke: "var(--accent)" }}
           />
         ) : null}
 

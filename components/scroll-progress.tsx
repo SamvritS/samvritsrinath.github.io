@@ -16,7 +16,7 @@ export function ScrollProgress() {
     <motion.div
       data-testid="scroll-progress"
       aria-hidden
-      className="scroll-progress fixed inset-x-0 top-0 z-[60] h-0.5 origin-left bg-wavelength"
+      className="scroll-progress fixed inset-x-0 top-0 z-[60] h-0.5 origin-left bg-accent"
       style={{ scaleX }}
     />
   );

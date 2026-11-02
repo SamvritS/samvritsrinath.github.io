@@ -82,7 +82,7 @@ export function PipelineWalkthrough() {
               key={s.id}
               data-testid={on ? "walkthrough-step-active" : "walkthrough-step"}
               className="border-l py-8 pl-6 pr-2"
-              style={{ borderColor: on ? "var(--wavelength)" : "var(--line)" }}
+              style={{ borderColor: on ? "var(--accent)" : "var(--line)" }}
             >
               <p className="font-mono text-xs text-ink-faint tabular-nums hue-text">
                 {String(i + 1).padStart(2, "0")} / 06

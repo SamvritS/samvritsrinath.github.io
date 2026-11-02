@@ -30,7 +30,7 @@ export function ClubList() {
               </span>
             </span>
             <ArrowUpRight
-              className="h-4 w-4 shrink-0 text-ink-faint transition-colors group-hover:text-wavelength"
+              className="h-4 w-4 shrink-0 text-ink-faint transition-colors group-hover:text-accent"
               aria-hidden
             />
           </a>

@@ -1,4 +1,4 @@
-import { AmbientField } from "@/components/atmosphere/ambient-field";
+import { Atmosphere } from "@/components/atmosphere/atmosphere";
 import { HarmonicRegister } from "@/components/atmosphere/harmonic-register";
 import { LogoTile } from "@/components/logo-tile";
 import { experience } from "@/data/experience";
@@ -11,13 +11,13 @@ export function ExperienceSection() {
       id="experience"
       className="relative overflow-hidden border-t border-line"
     >
-      <AmbientField variant="experience" />
+      <Atmosphere variant="article" />
       <div className="relative z-10 mx-auto max-w-6xl px-6 py-20 md:py-28">
         <div className="max-w-3xl">
-          <p className="eyebrow">01 / EXPERIENCE</p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-ink md:text-5xl">
-            Experience
-          </h2>
+          <p className="eyebrow">
+            <span className="text-accent">01</span> / EXPERIENCE
+          </p>
+          <h2 className="type-h2 mt-4 text-ink">Experience</h2>
           <HarmonicRegister
             variant="seam"
             className="mt-8 hidden h-auto w-40 opacity-70 md:block"

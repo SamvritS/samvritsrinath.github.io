@@ -28,7 +28,7 @@ export function FloatingContact() {
           <div className="mt-3 flex gap-2">
             <a
               href={mailto}
-              className="border border-ink bg-ink px-3 py-1.5 font-mono text-xs uppercase tracking-[0.18em] text-void transition-colors hover:border-wavelength hover:bg-wavelength"
+              className="border border-ink bg-ink px-3 py-1.5 font-mono text-xs uppercase tracking-[0.18em] text-void transition-colors hover:border-accent hover:bg-accent"
             >
               Write
             </a>
@@ -41,7 +41,7 @@ export function FloatingContact() {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-label="Contact options"
-        className="flex items-center gap-2 border border-line-strong bg-surface px-4 py-2.5 font-mono text-xs uppercase tracking-[0.18em] text-ink transition-colors hover:border-wavelength"
+        className="flex items-center gap-2 border border-line-strong bg-surface px-4 py-2.5 font-mono text-xs uppercase tracking-[0.18em] text-ink transition-colors hover:border-accent"
       >
         <Envelope className="h-4 w-4" />
         Mail
