@@ -49,7 +49,7 @@ const py = (score: number) =>
   OY - ((score - SCORE_MIN) / (SCORE_MAX - SCORE_MIN)) * PH;
 
 const LEGEND: { key: Series; label: string; color: string }[] = [
-  { key: "heuristic", label: "heuristic", color: "var(--wavelength)" },
+  { key: "heuristic", label: "heuristic", color: "var(--accent)" },
   { key: "exact", label: "exact solvers", color: "var(--ink-soft)" },
   { key: "relax", label: "linear relaxations", color: "var(--ink-faint)" },
   { key: "frontier", label: "frontier", color: "var(--line-strong)" },
@@ -130,20 +130,20 @@ export function OptFantasyComparison() {
       {(!isolated || isolated === "frontier") && (
         <path d={frontier} fill="none" stroke="var(--line-strong)" strokeWidth={1.5} />
       )}
-      <VisualAnnotation x={px(0.25)} y={py(1849.36) - 16} color="var(--wavelength)" size={10}>
+      <VisualAnnotation x={px(0.25)} y={py(1849.36) - 16} color="var(--accent)" size={10}>
         MIQCP · 1,849.36 PTS · 0.25S
       </VisualAnnotation>
 
       <g aria-label="Integrality gap bracket">
-        <line x1={gapX} y1={py(1956.56)} x2={gapX} y2={py(1868.31)} stroke="var(--wavelength)" strokeWidth={1.5} />
-        <path d={`M ${gapX - 6} ${py(1956.56)} H ${gapX + 6} M ${gapX - 6} ${py(1868.31)} H ${gapX + 6}`} stroke="var(--wavelength)" strokeWidth={1.5} />
-        <text x={gapX + 10} y={(py(1956.56) + py(1868.31)) / 2 + 3} fontSize={9} fontFamily="var(--font-jetbrains-mono)" fill="var(--wavelength)" className="tabular-nums">
+        <line x1={gapX} y1={py(1956.56)} x2={gapX} y2={py(1868.31)} stroke="var(--accent)" strokeWidth={1.5} />
+        <path d={`M ${gapX - 6} ${py(1956.56)} H ${gapX + 6} M ${gapX - 6} ${py(1868.31)} H ${gapX + 6}`} stroke="var(--accent)" strokeWidth={1.5} />
+        <text x={gapX + 10} y={(py(1956.56) + py(1868.31)) / 2 + 3} fontSize={9} fontFamily="var(--font-jetbrains-mono)" fill="var(--accent)" className="tabular-nums">
           88.25 PTS GAP
         </text>
       </g>
 
       <g opacity={dim("heuristic")} aria-label="Schematic search paths">
-        <path d={`M ${px(0.01)} ${py(1500)} Q ${px(0.02)} ${py(1700)}, ${px(0.03)} ${py(1738.4)}`} fill="none" stroke="var(--wavelength)" strokeWidth={1} strokeDasharray="4 3" opacity={0.7} />
+        <path d={`M ${px(0.01)} ${py(1500)} Q ${px(0.02)} ${py(1700)}, ${px(0.03)} ${py(1738.4)}`} fill="none" stroke="var(--accent)" strokeWidth={1} strokeDasharray="4 3" opacity={0.7} />
         <path d={`M ${px(0.01)} ${py(1400)} Q ${px(1)} ${py(1600)}, ${px(11.73)} ${py(1849.36)}`} fill="none" stroke="var(--ink-soft)" strokeWidth={1} strokeDasharray="4 3" opacity={0.7} />
         <VisualAnnotation x={px(0.01)} y={py(1400) - 8} anchor="start" size={8}>
           SEARCH PATHS · SCHEMATIC
@@ -165,7 +165,7 @@ export function OptFantasyComparison() {
             cx={px(p.secs)}
             cy={py(p.score)}
             r={p.label === "MIQCP" ? 8 : 6}
-            fill={p.series === "heuristic" ? "var(--wavelength)" : p.series === "exact" ? "var(--ink-soft)" : "var(--ink-faint)"}
+            fill={p.series === "heuristic" ? "var(--accent)" : p.series === "exact" ? "var(--ink-soft)" : "var(--ink-faint)"}
             opacity={p.label === "MIQCP" ? 1 : 0.8}
           />
           <text
@@ -214,8 +214,8 @@ export function OptFantasyComparison() {
                 }
               }}
             >
-              <line x1={0} y1={0} x2={18} y2={0} stroke={on ? "var(--wavelength)" : item.color} strokeWidth={on ? 2 : 1} opacity={0.8} />
-              <text x={26} y={3} fill={on ? "var(--wavelength)" : "var(--ink-faint)"}>
+              <line x1={0} y1={0} x2={18} y2={0} stroke={on ? "var(--accent)" : item.color} strokeWidth={on ? 2 : 1} opacity={0.8} />
+              <text x={26} y={3} fill={on ? "var(--accent)" : "var(--ink-faint)"}>
                 {item.label}
               </text>
             </g>
@@ -225,8 +225,8 @@ export function OptFantasyComparison() {
 
       {cross && (
         <g pointerEvents="none">
-          <line x1={cross.x} y1={OY - PH} x2={cross.x} y2={OY} stroke="var(--wavelength)" strokeWidth={1} opacity={0.5} />
-          <line x1={OX} y1={cross.y} x2={OX + PW} y2={cross.y} stroke="var(--wavelength)" strokeWidth={1} opacity={0.5} />
+          <line x1={cross.x} y1={OY - PH} x2={cross.x} y2={OY} stroke="var(--accent)" strokeWidth={1} opacity={0.5} />
+          <line x1={OX} y1={cross.y} x2={OX + PW} y2={cross.y} stroke="var(--accent)" strokeWidth={1} opacity={0.5} />
         </g>
       )}
 

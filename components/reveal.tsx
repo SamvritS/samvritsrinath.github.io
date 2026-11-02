@@ -32,7 +32,7 @@ export function Reveal({
       }
       viewport={{ once: true, margin: "0px 0px -10% 0px" }}
       transition={{
-        duration: reduced ? 0 : 0.55,
+        duration: reduced ? 0 : 0.32,
         ease: [0.16, 1, 0.3, 1],
         delay: reduced ? 0 : delay,
       }}

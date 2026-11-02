@@ -1,0 +1,888 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Color Pop - Design System</title>
+    <link rel="stylesheet" href="./design-system.tokens.css" />
+    <link rel="stylesheet" href="./design-system.css" />
+  </head>
+  <body>
+    <header class="ds-nav">
+      <div class="ds-nav__inner">
+        <a class="ds-wordmark" href="#top">
+          <span class="ds-wordmark__mark">SS</span>
+          Color Pop
+        </a>
+        <nav class="ds-nav__links" aria-label="Design system sections">
+          <a href="#tokens">Tokens</a>
+          <a href="#type">Type</a>
+          <a href="#layout">Layout</a>
+          <a href="#components">Components</a>
+          <a href="#figures">Figures</a>
+          <a href="#atmosphere">Atmosphere</a>
+        </nav>
+        <button
+          type="button"
+          class="ds-theme-toggle"
+          data-theme-toggle
+          aria-pressed="false"
+        >
+          Dark
+        </button>
+      </div>
+    </header>
+
+    <main class="ds-page" id="top">
+      <section class="ds-masthead">
+        <div class="ds-masthead__meta">
+          <span>DS-A</span>
+          <span>2026-11-01</span>
+          <span>feat/ui/color-pop</span>
+          <span>176 contrast pairs pass</span>
+        </div>
+        <h1>Color Pop</h1>
+        <p class="ds-masthead__dek">
+          A design system for an editorial observatory. Warm paper, blue night,
+          one vermilion accent, a cool ultramarine atmosphere, and measured
+          reading type.
+        </p>
+        <div class="ds-masthead__rule"></div>
+      </section>
+
+      <section class="ds-section" id="tokens">
+        <div class="ds-section__head">
+          <div class="ds-section__label"><span>01</span><span>Tokens</span></div>
+          <h2>Three colour layers, one accent, one atmosphere.</h2>
+          <p class="ds-section__dek">
+            Neutrals carry the page. The vermilion accent carries action and
+            focus. The ultramarine atmosphere carries depth and never text.
+            Project accents stay on project pages. Data ink stays in figures.
+          </p>
+        </div>
+
+        <div class="ds-duo">
+          <div class="light ds-plate ds-plate--void">
+            <p class="ds-plate__label">Light / paper</p>
+            <div class="ds-swatch-grid">
+              <div class="ds-swatch">
+                <div class="ds-swatch__color" style="background: var(--void)"></div>
+                <div class="ds-swatch__name">void</div>
+                <div class="ds-swatch__value">#F4ECDF</div>
+                <div class="ds-swatch__note">Page ground.</div>
+              </div>
+              <div class="ds-swatch">
+                <div class="ds-swatch__color" style="background: var(--surface)"></div>
+                <div class="ds-swatch__name">surface</div>
+                <div class="ds-swatch__value">#FDF9F1</div>
+                <div class="ds-swatch__note">Plates and cards.</div>
+              </div>
+              <div class="ds-swatch">
+                <div class="ds-swatch__color" style="background: var(--surface-2)"></div>
+                <div class="ds-swatch__name">surface-2</div>
+                <div class="ds-swatch__value">#F7EFE2</div>
+                <div class="ds-swatch__note">Second plate step.</div>
+              </div>
+              <div class="ds-swatch">
+                <div class="ds-swatch__color" style="background: var(--ink)"></div>
+                <div class="ds-swatch__name">ink</div>
+                <div class="ds-swatch__value">#0F1722</div>
+                <div class="ds-swatch__note">Primary type.</div>
+              </div>
+              <div class="ds-swatch">
+                <div class="ds-swatch__color" style="background: var(--ink-soft)"></div>
+                <div class="ds-swatch__name">ink-soft</div>
+                <div class="ds-swatch__value">#3F4B5A</div>
+                <div class="ds-swatch__note">Reading prose.</div>
+              </div>
+              <div class="ds-swatch">
+                <div class="ds-swatch__color" style="background: var(--ink-faint)"></div>
+                <div class="ds-swatch__name">ink-faint</div>
+                <div class="ds-swatch__value">#4B5766</div>
+                <div class="ds-swatch__note">Labels and captions.</div>
+              </div>
+              <div class="ds-swatch">
+                <div
+                  class="ds-swatch__color"
+                  style="background: var(--surface); border-color: var(--line-strong)"
+                ></div>
+                <div class="ds-swatch__name">line</div>
+                <div class="ds-swatch__value">rgba(15, 23, 34, 0.10)</div>
+                <div class="ds-swatch__note">Decorative hairline.</div>
+              </div>
+              <div class="ds-swatch">
+                <div
+                  class="ds-swatch__color"
+                  style="background: var(--surface); border-color: var(--line-strong)"
+                ></div>
+                <div class="ds-swatch__name">line-strong</div>
+                <div class="ds-swatch__value">rgba(15, 23, 34, 0.18)</div>
+                <div class="ds-swatch__note">Structural hairline.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dark ds-plate ds-plate--void">
+            <p class="ds-plate__label">Dark / night</p>
+            <div class="ds-swatch-grid">
+              <div class="ds-swatch">
+                <div class="ds-swatch__color" style="background: var(--void)"></div>
+                <div class="ds-swatch__name">void</div>
+                <div class="ds-swatch__value">#040A12</div>
+                <div class="ds-swatch__note">Page ground.</div>
+              </div>
+              <div class="ds-swatch">
+                <div class="ds-swatch__color" style="background: var(--surface)"></div>
+                <div class="ds-swatch__name">surface</div>
+                <div class="ds-swatch__value">#08111D</div>
+                <div class="ds-swatch__note">Plates and cards.</div>
+              </div>
+              <div class="ds-swatch">
+                <div class="ds-swatch__color" style="background: var(--surface-2)"></div>
+                <div class="ds-swatch__name">surface-2</div>
+                <div class="ds-swatch__value">#0B1623</div>
+                <div class="ds-swatch__note">Second plate step.</div>
+              </div>
+              <div class="ds-swatch">
+                <div class="ds-swatch__color" style="background: var(--ink)"></div>
+                <div class="ds-swatch__name">ink</div>
+                <div class="ds-swatch__value">#F5F8FC</div>
+                <div class="ds-swatch__note">Primary type.</div>
+              </div>
+              <div class="ds-swatch">
+                <div class="ds-swatch__color" style="background: var(--ink-soft)"></div>
+                <div class="ds-swatch__name">ink-soft</div>
+                <div class="ds-swatch__value">#B0BCCB</div>
+                <div class="ds-swatch__note">Reading prose.</div>
+              </div>
+              <div class="ds-swatch">
+                <div class="ds-swatch__color" style="background: var(--ink-faint)"></div>
+                <div class="ds-swatch__name">ink-faint</div>
+                <div class="ds-swatch__value">#8C98AA</div>
+                <div class="ds-swatch__note">Labels and captions.</div>
+              </div>
+              <div class="ds-swatch">
+                <div
+                  class="ds-swatch__color"
+                  style="background: var(--surface); border-color: var(--line-strong)"
+                ></div>
+                <div class="ds-swatch__name">line</div>
+                <div class="ds-swatch__value">rgba(245, 248, 252, 0.09)</div>
+                <div class="ds-swatch__note">Decorative hairline.</div>
+              </div>
+              <div class="ds-swatch">
+                <div
+                  class="ds-swatch__color"
+                  style="background: var(--surface); border-color: var(--line-strong)"
+                ></div>
+                <div class="ds-swatch__name">line-strong</div>
+                <div class="ds-swatch__value">rgba(245, 248, 252, 0.18)</div>
+                <div class="ds-swatch__note">Structural hairline.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="ds-subhead">Accent / action and focus</h3>
+        <div class="ds-duo">
+          <div class="light ds-plate">
+            <div class="ds-swatch">
+              <div class="ds-swatch__color" style="background: var(--accent)"></div>
+              <div class="ds-swatch__name">accent / light</div>
+              <div class="ds-swatch__value">#B00F24</div>
+              <div class="ds-swatch__note">
+                Links, focus, scroll line, active nav, one key number.
+              </div>
+            </div>
+          </div>
+          <div class="dark ds-plate">
+            <div class="ds-swatch">
+              <div class="ds-swatch__color" style="background: var(--accent)"></div>
+              <div class="ds-swatch__name">accent / dark</div>
+              <div class="ds-swatch__value">#FF4638</div>
+              <div class="ds-swatch__note">
+                Same role. Never a decorative border.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="ds-subhead">Atmosphere / decorative only</h3>
+        <div class="ds-duo">
+          <div class="light ds-plate">
+            <div class="ds-swatch-grid">
+              <div class="ds-swatch">
+                <div
+                  class="ds-swatch__color"
+                  style="background: radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--atmosphere) 55%, transparent), transparent 72%), var(--void)"
+                ></div>
+                <div class="ds-swatch__name">atmosphere</div>
+                <div class="ds-swatch__value">#5B72D6 at 17%</div>
+                <div class="ds-swatch__note">Ultramarine primary field.</div>
+              </div>
+              <div class="ds-swatch">
+                <div
+                  class="ds-swatch__color"
+                  style="background: radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--atmosphere-echo) 55%, transparent), transparent 72%), var(--void)"
+                ></div>
+                <div class="ds-swatch__name">echo</div>
+                <div class="ds-swatch__value">#6FB3A8 at 6%</div>
+                <div class="ds-swatch__note">Retained teal echo.</div>
+              </div>
+              <div class="ds-swatch">
+                <div
+                  class="ds-swatch__color"
+                  style="background: radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--atmosphere-warm) 55%, transparent), transparent 72%), var(--void)"
+                ></div>
+                <div class="ds-swatch__name">warm</div>
+                <div class="ds-swatch__value">#E0A45A at 3%</div>
+                <div class="ds-swatch__note">Warm counter-glow.</div>
+              </div>
+            </div>
+          </div>
+          <div class="dark ds-plate">
+            <div class="ds-swatch-grid">
+              <div class="ds-swatch">
+                <div
+                  class="ds-swatch__color"
+                  style="background: radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--atmosphere) 55%, transparent), transparent 72%), var(--void)"
+                ></div>
+                <div class="ds-swatch__name">atmosphere</div>
+                <div class="ds-swatch__value">#2B3A9E at 26%</div>
+                <div class="ds-swatch__note">Ultramarine primary field.</div>
+              </div>
+              <div class="ds-swatch">
+                <div
+                  class="ds-swatch__color"
+                  style="background: radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--atmosphere-echo) 55%, transparent), transparent 72%), var(--void)"
+                ></div>
+                <div class="ds-swatch__name">echo</div>
+                <div class="ds-swatch__value">#0D4A44 at 8%</div>
+                <div class="ds-swatch__note">Retained teal echo.</div>
+              </div>
+              <div class="ds-swatch">
+                <div
+                  class="ds-swatch__color"
+                  style="background: radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--atmosphere-warm) 55%, transparent), transparent 72%), var(--void)"
+                ></div>
+                <div class="ds-swatch__name">warm</div>
+                <div class="ds-swatch__value">#D89A3F at 3%</div>
+                <div class="ds-swatch__note">Warm counter-glow.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="ds-subhead">Project accents / detail pages only</h3>
+        <div class="ds-swatch-grid">
+          <div class="project-accent-specsplit ds-swatch">
+            <div class="ds-swatch__color" style="background: var(--project-accent)"></div>
+            <div class="ds-swatch__name">SpecSplit</div>
+            <div class="ds-swatch__value">#A24A1F / #E08A5A</div>
+          </div>
+          <div class="project-accent-lomaverse ds-swatch">
+            <div class="ds-swatch__color" style="background: var(--project-accent)"></div>
+            <div class="ds-swatch__name">LomaVerse</div>
+            <div class="ds-swatch__value">#4B3FA8 / #A99CFF</div>
+          </div>
+          <div class="project-accent-ip-sage ds-swatch">
+            <div class="ds-swatch__color" style="background: var(--project-accent)"></div>
+            <div class="ds-swatch__name">IP-Sage</div>
+            <div class="ds-swatch__value">#0C6F61 / #4FC2AE</div>
+          </div>
+          <div class="project-accent-honeyllm ds-swatch">
+            <div class="ds-swatch__color" style="background: var(--project-accent)"></div>
+            <div class="ds-swatch__name">HoneyLLM</div>
+            <div class="ds-swatch__value">#8A5A00 / #D9A441</div>
+          </div>
+          <div class="project-accent-country-in-the-middle ds-swatch">
+            <div class="ds-swatch__color" style="background: var(--project-accent)"></div>
+            <div class="ds-swatch__name">Country-in-the-Middle</div>
+            <div class="ds-swatch__value">#A3245F / #E06A9A</div>
+          </div>
+          <div class="project-accent-optfantasy ds-swatch">
+            <div class="ds-swatch__color" style="background: var(--project-accent)"></div>
+            <div class="ds-swatch__name">OptFantasy</div>
+            <div class="ds-swatch__value">#2F6B2F / #7FC77F</div>
+          </div>
+        </div>
+
+        <h3 class="ds-subhead">Data ink / figures</h3>
+        <div class="ds-swatch-grid">
+          <div class="ds-swatch">
+            <div class="ds-swatch__color" style="background: var(--data-slate)"></div>
+            <div class="ds-swatch__name">data-slate</div>
+            <div class="ds-swatch__value">#5B6B7F / #9DAEC4</div>
+          </div>
+          <div class="ds-swatch">
+            <div class="ds-swatch__color" style="background: var(--data-ochre)"></div>
+            <div class="ds-swatch__name">data-ochre</div>
+            <div class="ds-swatch__value">#8A5A00 / #D9A441</div>
+          </div>
+          <div class="ds-swatch">
+            <div class="ds-swatch__color" style="background: var(--data-sage)"></div>
+            <div class="ds-swatch__name">data-sage</div>
+            <div class="ds-swatch__value">#2F6B2F / #7FC77F</div>
+          </div>
+        </div>
+
+        <div class="ds-callout" style="margin-top: var(--space-8)">
+          <div class="ds-callout__label">Contrast gate</div>
+          <p>
+            176 pairs pass. Text is at least 4.5:1, meaningful graphics and focus
+            are at least 3:1, and the worst atmosphere case is 4.58:1. Decorative
+            hairlines are exempt. IP-Sage was darkened from #0E7466 to #0C6F61
+            to clear its own 7% field at 4.70:1.
+          </p>
+        </div>
+      </section>
+
+      <section class="ds-section" id="type">
+        <div class="ds-section__head">
+          <div class="ds-section__label"><span>02</span><span>Typography</span></div>
+          <h2>One display face. One reading face.</h2>
+          <p class="ds-section__dek">
+            Outfit carries display, headings, UI, and article prose. JetBrains
+            Mono carries labels, coordinates, metrics, and code.
+          </p>
+        </div>
+
+        <div class="ds-type-stack">
+          <div class="ds-type-row">
+            <div class="ds-type-row__label">Display</div>
+            <p class="ds-type-row__spec type-display">Samvrit Srinath</p>
+          </div>
+          <div class="ds-type-row">
+            <div class="ds-type-row__label">H1</div>
+            <p class="ds-type-row__spec type-h1">Selected work</p>
+          </div>
+          <div class="ds-type-row">
+            <div class="ds-type-row__label">H2</div>
+            <p class="ds-type-row__spec type-h2">Experience</p>
+          </div>
+          <div class="ds-type-row">
+            <div class="ds-type-row__label">H3</div>
+            <p class="ds-type-row__spec type-h3">SpecSplit</p>
+          </div>
+          <div class="ds-type-row">
+            <div class="ds-type-row__label">H4</div>
+            <p class="ds-type-row__spec" style="font-size: var(--type-h4); font-weight: 600">
+              Method
+            </p>
+          </div>
+          <div class="ds-type-row">
+            <div class="ds-type-row__label">Dek</div>
+            <p class="ds-type-row__spec type-dek">
+              I build software for networks, large-scale data, and machine
+              learning systems.
+            </p>
+          </div>
+          <div class="ds-type-row">
+            <div class="ds-type-row__label">Article body</div>
+            <p class="ds-type-row__spec type-read">
+              The reading column stays between 60 and 70 characters. At 18
+              pixels on desktop the line is long enough to carry an argument
+              and short enough to return to the next one without losing the
+              place.
+            </p>
+          </div>
+          <div class="ds-type-row">
+            <div class="ds-type-row__label">UI body</div>
+            <p class="ds-type-row__spec type-ui">
+              Project facts, cards, forms, and navigation use the UI text role.
+            </p>
+          </div>
+          <div class="ds-type-row">
+            <div class="ds-type-row__label">Caption</div>
+            <p class="ds-type-row__spec type-caption">
+              Fig. 01 - Acceptance heatmap. Source: SpecSplit evaluation.
+            </p>
+          </div>
+          <div class="ds-type-row">
+            <div class="ds-type-row__label">Mono label</div>
+            <p class="ds-type-row__spec type-mono">01 / Tokens</p>
+          </div>
+          <div class="ds-type-row">
+            <div class="ds-type-row__label">Stat numeral</div>
+            <p class="ds-type-row__spec type-stat">68ch</p>
+          </div>
+        </div>
+
+        <div class="ds-type-option">
+          <div class="ds-type-option__head">
+            <span class="ds-type-option__title">Option A - Outfit throughout (selected)</span>
+            <span class="ds-type-option__cost">72,708 B initial</span>
+          </div>
+          <p class="type-read">
+            The page reads as one continuous voice. The same face carries the
+            headline, the interface, and the argument. This is the tighter
+            system: one family, fewer files, and a body that matches the
+            geometry of the headings.
+          </p>
+          <p class="type-read">
+            The measure and leading do most of the work, so the page still holds
+            at 18 pixels and 68 characters without a second face. The owner
+            chose this single-family reading voice after the two-option review.
+          </p>
+        </div>
+
+        <div class="ds-callout" style="margin-top: var(--space-8)">
+          <div class="ds-callout__label">Rules</div>
+          <p>
+            Balance headings, pretty paragraphs, tabular numerals, 60 to 70
+            characters for reading prose. Outfit carries the reading role. No
+            mixed-family emphasis inside a headline.
+          </p>
+        </div>
+      </section>
+
+      <section class="ds-section" id="layout">
+        <div class="ds-section__head">
+          <div class="ds-section__label"><span>03</span><span>Layout</span></div>
+          <h2>One container. One rail. One hairline.</h2>
+          <p class="ds-section__dek">
+            Page 1152px, article 680px, figure 760px, reading 68ch. The rail is
+            3 of 12 for a sticky label and 9 of 12 for content. Sections use
+            80px on mobile and 112px on desktop.
+          </p>
+        </div>
+
+        <div class="ds-container-demo">
+          <div class="ds-container" style="max-width: var(--page-max)">
+            <div class="ds-container__label">Page / 72rem / 1152px</div>
+            <div class="ds-container__box"></div>
+          </div>
+          <div class="ds-container" style="max-width: var(--article-max)">
+            <div class="ds-container__label">Article / 42.5rem / 680px</div>
+            <div class="ds-container__box"></div>
+          </div>
+          <div class="ds-container" style="max-width: 47.5rem">
+            <div class="ds-container__label">Figure / 47.5rem / 760px</div>
+            <div class="ds-container__box"></div>
+          </div>
+          <div class="ds-container" style="max-width: var(--measure-article)">
+            <div class="ds-container__label">Reading measure / 68ch</div>
+            <div class="ds-container__box"></div>
+          </div>
+        </div>
+
+        <h3 class="ds-subhead">Spacing scale</h3>
+        <div class="ds-spacing-scale">
+          <div class="ds-spacing"><div class="ds-spacing__bar" style="height: var(--space-1); width: 8px"></div>1</div>
+          <div class="ds-spacing"><div class="ds-spacing__bar" style="height: var(--space-2); width: 8px"></div>2</div>
+          <div class="ds-spacing"><div class="ds-spacing__bar" style="height: var(--space-3); width: 8px"></div>3</div>
+          <div class="ds-spacing"><div class="ds-spacing__bar" style="height: var(--space-4); width: 8px"></div>4</div>
+          <div class="ds-spacing"><div class="ds-spacing__bar" style="height: var(--space-5); width: 8px"></div>5</div>
+          <div class="ds-spacing"><div class="ds-spacing__bar" style="height: var(--space-6); width: 8px"></div>6</div>
+          <div class="ds-spacing"><div class="ds-spacing__bar" style="height: var(--space-8); width: 8px"></div>8</div>
+          <div class="ds-spacing"><div class="ds-spacing__bar" style="height: var(--space-10); width: 8px"></div>10</div>
+          <div class="ds-spacing"><div class="ds-spacing__bar" style="height: var(--space-12); width: 8px"></div>12</div>
+          <div class="ds-spacing"><div class="ds-spacing__bar" style="height: var(--space-16); width: 8px"></div>16</div>
+          <div class="ds-spacing"><div class="ds-spacing__bar" style="height: var(--space-20); width: 8px"></div>20</div>
+          <div class="ds-spacing"><div class="ds-spacing__bar" style="height: var(--space-24); width: 8px"></div>24</div>
+          <div class="ds-spacing"><div class="ds-spacing__bar" style="height: var(--space-28); width: 8px"></div>28</div>
+          <div class="ds-spacing"><div class="ds-spacing__bar" style="height: var(--space-32); width: 8px"></div>32</div>
+        </div>
+
+        <h3 class="ds-subhead">Section rail</h3>
+        <div class="ds-rail">
+          <div class="ds-rail__label">03 / Layout</div>
+          <div class="ds-rail__body">
+            <h3>Content lives in the remaining nine columns.</h3>
+            <p class="type-read" style="margin: 0">
+              The rail label is sticky on desktop. The content column keeps the
+              reading measure and the section heading. Experience is the one
+              full-width exception, with a 180px date rail and a flexible role
+              column.
+            </p>
+          </div>
+        </div>
+
+        <h3 class="ds-subhead">Layer scale</h3>
+        <div class="ds-table-wrap">
+          <table class="ds-table">
+            <thead>
+              <tr><th>Layer</th><th>Value</th><th>Use</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Atmosphere</td><td>0</td><td>Behind content</td></tr>
+              <tr><td>Content</td><td>10</td><td>Section content</td></tr>
+              <tr><td>Sticky</td><td>30</td><td>Archive bar</td></tr>
+              <tr><td>Menu</td><td>40</td><td>Mobile menu</td></tr>
+              <tr><td>Nav</td><td>50</td><td>Sticky nav</td></tr>
+              <tr><td>Progress</td><td>60</td><td>Scroll line</td></tr>
+              <tr><td>Search</td><td>70</td><td>Search dialog</td></tr>
+              <tr><td>Confirm</td><td>80</td><td>Contact confirm</td></tr>
+              <tr><td>Lightbox</td><td>90</td><td>Figure dialog</td></tr>
+              <tr><td>Skip</td><td>100</td><td>Skip link</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="ds-section" id="components">
+        <div class="ds-section__head">
+          <div class="ds-section__label"><span>04</span><span>Components</span></div>
+          <h2>Flat, hairlined, and readable.</h2>
+          <p class="ds-section__dek">
+            Buttons are square. Cards are separated by hairlines, not shadows.
+            Control boundaries use ink-faint so they clear 3:1. Chips are
+            labels, not decoration.
+          </p>
+        </div>
+
+        <h3 class="ds-subhead">Buttons and links</h3>
+        <div class="ds-button-row">
+          <button type="button" class="ds-button ds-button--primary">View work</button>
+          <button type="button" class="ds-button ds-button--secondary">Get in touch</button>
+          <a class="ds-link" href="#figures">Read the case study</a>
+        </div>
+
+        <h3 class="ds-subhead">Chips</h3>
+        <div class="ds-chip-row">
+          <span class="ds-chip">Systems</span>
+          <span class="ds-chip">Research</span>
+          <span class="ds-chip">Networks</span>
+          <span class="ds-chip ds-chip--control">Filter: 2026</span>
+        </div>
+
+        <h3 class="ds-subhead">Card</h3>
+        <div class="ds-card" style="max-width: 520px">
+          <div class="ds-card__cover">
+            <img
+              src="../public/assets/projects/specsplit/dashboard.webp"
+              alt="SpecSplit dashboard"
+              width="1856"
+              height="1307"
+            />
+          </div>
+          <div class="ds-card__meta"><span>Systems</span><span>2026</span></div>
+          <h3>SpecSplit</h3>
+          <p>Disaggregated speculative decoding for faster inference.</p>
+          <a class="ds-card__link" href="#figures">Details</a>
+        </div>
+
+        <h3 class="ds-subhead">Logo tiles</h3>
+        <div class="ds-logo-row">
+          <span class="ds-logo-tile ds-logo-tile--bare">
+            <img src="../public/assets/companies/UCSD.png" alt="UC San Diego" width="100" height="100" />
+          </span>
+          <span class="ds-logo-tile">
+            <img src="../public/assets/clubs/cses.png" alt="CSES" width="100" height="100" />
+          </span>
+          <span class="type-mono" style="color: var(--ink-faint)">bare company / tiled club</span>
+        </div>
+
+        <h3 class="ds-subhead">Table</h3>
+        <div class="ds-table-wrap">
+          <table class="ds-table">
+            <thead>
+              <tr><th>Token</th><th>Role</th><th>Value</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>--accent</td><td>Action and focus</td><td>#B00F24 / #FF4638</td></tr>
+              <tr><td>--atmosphere</td><td>Decorative field</td><td>#5B72D6 / #2B3A9E</td></tr>
+              <tr><td>--figure-plate</td><td>Figure ground</td><td>#FDF9F1 / #F2ECE1</td></tr>
+              <tr><td>--data-sage</td><td>Figure series</td><td>#2F6B2F / #7FC77F</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="ds-subhead">Callout</h3>
+        <div class="ds-callout">
+          <div class="ds-callout__label">Reading note</div>
+          <p>
+            A callout uses a hairline frame and a plate, not a coloured left
+            stripe. The label is mono. The body stays in the UI text role.
+          </p>
+        </div>
+
+        <h3 class="ds-subhead">Navigation and footer</h3>
+        <div class="ds-plate">
+          <div class="ds-nav__inner" style="padding: 0; height: 56px">
+            <span class="ds-wordmark"><span class="ds-wordmark__mark">SS</span>Samvrit Srinath</span>
+            <span class="ds-nav__links"><span>Work</span><span>Research</span><span>About</span><span>Contact</span></span>
+          </div>
+        </div>
+        <div class="ds-plate" style="margin-top: var(--space-4)">
+          <div class="ds-footer-demo__row">
+            <span class="ds-footer-demo__mark">Samvrit Srinath</span>
+            <span class="ds-footer-demo__links"><span>Résumé</span><span>Playground</span><span>Privacy</span><span>Terms</span></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="ds-section" id="figures">
+        <div class="ds-section__head">
+          <div class="ds-section__label"><span>05</span><span>Figures</span></div>
+          <h2>Three aspect modes, no forced crop.</h2>
+          <p class="ds-section__dek">
+            The measured image set runs from 0.338 portrait to 7.150 panoramic.
+            Charts use free and contain. Covers use the 16:10 frame with
+            coverFit. The plate is light in both themes; the plot is not
+            inverted.
+          </p>
+        </div>
+
+        <div class="ds-figure-grid">
+          <figure>
+            <div class="figure-frame figure-frame--crop">
+              <div class="figure-frame__plate" style="--figure-ratio: 885 / 768">
+                <img
+                  class="figure-frame__image figure-image--multiply"
+                  src="../public/assets/projects/specsplit/acceptance_heatmap.png"
+                  alt="SpecSplit acceptance heatmap"
+                  width="885"
+                  height="768"
+                />
+              </div>
+            </div>
+            <figcaption class="figure-caption">
+              <span class="figure-caption__label">Fig. 01 / Free</span>
+              <span>Intrinsic 885 x 768. The matplotlib white becomes paper.</span>
+            </figcaption>
+          </figure>
+
+          <figure>
+            <div class="figure-frame figure-frame--crop">
+              <div class="figure-frame__plate" style="--figure-ratio: 16 / 10">
+                <img
+                  class="figure-frame__image figure-image--multiply"
+                  src="../public/assets/projects/specsplit/acceptance_heatmap.png"
+                  alt="SpecSplit acceptance heatmap on a 16:10 plate"
+                  width="885"
+                  height="768"
+                />
+              </div>
+            </div>
+            <figcaption class="figure-caption">
+              <span class="figure-caption__label">Fig. 02 / 16:10</span>
+              <span>Cover and new-figure frame. Contain, never crop a chart.</span>
+            </figcaption>
+          </figure>
+
+          <figure>
+            <div class="figure-frame figure-frame--crop">
+              <div class="figure-frame__plate" style="--figure-ratio: 4 / 3">
+                <img
+                  class="figure-frame__image figure-image--multiply"
+                  src="../public/assets/projects/specsplit/acceptance_heatmap.png"
+                  alt="SpecSplit acceptance heatmap on a 4:3 plate"
+                  width="885"
+                  height="768"
+                />
+              </div>
+            </div>
+            <figcaption class="figure-caption">
+              <span class="figure-caption__label">Fig. 03 / 4:3</span>
+              <span>Square-ish UI shots and deliberate crops only.</span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <h3 class="ds-subhead">Dark plate</h3>
+        <div class="dark">
+          <figure>
+            <div class="figure-frame">
+              <div class="figure-frame__plate" style="--figure-ratio: 885 / 768">
+                <img
+                  class="figure-frame__image figure-image--multiply"
+                  src="../public/assets/projects/specsplit/acceptance_heatmap.png"
+                  alt="SpecSplit acceptance heatmap on the dark-mode light plate"
+                  width="885"
+                  height="768"
+                />
+              </div>
+            </div>
+            <figcaption class="figure-caption">
+              <span class="figure-caption__label">Fig. 04 / Dark mode</span>
+              <span>The plate stays light. The plot is not inverted.</span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="ds-section" id="atmosphere">
+        <div class="ds-section__head">
+          <div class="ds-section__label"><span>06</span><span>Atmosphere</span></div>
+          <h2>Ultramarine, contour, and grain.</h2>
+          <p class="ds-section__dek">
+            The atmosphere sits behind content, never behind reading prose. One
+            layer animates. The contour is 2 layers of 5 paths. The grain is
+            inline feTurbulence. Everything is static under reduced motion.
+          </p>
+        </div>
+
+        <div class="ds-demo">
+          <div class="ds-demo__label"><span>Hero / contour drift 75s</span><span>2 layers / 5 paths</span></div>
+          <div class="ds-demo--hero" style="position: relative; overflow: hidden; isolation: isolate">
+            <div class="ds-atmosphere ds-atmosphere-hero" data-inview="true" aria-hidden="true">
+              <span class="ds-atmosphere-field"></span>
+              <svg class="ds-atmosphere-contour" viewBox="0 0 1200 800" preserveAspectRatio="none">
+                <g class="ds-atmosphere-contour-layer ds-atmosphere-contour-layer--a">
+                  <path class="ds-atmosphere-contour-line" pathLength="1" d="M0 126.8 Q100 126.8 200 149.5 Q300 149.5 400 152.2 Q500 152.2 600 133.0 Q700 133.0 800 105.0 Q900 105.0 1000 87.2 Q1100 87.2 1200 91.7"></path>
+                  <path class="ds-atmosphere-contour-line" pathLength="1" d="M0 278.0 Q100 278.0 200 288.0 Q300 288.0 400 278.9 Q500 278.9 600 257.0 Q700 257.0 800 237.1 Q900 237.1 1000 232.8 Q1100 232.8 1200 247.0"></path>
+                  <path class="ds-atmosphere-contour-line" pathLength="1" d="M0 422.4 Q100 422.4 200 421.3 Q300 421.3 400 405.7 Q500 405.7 600 386.3 Q700 386.3 800 376.2 Q900 376.2 1000 382.2 Q1100 382.2 1200 400.4"></path>
+                  <path class="ds-atmosphere-contour-line" pathLength="1" d="M0 569.7 Q100 569.7 200 556.7 Q300 556.7 400 532.3 Q500 532.3 600 513.2 Q700 513.2 800 512.2 Q900 512.2 1000 530.2 Q1100 530.2 1200 554.8"></path>
+                  <path class="ds-atmosphere-contour-line" pathLength="1" d="M0 710.7 Q100 710.7 200 683.5 Q300 683.5 400 653.9 Q500 653.9 600 642.0 Q700 642.0 800 656.0 Q900 656.0 1000 686.3 Q1100 686.3 1200 712.3"></path>
+                </g>
+                <g class="ds-atmosphere-contour-layer ds-atmosphere-contour-layer--b">
+                  <path class="ds-atmosphere-contour-line" pathLength="1" d="M0 207.3 Q100 207.3 200 197.3 Q300 197.3 400 162.0 Q500 162.0 600 125.3 Q700 125.3 800 112.2 Q900 112.2 1000 131.6 Q1100 131.6 1200 170.3"></path>
+                  <path class="ds-atmosphere-contour-line" pathLength="1" d="M0 334.1 Q100 334.1 200 313.7 Q300 313.7 400 284.1 Q500 284.1 600 265.2 Q700 265.2 800 270.0 Q900 270.0 1000 295.2 Q1100 295.2 1200 323.7"></path>
+                  <path class="ds-atmosphere-contour-line" pathLength="1" d="M0 469.7 Q100 469.7 200 435.2 Q300 435.2 400 404.0 Q500 404.0 600 397.2 Q700 397.2 800 419.6 Q900 419.6 1000 455.8 Q1100 455.8 1200 481.3"></path>
+                  <path class="ds-atmosphere-contour-line" pathLength="1" d="M0 587.7 Q100 587.7 200 561.7 Q300 561.7 400 548.2 Q500 548.2 600 556.3 Q700 556.3 800 580.5 Q900 580.5 1000 604.4 Q1100 604.4 1200 611.7"></path>
+                  <path class="ds-atmosphere-contour-line" pathLength="1" d="M0 707.2 Q100 707.2 200 675.3 Q300 675.3 400 673.7 Q500 673.7 600 703.6 Q700 703.6 800 744.7 Q900 744.7 1000 769.0 Q1100 769.0 1200 759.9"></path>
+                </g>
+              </svg>
+              <span class="ds-atmosphere-grid"></span>
+              <svg class="ds-atmosphere-grain" aria-hidden="true" width="100%" height="100%" preserveAspectRatio="none">
+                <filter id="grain-hero"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter>
+                <rect width="100%" height="100%" filter="url(#grain-hero)"></rect>
+              </svg>
+              <svg class="ds-atmosphere-marks" aria-hidden="true" viewBox="0 0 96 96" fill="none">
+                <path d="M48 8v24M48 64v24M8 48h24M64 48h24" stroke="var(--line-strong)"></path>
+                <circle cx="48" cy="48" r="10" stroke="var(--line)"></circle>
+                <circle cx="48" cy="48" r="2" fill="var(--accent)"></circle>
+                <path d="M20 20h8M20 20v8M76 76h-8M76 76v-8" stroke="var(--line-strong)"></path>
+              </svg>
+            </div>
+            <div class="ds-hero">
+              <div class="ds-hero__copy">
+                <p class="ds-hero__eyebrow">Software engineer / systems / research</p>
+                <h3 class="ds-hero__title">Samvrit Srinath</h3>
+                <p class="ds-hero__support">
+                  I build software for networks, large-scale data, and machine
+                  learning systems.
+                </p>
+                <div class="ds-button-row" style="margin-top: var(--space-6)">
+                  <button type="button" class="ds-button ds-button--primary">View work</button>
+                  <button type="button" class="ds-button ds-button--secondary">Get in touch</button>
+                </div>
+              </div>
+              <div class="ds-hero__portrait">
+                <img src="../public/assets/profile/profile-circle.webp" alt="Samvrit Srinath" width="880" height="880" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ds-demo">
+          <div class="ds-demo__label"><span>Article / field drift 75s</span><span>field + halftone + grain</span></div>
+          <div class="ds-article" style="border: 1px solid var(--line)">
+            <div class="ds-article__header">
+              <div class="ds-atmosphere ds-atmosphere-article" data-inview="true" aria-hidden="true">
+                <span class="ds-atmosphere-field"></span>
+                <span class="ds-atmosphere-halftone"></span>
+                <span class="ds-atmosphere-grid"></span>
+                <svg class="ds-atmosphere-grain" aria-hidden="true" width="100%" height="100%" preserveAspectRatio="none">
+                  <filter id="grain-article"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter>
+                  <rect width="100%" height="100%" filter="url(#grain-article)"></rect>
+                </svg>
+                <svg class="ds-atmosphere-marks" aria-hidden="true" viewBox="0 0 96 96" fill="none">
+                  <path d="M48 8v24M48 64v24M8 48h24M64 48h24" stroke="var(--line-strong)"></path>
+                  <circle cx="48" cy="48" r="10" stroke="var(--line)"></circle>
+                  <circle cx="48" cy="48" r="2" fill="var(--accent)"></circle>
+                  <path d="M20 20h8M20 20v8M76 76h-8M76 76v-8" stroke="var(--line-strong)"></path>
+                </svg>
+              </div>
+              <div class="ds-demo__content">
+                <p class="ds-article__eyebrow">Case study / systems</p>
+                <h3 class="ds-article__title">A measured header band.</h3>
+                <p class="ds-article__dek">
+                  The field fades to paper before the article body. The header
+                  can carry the atmosphere; the argument stays on solid ground.
+                </p>
+              </div>
+            </div>
+            <div class="ds-article__body">
+              <p>
+                The reading column sits outside the atmosphere frame. Its
+                measure is 68 characters, its leading is 1.75, and its ink is
+                ink-soft. The atmosphere never competes with the sentence.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="ds-demo">
+          <div class="ds-demo__label"><span>Footer / static</span><span>halftone + grain</span></div>
+          <div class="ds-footer-demo">
+            <div class="ds-atmosphere ds-atmosphere-footer" data-inview="true" aria-hidden="true">
+              <span class="ds-atmosphere-field"></span>
+              <span class="ds-atmosphere-halftone"></span>
+              <span class="ds-atmosphere-grid"></span>
+              <svg class="ds-atmosphere-grain" aria-hidden="true" width="100%" height="100%" preserveAspectRatio="none">
+                <filter id="grain-footer"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter>
+                <rect width="100%" height="100%" filter="url(#grain-footer)"></rect>
+              </svg>
+              <svg class="ds-atmosphere-marks" aria-hidden="true" viewBox="0 0 96 96" fill="none">
+                <path d="M48 8v24M48 64v24M8 48h24M64 48h24" stroke="var(--line-strong)"></path>
+                <circle cx="48" cy="48" r="10" stroke="var(--line)"></circle>
+                <circle cx="48" cy="48" r="2" fill="var(--accent)"></circle>
+                <path d="M20 20h8M20 20v8M76 76h-8M76 76v-8" stroke="var(--line-strong)"></path>
+              </svg>
+            </div>
+            <div class="ds-footer-demo__row">
+              <span class="ds-footer-demo__mark">Samvrit Srinath / Color Pop</span>
+              <span class="ds-footer-demo__links"><span>Résumé</span><span>Playground</span><span>Privacy</span><span>Terms</span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ds-demo">
+          <div class="ds-demo__label"><span>OG / static recipe</span><span>contour + field + marks</span></div>
+          <div class="ds-og">
+            <div class="ds-atmosphere ds-atmosphere-og" data-inview="true" aria-hidden="true">
+              <span class="ds-atmosphere-field"></span>
+              <svg class="ds-atmosphere-contour" viewBox="0 0 1200 800" preserveAspectRatio="none">
+                <g class="ds-atmosphere-contour-layer ds-atmosphere-contour-layer--b">
+                  <path class="ds-atmosphere-contour-line" pathLength="1" d="M0 207.3 Q100 207.3 200 197.3 Q300 197.3 400 162.0 Q500 162.0 600 125.3 Q700 125.3 800 112.2 Q900 112.2 1000 131.6 Q1100 131.6 1200 170.3"></path>
+                  <path class="ds-atmosphere-contour-line" pathLength="1" d="M0 334.1 Q100 334.1 200 313.7 Q300 313.7 400 284.1 Q500 284.1 600 265.2 Q700 265.2 800 270.0 Q900 270.0 1000 295.2 Q1100 295.2 1200 323.7"></path>
+                  <path class="ds-atmosphere-contour-line" pathLength="1" d="M0 469.7 Q100 469.7 200 435.2 Q300 435.2 400 404.0 Q500 404.0 600 397.2 Q700 397.2 800 419.6 Q900 419.6 1000 455.8 Q1100 455.8 1200 481.3"></path>
+                </g>
+              </svg>
+              <span class="ds-atmosphere-grid"></span>
+              <svg class="ds-atmosphere-grain" aria-hidden="true" width="100%" height="100%" preserveAspectRatio="none">
+                <filter id="grain-og"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter>
+                <rect width="100%" height="100%" filter="url(#grain-og)"></rect>
+              </svg>
+              <svg class="ds-atmosphere-marks" aria-hidden="true" viewBox="0 0 96 96" fill="none">
+                <path d="M48 8v24M48 64v24M8 48h24M64 48h24" stroke="var(--line-strong)"></path>
+                <circle cx="48" cy="48" r="10" stroke="var(--line)"></circle>
+                <circle cx="48" cy="48" r="2" fill="var(--accent)"></circle>
+                <path d="M20 20h8M20 20v8M76 76h-8M76 76v-8" stroke="var(--line-strong)"></path>
+              </svg>
+            </div>
+            <div class="ds-og__content">
+              <div class="ds-og__mark">Samvrit Srinath / Software engineer</div>
+              <div class="ds-og__title">Networks, data, and systems.</div>
+              <div class="ds-og__line"></div>
+            </div>
+            <div class="ds-og__content type-mono" style="color: var(--ink-faint)">
+              samvritsrinath.github.io
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="ds-footer">
+      <div class="ds-page ds-footer__inner">
+        <span>Color Pop / Design system</span>
+        <span>DS-A / 2026-11-01</span>
+      </div>
+    </footer>
+
+    <script>
+      const toggle = document.querySelector("[data-theme-toggle]");
+      if (toggle) {
+        toggle.addEventListener("click", () => {
+          const dark = document.documentElement.classList.toggle("dark");
+          toggle.setAttribute("aria-pressed", String(dark));
+          toggle.textContent = dark ? "Light" : "Dark";
+        });
+      }
+    </script>
+  </body>
+</html>

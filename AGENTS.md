@@ -41,8 +41,8 @@ Run `bun run lint` and `bun run typecheck` after any code change. Run
   (for example `assets/projects/<slug>/<file>.webp`).
 - Atmosphere is centralized. Gradients and blur live only inside the
   `atmosphere:allow-begin` block in `app/globals.css`; components consume the
-  `.atmosphere-*`, `.field-*`, and `.hero-portrait*` classes. Gradient
-  utilities, glass, shadows, giant orbs, decorative star fields, fake
+  `.ds-atmosphere-*`, `.site-atmosphere`, and `.hero-portrait*` classes.
+  Gradient utilities, glass, shadows, giant orbs, decorative star fields, fake
   diagrams, and raw colour literals stay banned. `scripts/verify-tropes.sh`
   enforces the distinction.
 
@@ -66,15 +66,17 @@ to the requested change.
 ## Design system
 
 - The tokens are `--void`, `--surface`, `--surface-2`, `--ink`, `--ink-soft`,
-  `--ink-faint`, `--line`, `--line-strong`, and `--wavelength`. Light is warm
-  paper (`#f2ece1`); dark is blue-toned near-black (`#060a11`). The accent is
-  `#ad1526` in light and `#ff5a4d` in dark. Atmosphere adds `--field-blue`,
-  `--field-teal`, `--field-warm`, `--field-slate`, and the `--atmo-*` alpha
-  tokens.
-- `scripts/verify-contrast.ts` gates the ink family and wavelength against
-  void, surface, and the worst atmospheric field composite in both modes at
-  4.5:1. The atmosphere alphas are tokens, so a stronger field fails the gate
-  instead of silently lowering a label.
+  `--ink-faint`, `--line`, `--line-strong`, and `--accent`. Light is warm
+  paper (`#F4ECDF`); dark is blue-toned near-black (`#040A12`). The accent is
+  `#B00F24` in light and `#FF4638` in dark. Atmosphere adds `--atmosphere`,
+  `--atmosphere-echo`, `--atmosphere-warm`, the `--site-*` alphas, and the
+  `--atmo-*` alpha tokens. Project accents live in `data/projects.ts` as
+  `projectAccent` and generate `project-accent-<slug>` classes.
+- `scripts/verify-contrast.ts` gates the ink family, accent, project accents,
+  and data ink against void, surface, the project field, and the worst
+  section and site atmosphere composites in both modes at 4.5:1 for text and
+  3:1 for graphics and focus. The atmosphere alphas are tokens, so a stronger
+  field fails the gate instead of silently lowering a label.
 - Outfit for display and body. JetBrains Mono for labels, coordinates,
   metrics, and code. Reading prose uses `.read` at 17px mobile and 18px
   desktop with a 68ch cap. Numeric values are `tabular-nums`.
@@ -104,7 +106,7 @@ to the requested change.
   and the role, bullets, and technologies in the second. It stacks below `md`
   and is not pushed into the `SectionHeading` rail.
 - Motion is `motion/react` plus Lenis. Reveals run once and translate 22px
-  over 550ms. Hover changes colour, border, underline, or at most a 1px
+  over 320ms. Hover changes colour, border, underline, or at most a 1px
   translate. No scroll hijacking and no larger hover transforms.
   `prefers-reduced-motion` makes reveals instant and stops the LomaVerse
   scene.

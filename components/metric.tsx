@@ -4,7 +4,7 @@ type MetricProps = {
   value: string;
   label: string;
   className?: string;
-  tone?: "ink" | "hue";
+  tone?: "ink" | "hue" | "project";
 };
 
 export function Metric({ value, label, className, tone = "ink" }: MetricProps) {
@@ -13,7 +13,9 @@ export function Metric({ value, label, className, tone = "ink" }: MetricProps) {
       <span
         className={cn(
           "text-3xl font-semibold tracking-tight tabular-nums md:text-4xl",
-          tone === "hue" ? "hue-text" : "text-ink",
+          tone === "hue" && "hue-text",
+          tone === "project" && "project-accent-text",
+          tone === "ink" && "text-ink",
         )}
       >
         {value}
@@ -32,7 +34,7 @@ export function MetricRow({
 }: {
   metrics: { value: string; label: string }[];
   className?: string;
-  tone?: "ink" | "hue";
+  tone?: "ink" | "hue" | "project";
 }) {
   return (
     <div

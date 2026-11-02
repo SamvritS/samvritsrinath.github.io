@@ -109,13 +109,13 @@ export function SpecSplitTopology({
       <g
         key={id}
         data-testid="topology-edge"
-        stroke={lit ? "var(--wavelength)" : undefined}
+        stroke={lit ? "var(--accent)" : undefined}
       >
         <VisualEdge
           d={d}
           markerId={arrowId}
           dashed={opts?.dashed ?? false}
-          color={lit ? "var(--wavelength)" : "var(--line-strong)"}
+          color={lit ? "var(--accent)" : "var(--line-strong)"}
           opacity={lit ? 1 : 0.45}
           width={opts?.width ?? 1.5}
         />
@@ -249,11 +249,11 @@ export function SpecSplitTopology({
                   !accepted
                     ? "var(--line-strong)"
                     : i === acceptedCount - 1
-                      ? "var(--wavelength)"
+                      ? "var(--accent)"
                       : "var(--hue)"
                 }
                 opacity={!accepted ? 0.55 : 1}
-                stroke={branch === i ? "var(--wavelength)" : "none"}
+                stroke={branch === i ? "var(--accent)" : "none"}
                 strokeWidth={2}
                 tabIndex={0}
                 role="button"
@@ -304,7 +304,7 @@ export function SpecSplitTopology({
           fontSize={11}
           fontFamily="var(--font-jetbrains-mono)"
           letterSpacing="0.08em"
-          fill="var(--wavelength)"
+          fill="var(--accent)"
         >
           {selection}
         </text>

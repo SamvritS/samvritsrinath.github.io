@@ -167,7 +167,7 @@ export function MegakernelAnatomy() {
       <g data-testid="system-bus">
         <VisualBus
           paths={BUS_Y.map((y) => `M 150 ${y} L 1090 ${y}`)}
-          color={bottleneck ? "var(--wavelength)" : undefined}
+          color={bottleneck ? "var(--accent)" : undefined}
           opacity={bottleneck ? 1 : 0.8}
         />
         <VisualAnnotation x={150} y={108} anchor="start" size={9}>
@@ -181,7 +181,7 @@ export function MegakernelAnatomy() {
           <path
             d={`M ${smX(3) - 8} 100 V 164 H ${smX(3) + 4} M ${smX(4) + SM_W + 8} 100 V 164 H ${smX(4) + SM_W - 4}`}
             fill="none"
-            stroke="var(--wavelength)"
+            stroke="var(--accent)"
             strokeWidth={1.5}
           />
           <text
@@ -190,7 +190,7 @@ export function MegakernelAnatomy() {
             textAnchor="middle"
             fontSize={10}
             fontFamily="var(--font-jetbrains-mono)"
-            fill="var(--wavelength)"
+            fill="var(--accent)"
           >
             INTER-OP BOTTLENECK · 7.46us HBM ROUND TRIP
           </text>
@@ -209,7 +209,7 @@ export function MegakernelAnatomy() {
               width={SM_W}
               height={SM_H}
               fill="var(--surface)"
-              stroke={active === label ? "var(--wavelength)" : "var(--line-strong)"}
+              stroke={active === label ? "var(--accent)" : "var(--line-strong)"}
               strokeWidth={active === label ? 1.5 : 1}
             />
             <text
@@ -241,7 +241,7 @@ export function MegakernelAnatomy() {
                 width={SM_W - 24}
                 height={96}
                 fill="url(#hatch-bottleneck)"
-                stroke="var(--wavelength)"
+                stroke="var(--accent)"
                 strokeWidth={1}
                 strokeDasharray="4 3"
               />
@@ -276,7 +276,7 @@ export function MegakernelAnatomy() {
               width={(SM_W - 20) * OCCUPANCY[i]}
               height={SLAB_H}
               fill="color-mix(in srgb, var(--hue) 55%, var(--surface))"
-              stroke={active === `${label} SHM` ? "var(--wavelength)" : "var(--line-strong)"}
+              stroke={active === `${label} SHM` ? "var(--accent)" : "var(--line-strong)"}
             />
             <text
               x={smX(i) + 16}
@@ -335,7 +335,7 @@ export function MegakernelAnatomy() {
           fontSize={11}
           fontFamily="var(--font-jetbrains-mono)"
           letterSpacing="0.08em"
-          fill="var(--wavelength)"
+          fill="var(--accent)"
         >
           inspecting {active}
         </text>

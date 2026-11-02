@@ -17,8 +17,8 @@ export function PageHeader({
     <header data-testid="page-header" className="border-t border-line pt-5">
       <div className="grid gap-4 lg:grid-cols-12 lg:gap-12">
         <p className="eyebrow flex items-center gap-3 lg:col-span-3">
-          <span className="text-ink-faint">{index}</span>
-          <span className="h-px w-6 bg-current opacity-40" />
+          <span className="text-accent">{index}</span>
+          <span className="h-px w-6 bg-accent opacity-50" />
           {kicker}
         </p>
       </div>
@@ -26,14 +26,10 @@ export function PageHeader({
       <div className="mt-10 grid gap-8 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-9 lg:col-start-4">
           <Reveal mask>
-            <h1 className="max-w-4xl text-4xl font-semibold tracking-tight text-ink md:text-6xl">
-              {title}
-            </h1>
+            <h1 className="type-h1 max-w-4xl text-ink">{title}</h1>
           </Reveal>
           {description && (
-            <p className="mt-5 max-w-2xl text-[17px] leading-relaxed text-ink-soft md:text-lg">
-              {description}
-            </p>
+            <p className="type-dek mt-5 max-w-2xl">{description}</p>
           )}
         </div>
       </div>

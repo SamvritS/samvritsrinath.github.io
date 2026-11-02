@@ -68,7 +68,7 @@ test("trust additions: copy, faq, dialog, floating contact, utm, covers", async 
 
   await page.getByPlaceholder("Ada Lovelace").fill("Test User");
   await page.getByPlaceholder("ada@example.com").fill("test@example.com");
-  await page.getByPlaceholder(/building/).fill("Hello, testing the form.");
+  await page.getByPlaceholder(/interested/).fill("Hello, testing the form.");
   await page.route("**/api/contact", (route) =>
     route.fulfill({
       status: 200,

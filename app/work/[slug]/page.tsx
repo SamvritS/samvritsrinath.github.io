@@ -80,6 +80,7 @@ export default async function ProjectPage({
 
   return (
     <div
+      className={`project-accent-${project.slug}`}
       style={{ "--hue": project.hue } as React.CSSProperties}
       data-hue={project.hue}
     >
@@ -95,15 +96,11 @@ export default async function ProjectPage({
         <header className="mx-auto max-w-[760px]">
           <p className="eyebrow mb-6 flex items-center gap-3">
             <span>{project.eyebrow}</span>
-            <span className="h-px w-8 bg-current opacity-40" />
-            <span className="text-ink-faint">{project.year}</span>
+            <span className="h-px w-8 bg-accent opacity-50" />
+            <span className="text-accent">{project.year}</span>
           </p>
-          <h1 className="text-4xl font-semibold tracking-tight text-ink md:text-6xl">
-            {project.title}
-          </h1>
-          <p className="mt-6 max-w-[65ch] text-lg leading-relaxed text-ink-soft md:text-xl">
-            {project.tagline}
-          </p>
+          <h1 className="type-h1 text-ink">{project.title}</h1>
+          <p className="type-dek mt-6 max-w-[65ch]">{project.tagline}</p>
           <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-ink-faint">
             <span className="text-ink">{project.role}</span>
             <span>{project.year}</span>
@@ -114,7 +111,7 @@ export default async function ProjectPage({
                 href={project.paper.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-ink transition-colors hover:text-wavelength"
+                className="inline-flex items-center gap-1.5 text-ink transition-colors hover:text-accent"
               >
                 <FileText className="h-3.5 w-3.5" aria-hidden />
                 Paper
@@ -127,7 +124,7 @@ export default async function ProjectPage({
                 href={link.href}
                 target={link.external ? "_blank" : undefined}
                 rel={link.external ? "noopener noreferrer" : undefined}
-                className="inline-flex items-center gap-1.5 text-ink transition-colors hover:text-wavelength"
+                className="inline-flex items-center gap-1.5 text-ink transition-colors hover:text-accent"
               >
                 {link.label}
                 <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
@@ -163,7 +160,7 @@ export default async function ProjectPage({
           aria-label="Project facts"
           className="mx-auto mt-20 max-w-[680px] border-t border-line pt-8"
         >
-          <h2 className="font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-ink-faint">
+          <h2 className="project-accent-text font-mono text-[0.6875rem] uppercase tracking-[0.2em]">
             Project facts
           </h2>
           <dl className="mt-6 grid gap-6 sm:grid-cols-2">
@@ -189,9 +186,11 @@ export default async function ProjectPage({
             )}
           </dl>
 
-          <div className="mt-8">
-            <MetricRow metrics={project.metrics} tone="hue" />
-          </div>
+          {!showProductStage && (
+            <div className="mt-8">
+              <MetricRow metrics={project.metrics} tone="project" />
+            </div>
+          )}
 
           <div className="mt-8">
             <h3 className="font-mono text-[0.6875rem] uppercase tracking-[0.16em] text-ink-faint">
@@ -201,7 +200,7 @@ export default async function ProjectPage({
               {project.technologies.map((t) => (
                 <span
                   key={t}
-                  className="border px-3.5 py-1.5 font-mono text-xs hue-line text-ink-soft"
+                  className="border px-3.5 py-1.5 font-mono text-xs project-accent-line text-ink-soft"
                 >
                   {t}
                 </span>
@@ -212,7 +211,7 @@ export default async function ProjectPage({
 
         {project.paper && (
           <div className="mx-auto mt-20 max-w-[680px]">
-            <h2 className="font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-ink-faint">
+            <h2 className="project-accent-text font-mono text-[0.6875rem] uppercase tracking-[0.2em]">
               Primary sources
             </h2>
             <div className="mt-6 max-w-md">

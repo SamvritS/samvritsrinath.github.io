@@ -25,13 +25,13 @@ export function SelectedWork() {
       rail="03 / SELECTED PROJECTS"
       kicker="Work"
       title="Selected work"
-      atmosphere="work"
-      register="seam"
+      atmosphere="article"
       divider
     >
       <article
         data-testid="work-lead"
         data-hue={spotlight.hue}
+        className={`project-accent-${spotlight.slug}`}
         style={{ "--hue": spotlight.hue } as React.CSSProperties}
       >
         {spotlight.cover && (
@@ -41,14 +41,14 @@ export function SelectedWork() {
             width={5834}
             height={1675}
             sizes="(min-width: 1024px) 840px, 100vw"
-            className="h-auto w-full border border-line bg-surface"
+            className="project-accent-line h-auto w-full border bg-surface"
           />
         )}
 
         <div className="mt-8 grid gap-8 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-7">
-            <p className="eyebrow hue-text">{clean(spotlight.eyebrow)}</p>
-            <h3 className="mt-3 text-3xl font-semibold tracking-tight text-ink md:text-4xl">
+            <p className="eyebrow project-accent-text">{clean(spotlight.eyebrow)}</p>
+            <h3 className="type-h2 mt-3 text-ink">
               {clean(spotlight.title)}
             </h3>
             <p className="read mt-4">{clean(spotlight.tagline)}</p>
@@ -73,7 +73,7 @@ export function SelectedWork() {
             <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
               <Link
                 href={`/work/${spotlight.slug}`}
-                className="inline-flex items-center gap-1.5 border border-ink bg-ink px-5 py-2.5 text-sm font-medium text-void transition-colors hover:border-wavelength hover:bg-wavelength"
+                className="inline-flex items-center gap-1.5 border border-ink bg-ink px-5 py-2.5 text-sm font-medium text-void transition-colors hover:border-accent hover:bg-accent"
               >
                 Details
                 <ArrowUpRight className="h-4 w-4" />
@@ -83,7 +83,7 @@ export function SelectedWork() {
                   href={spotlight.paper.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.18em] text-ink transition-colors hover:text-wavelength"
+                  className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.18em] text-ink transition-colors hover:text-accent"
                 >
                   <FileText className="h-3.5 w-3.5" aria-hidden />
                   {clean(spotlight.paper.venue)} paper
@@ -96,7 +96,7 @@ export function SelectedWork() {
           <div className="lg:col-span-5">
             <MetricRow
               metrics={spotlight.metrics.slice(0, 4)}
-              tone="hue"
+              tone="project"
               className="grid-cols-2 gap-x-6 gap-y-6 md:grid-cols-2"
             />
           </div>
@@ -109,7 +109,7 @@ export function SelectedWork() {
             <Link
               href={`/work/${project.slug}`}
               style={{ "--hue": project.hue } as React.CSSProperties}
-              className="group grid gap-6 border-t border-line py-8 md:grid-cols-12 md:gap-8"
+              className={`project-card project-accent-${project.slug} group grid gap-6 border-t border-line py-8 md:grid-cols-12 md:gap-8`}
             >
               <div className="md:col-span-3">
                 <ProjectCover
@@ -124,10 +124,12 @@ export function SelectedWork() {
                     {String(index + 2).padStart(2, "0")}
                   </span>
                   <span>{project.year}</span>
-                  <span>{clean(project.category)}</span>
+                  <span className="project-accent-text">
+                    {clean(project.category)}
+                  </span>
                 </div>
 
-                <h3 className="mt-3 pr-6 text-xl font-semibold tracking-tight text-ink transition-colors group-hover:text-wavelength md:text-2xl">
+                <h3 className="project-card-title type-h3 mt-3 pr-6 text-ink transition-colors">
                   {clean(project.title)}
                 </h3>
                 <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-soft">
@@ -162,7 +164,7 @@ export function SelectedWork() {
         </p>
         <Link
           href="/work"
-          className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.18em] text-ink transition-colors hover:text-wavelength"
+          className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.18em] text-ink transition-colors hover:text-accent"
         >
           All work
           <ArrowUpRight className="h-3.5 w-3.5" />

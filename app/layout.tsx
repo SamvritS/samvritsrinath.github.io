@@ -15,6 +15,7 @@ import { CookieBanner } from "@/components/cookie-banner";
 import { GoTop } from "@/components/go-top";
 import { FloatingContact } from "@/components/floating-contact";
 import { UtmCapture } from "@/components/utm-capture";
+import { SiteAtmosphere } from "@/components/atmosphere/site-atmosphere";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -97,7 +98,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <head />
-      <body className={`${outfit.variable} ${jetbrainsMono.variable} font-sans`}>
+      <body
+        className={`${outfit.variable} ${jetbrainsMono.variable} font-sans`}
+      >
         {/* Both component scripts live in the body, and nothing positional is
             left in head. An extension that prepends nodes to head shifts a
             positional inline script by one and desynchronises hydration; with an
@@ -124,15 +127,18 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <LenisProvider>
-          <SkipLink />
-          <ScrollProgress />
-          <Nav />
-          <RouteTransition>{children}</RouteTransition>
-          <Footer />
-          <CookieBanner />
-          <GoTop />
-          <FloatingContact />
-          <UtmCapture />
+          <SiteAtmosphere />
+          <div className="relative z-10">
+            <SkipLink />
+            <ScrollProgress />
+            <Nav />
+            <RouteTransition>{children}</RouteTransition>
+            <Footer />
+            <CookieBanner />
+            <GoTop />
+            <FloatingContact />
+            <UtmCapture />
+          </div>
           <Analytics />
           <SpeedInsights />
         </LenisProvider>

@@ -192,7 +192,7 @@ export function AddressSpaceLayer() {
     const cs = getComputedStyle(wrap);
     return {
       hue: cs.getPropertyValue("--hue").trim() || "gray",
-      accent: cs.getPropertyValue("--wavelength").trim() || "gray",
+      accent: cs.getPropertyValue("--accent").trim() || "gray",
       faint: cs.getPropertyValue("--ink-faint").trim() || "gray",
     };
   }, [wrap]);

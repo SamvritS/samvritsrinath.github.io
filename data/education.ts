@@ -25,7 +25,7 @@ export const education = {
 export const teaching: TeachingCompany[] = [
   {
     company: "UC San Diego, CSE Department",
-    logo: "/assets/companies/CSE_UCSD.png",
+    logo: "/assets/companies/CSE_UCSD-transparent.png",
     roles: [
       {
         role: "Education Researcher & Head Tutor (CSE 8A)",
@@ -60,7 +60,7 @@ export const teaching: TeachingCompany[] = [
   },
   {
     company: "CSE, Peer Led Academic Cohorts (PACE)",
-    logo: "/assets/companies/CSE_PACE.png",
+    logo: "/assets/companies/CSE_PACE-transparent.png",
     roles: [
       {
         role: "Lead Peer Mentor (CSE 89)",

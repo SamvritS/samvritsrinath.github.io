@@ -49,7 +49,7 @@ export function HeroTitles() {
       <span aria-hidden>
         Currently:&nbsp;
         <span className="text-ink">{text}</span>
-        <span className="text-wavelength">▍</span>
+        <span className="text-accent">▍</span>
       </span>
     </p>
   );

@@ -8,11 +8,9 @@ import {
   FileText,
 } from "@/components/ui-icons";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
-import { AmbientField } from "@/components/atmosphere/ambient-field";
+import { Atmosphere } from "@/components/atmosphere/atmosphere";
 import { CoordinateMarks } from "@/components/atmosphere/coordinate-marks";
-import { HarmonicRegister } from "@/components/atmosphere/harmonic-register";
 import { SectionDivider } from "@/components/atmosphere/section-divider";
-import { SignalTrace } from "@/components/atmosphere/signal-trace";
 import { Reveal } from "@/components/reveal";
 import { useMailto } from "@/components/utm-capture";
 import { site } from "@/data/site";
@@ -46,13 +44,8 @@ export function ContactSection() {
       id="contact"
       className="relative overflow-hidden"
     >
-      <AmbientField variant="contact" />
+      <Atmosphere variant="footer" />
       <SectionDivider />
-      <HarmonicRegister
-        variant="converge"
-        className="pointer-events-none absolute -bottom-6 right-0 hidden h-auto w-[520px] max-w-[70%] opacity-60 md:block"
-      />
-      <SignalTrace className="pointer-events-none absolute -bottom-6 right-0 hidden w-[520px] max-w-[70%] opacity-60 md:block" />
       <div className="relative z-10 mx-auto max-w-6xl px-6 py-20 md:py-28">
         <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
           <div className="self-start lg:col-span-3">
@@ -62,14 +55,14 @@ export function ContactSection() {
 
           <div className="lg:col-span-9">
             <Reveal mask>
-              <h2 className="max-w-3xl text-4xl font-semibold tracking-tight text-ink md:text-6xl">
+              <h2 className="type-h1 max-w-3xl text-ink">
                 Open to industry work.
               </h2>
             </Reveal>
             <div className="mt-10">
               <Link
                 href={mailto}
-                className="inline-flex max-w-full flex-wrap items-center gap-x-4 gap-y-2 border border-ink bg-ink px-6 py-4 font-mono text-sm text-void transition-colors hover:border-wavelength hover:bg-wavelength"
+                className="inline-flex max-w-full flex-wrap items-center gap-x-4 gap-y-2 border border-ink bg-ink px-6 py-4 font-mono text-sm text-void transition-colors hover:border-accent hover:bg-accent"
               >
                 <span className="inline-flex items-center gap-2">
                   <Envelope className="h-4 w-4" aria-hidden />
@@ -98,9 +91,9 @@ export function ContactSection() {
                         </span>
                       </span>
                       {channel.external ? (
-                        <ArrowUpRight className="h-4 w-4 text-ink-faint transition-colors group-hover:text-wavelength" />
+                        <ArrowUpRight className="h-4 w-4 text-ink-faint transition-colors group-hover:text-accent" />
                       ) : (
-                        <Download className="h-4 w-4 text-ink-faint transition-colors group-hover:text-wavelength" />
+                        <Download className="h-4 w-4 text-ink-faint transition-colors group-hover:text-accent" />
                       )}
                     </a>
                   </li>

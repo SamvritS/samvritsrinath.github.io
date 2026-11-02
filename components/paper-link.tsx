@@ -9,7 +9,7 @@ export function PaperLink({ paper, className }: { paper: Paper; className?: stri
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "group flex flex-col gap-2 border border-line bg-surface p-6 transition-colors hover:border-wavelength",
+        "group flex flex-col gap-2 border border-line bg-surface p-6 transition-colors hover:border-accent",
         className,
       )}
     >
@@ -38,7 +38,7 @@ export function PaperPill({ paper }: { paper: Paper }) {
       href={paper.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center gap-1.5 border border-line px-6 py-3 text-sm font-medium text-ink transition-colors hover:border-wavelength hover:text-ink"
+      className="flex items-center gap-1.5 border border-line px-6 py-3 text-sm font-medium text-ink transition-colors hover:border-accent hover:text-ink"
     >
       <FileText className="h-4 w-4" aria-hidden />
       Paper

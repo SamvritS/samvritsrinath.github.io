@@ -14,7 +14,10 @@
     "build:presets": "bun scripts/build-lomaverse-presets.ts",
     "test:content": "bun test tests/content-depth.test.ts",
     "test:unit": "bun test tests/unit",
-    "measure:bundle": "bash scripts/measure-bundle.sh"
+    "measure:bundle": "bash scripts/measure-bundle.sh",
+    "build:tokens": "bun scripts/build-tokens.ts --out app/globals.css",
+    "verify:tokens": "bun scripts/verify-tokens.ts",
+    "verify:contrast:tokens": "bun scripts/verify-contrast.ts --tokens"
   },
   "dependencies": {
     "@emailjs/nodejs": "^5.0.2",

@@ -25,7 +25,7 @@ export function useIsFigure() {
   return useContext(VisualFigureContext);
 }
 
-// ponytail: per-section hue tints a 90/65/45% ink ramp; full hue marks output, wavelength stays reserved for highlight
+// ponytail: per-section hue tints a 90/65/45% ink ramp; full hue marks output, accent stays reserved for highlight
 export const visualNodeColor: Record<VisualNodeKind, string> = {
   source: "color-mix(in srgb, var(--hue, var(--ink)) 90%, var(--ink))",
   process: "color-mix(in srgb, var(--hue, var(--ink)) 65%, var(--ink))",
@@ -54,7 +54,7 @@ export function VisualNode({
   highlight?: boolean;
   state?: VisualNodeState;
 }) {
-  const color = highlight ? "var(--wavelength)" : visualNodeColor[kind];
+  const color = highlight ? "var(--accent)" : visualNodeColor[kind];
   const accentuated =
     highlight ||
     state === "selected" ||
@@ -74,7 +74,7 @@ export function VisualNode({
         height={h}
         rx={0}
         fill="var(--surface)"
-        stroke={accentuated ? "var(--wavelength)" : "var(--line-strong)"}
+        stroke={accentuated ? "var(--accent)" : "var(--line-strong)"}
         strokeWidth={accentuated ? 1.5 : 1}
       />
       {kind === "source" && (
@@ -91,7 +91,7 @@ export function VisualNode({
       )}
       <circle cx={16} cy={h / 2} r={3} fill={color} />
       {kind === "output" && !highlight && (
-        <circle cx={16} cy={h / 2} r={3 * 0.45} fill="var(--wavelength)" />
+        <circle cx={16} cy={h / 2} r={3 * 0.45} fill="var(--accent)" />
       )}
       <text
         x={30}
@@ -154,7 +154,7 @@ export function VisualSignal({
   d,
   dur = 2.8,
   delay = 0,
-  color = "var(--hue, var(--wavelength))",
+  color = "var(--hue, var(--accent))",
   r = 3.5,
   opacity = 0.9,
   once = false,
@@ -233,7 +233,7 @@ export function VisualSignal({
 
 export function VisualArrows({
   id,
-  color = "var(--wavelength)",
+  color = "var(--accent)",
   opacity = 0.6,
   orient = "auto",
 }: {
@@ -406,8 +406,8 @@ export function VisualPort({
   const dy = direction === "up" ? -9 : direction === "down" ? 9 : 0;
   return (
     <g aria-hidden="true">
-      <line x1={x} y1={y} x2={x + dx} y2={y + dy} stroke={active ? "var(--wavelength)" : "var(--line-strong)"} />
-      <circle cx={x + dx} cy={y + dy} r={2.5} fill={active ? "var(--wavelength)" : "var(--surface)"} stroke={active ? "var(--wavelength)" : "var(--ink-faint)"} />
+      <line x1={x} y1={y} x2={x + dx} y2={y + dy} stroke={active ? "var(--accent)" : "var(--line-strong)"} />
+      <circle cx={x + dx} cy={y + dy} r={2.5} fill={active ? "var(--accent)" : "var(--surface)"} stroke={active ? "var(--accent)" : "var(--ink-faint)"} />
     </g>
   );
 }
@@ -427,7 +427,7 @@ export function VisualPlane({
         points={points}
         fill="var(--surface)"
         fillOpacity={0.16}
-        stroke={active ? "var(--wavelength)" : "var(--line-strong)"}
+        stroke={active ? "var(--accent)" : "var(--line-strong)"}
         strokeWidth={1}
       />
       {label && <title>{label}</title>}
@@ -465,7 +465,7 @@ export function VisualState({
   label: string;
   state: "active" | "verified" | "degraded" | "idle";
 }) {
-  const color = state === "verified" || state === "active" ? "var(--hue, var(--ink))" : state === "degraded" ? "var(--wavelength)" : "var(--ink-faint)";
+  const color = state === "verified" || state === "active" ? "var(--hue, var(--ink))" : state === "degraded" ? "var(--accent)" : "var(--ink-faint)";
   return (
     <g transform={`translate(${x} ${y})`} aria-label={`${label}: ${state}`}>
       <circle r={3} fill={color} />
@@ -493,7 +493,7 @@ export function VisualCluster({
           cx={x + ((index * 17) % 31)}
           cy={y + ((index * 11) % 23)}
           r={index % 5 === 0 ? 2.2 : 1.2}
-          fill={index % 7 === 0 ? "var(--wavelength)" : "var(--hue, var(--ink-faint))"}
+          fill={index % 7 === 0 ? "var(--accent)" : "var(--hue, var(--ink-faint))"}
           opacity={0.76}
         />
       ))}
@@ -637,7 +637,7 @@ export function VisualBoundary({
         width={w}
         height={h}
         fill="none"
-        stroke={active ? "var(--wavelength)" : "var(--line-strong)"}
+        stroke={active ? "var(--accent)" : "var(--line-strong)"}
         strokeWidth={active ? 1.5 : 1}
         strokeDasharray="6 5"
       />
@@ -776,7 +776,7 @@ export function VisualDie({  x,
         width={w}
         height={h}
         fill="var(--surface)"
-        stroke={active ? "var(--wavelength)" : "var(--line-strong)"}
+        stroke={active ? "var(--accent)" : "var(--line-strong)"}
         strokeWidth={active ? 1.5 : 1}
       />
       {corners.map((d) => (
@@ -784,7 +784,7 @@ export function VisualDie({  x,
           key={d}
           d={d}
           fill="none"
-          stroke={active ? "var(--wavelength)" : "var(--ink-faint)"}
+          stroke={active ? "var(--accent)" : "var(--ink-faint)"}
           strokeWidth={1.5}
         />
       ))}
@@ -837,7 +837,7 @@ export function VisualMatrix({
   const rowLabelW = 96;
   const cellMark = (state: MatrixCellState, cx: number, cy: number) => {
     if (state === "HIT")
-      return <rect x={cx - 8} y={cy - 8} width={16} height={16} fill="var(--wavelength)" />;
+      return <rect x={cx - 8} y={cy - 8} width={16} height={16} fill="var(--accent)" />;
     if (state === "PART")
       return (
         <g>

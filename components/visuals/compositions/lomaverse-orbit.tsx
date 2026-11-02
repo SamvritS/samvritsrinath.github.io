@@ -56,7 +56,7 @@ export function LomaVerseOrbit({ mode = "diagram" }: { mode?: VisualMode }) {
               width={200}
               height={68}
               fill="var(--surface)"
-              stroke={i === 2 ? "var(--wavelength)" : "var(--line-strong)"}
+              stroke={i === 2 ? "var(--accent)" : "var(--line-strong)"}
               strokeWidth={i === 2 ? 1.5 : 1}
             />
             <text

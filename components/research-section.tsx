@@ -7,10 +7,10 @@ export function ResearchSection() {
       id="research"
       rail="04 / RESEARCH"
       kicker="Research"
-      title="Observation archive"
-      atmosphere="research"
+      title="Research"
+      atmosphere="article"
       divider
-      description="Internet measurement and computing education. Two threads: mapping who operates the network, and studying how students learn with generative AI."
+      description=""
     >
       <ResearchArchive />
     </SectionHeading>

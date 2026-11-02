@@ -16,7 +16,7 @@ export default function ResearchPage() {
         index="02"
         kicker="Research"
         title="Internet measurement and CS education."
-        description="Two threads of work: mapping who really operates the internet, and rethinking how we teach computer science in the generative-AI era."
+        description=""
       />
 
       <div className="mt-16">

@@ -47,7 +47,7 @@ export function EducationSection() {
             </p>
             <Link
               href="/about"
-              className="mt-5 inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.18em] text-ink transition-colors hover:text-wavelength"
+              className="mt-5 inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.18em] text-ink transition-colors hover:text-accent"
             >
               Full record
               <ArrowUpRight className="h-3.5 w-3.5" />
