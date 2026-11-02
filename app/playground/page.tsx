@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { PageHeader } from "@/components/page-header";
 import { Playground } from "@/components/playground";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Playground",
   description: "A pointer-driven particle field experiment.",
-  alternates: { canonical: "/playground" },
-};
+  path: "/playground",
+});
 
 export default function PlaygroundPage() {
   return (

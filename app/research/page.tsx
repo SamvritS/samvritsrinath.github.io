@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { PageHeader } from "@/components/page-header";
 import { ResearchArchive } from "@/components/research-archive";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Research",
   description:
     "Internet measurement and computing-education research: IP ownership attribution, country-in-the-middle exposure, and LLM-era CS education.",
-  alternates: { canonical: "/research" },
-};
+  path: "/research",
+});
 
 export default function ResearchPage() {
   return (

@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = {
-  title: "Privacy",
-  description: "How this site handles personal data.",
-  alternates: { canonical: "/privacy" },
+  ...pageMetadata({
+    title: "Privacy",
+    description: "How this site handles personal data.",
+    path: "/privacy",
+  }),
+  robots: { index: false, follow: true },
 };
 
 export default function PrivacyPage() {

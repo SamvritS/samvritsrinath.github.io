@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { PageHeader } from "@/components/page-header";
 import { Portrait } from "@/components/portrait";
 import { LogoTile } from "@/components/logo-tile";
@@ -11,12 +12,12 @@ import { education, teachingStats } from "@/data/education";
 import { clean } from "@/lib/copy";
 import { site } from "@/data/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About",
   description:
     "Samvrit Srinath, systems engineer, researcher, and educator at UC San Diego.",
-  alternates: { canonical: "/about" },
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

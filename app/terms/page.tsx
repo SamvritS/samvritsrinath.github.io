@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = {
-  title: "Terms",
-  description: "Terms of use for this site.",
-  alternates: { canonical: "/terms" },
+  ...pageMetadata({
+    title: "Terms",
+    description: "Terms of use for this site.",
+    path: "/terms",
+  }),
+  robots: { index: false, follow: true },
 };
 
 export default function TermsPage() {

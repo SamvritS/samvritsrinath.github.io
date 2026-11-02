@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { Download, Envelope, ArrowUpRight } from "@/components/ui-icons";
 import { site } from "@/data/site";
 import { education, skills, teaching } from "@/data/education";
@@ -6,11 +7,11 @@ import { experience } from "@/data/experience";
 import { researchAreas } from "@/data/research";
 import { clubs } from "@/data/education";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Résumé",
   description: "Samvrit Srinath's résumé, systems engineer and researcher.",
-  alternates: { canonical: "/resume" },
-};
+  path: "/resume",
+});
 
 function PaperSection({
   title,

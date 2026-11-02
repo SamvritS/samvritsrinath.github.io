@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight, FileText } from "@/components/ui-icons";
 import { bySlug, projects } from "@/data/projects";
+import { site } from "@/data/site";
 import { MetricRow } from "@/components/metric";
 import { VisualStory } from "@/components/visual-story";
 import { PaperLink } from "@/components/paper-link";
@@ -39,21 +40,37 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = bySlug(slug);
   if (!project) return { title: "Project" };
+  const socialTitle = `${project.title}: ${project.tagline}`;
   return {
     title: project.title,
     description: project.tagline,
+    keywords: [
+      project.title,
+      project.category,
+      ...project.technologies,
+      site.name,
+    ],
     alternates: { canonical: `/work/${project.slug}` },
     openGraph: {
-      title: `${project.title}: ${project.tagline}`,
+      title: socialTitle,
       description: project.description,
+      url: `/work/${project.slug}`,
+      siteName: site.name,
+      locale: "en_US",
+      type: "article",
       images: [
         {
           url: "/opengraph-image",
           width: 1200,
           height: 630,
-          alt: `${project.title}: ${project.tagline}`,
+          alt: socialTitle,
         },
       ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: socialTitle,
+      description: project.description,
     },
   };
 }

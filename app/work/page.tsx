@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { PageHeader } from "@/components/page-header";
 import { WorkArchive } from "@/components/work-archive";
 import { projects } from "@/data/projects";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Projects",
   description:
     "Research, systems engineering, and software across internet measurement, LLM infrastructure, and education.",
-  alternates: { canonical: "/work" },
-};
+  path: "/work",
+});
 
 export default function WorkPage() {
   return (

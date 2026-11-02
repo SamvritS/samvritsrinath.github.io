@@ -5,6 +5,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { site } from "@/data/site";
 import { projects } from "@/data/projects";
 import { researchAreas } from "@/data/research";
+import { education } from "@/data/education";
+import { experience } from "@/data/experience";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { ScrollProgress } from "@/components/scroll-progress";
@@ -30,6 +32,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
+  applicationName: site.name,
   title: {
     default: `${site.name} · ${site.tagline}`,
     template: `%s · ${site.name}`,
@@ -44,12 +47,28 @@ export const metadata: Metadata = {
     "machine learning",
     "UC San Diego",
   ],
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
+  publisher: site.name,
+  category: "technology",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     title: `${site.name} · ${site.tagline}`,
     description: site.bio,
     url: site.url,
     siteName: site.name,
     type: "website",
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
@@ -63,18 +82,48 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const papers = [
-    ...projects.flatMap((p) => (p.paper ? [p.paper] : [])),
-    ...researchAreas.flatMap((a) => a.papers),
-  ];
+  const papers = Array.from(
+    new Map(
+      [
+        ...projects.flatMap((p) => (p.paper ? [p.paper] : [])),
+        ...researchAreas.flatMap((a) => a.papers),
+      ].map((paper) => [`${paper.title}|${paper.href}`, paper] as const),
+    ).values(),
+  );
+  const personId = `${site.url}/#person`;
   const jsonLd = [
     {
       "@context": "https://schema.org",
       "@type": "Person",
+      "@id": personId,
       name: site.name,
       url: site.url,
+      image: `${site.url}/assets/profile/profile.webp`,
+      description: site.bio,
       jobTitle: "Software Engineer",
+      worksFor: {
+        "@type": "Organization",
+        name: experience[0].company,
+      },
+      alumniOf: {
+        "@type": "CollegeOrUniversity",
+        name: education.university,
+      },
+      knowsAbout: [
+        ...education.focus.split(" · "),
+        ...researchAreas.map((area) => area.title),
+      ],
       sameAs: [site.contact.github, site.contact.linkedin],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": `${site.url}/#website`,
+      url: site.url,
+      name: site.name,
+      description: site.bio,
+      inLanguage: "en",
+      publisher: { "@id": personId },
     },
     {
       "@context": "https://schema.org",
