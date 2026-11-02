@@ -1,58 +1,79 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import { site } from "@/data/site";
-import { Portrait } from "@/components/portrait";
+import { ArrowUpRight } from "@/components/ui-icons";
+import { AmbientField } from "@/components/atmosphere/ambient-field";
+import { HeroPortrait } from "@/components/hero-portrait";
+import { HeroTitles } from "@/components/hero-titles";
+import { Reveal } from "@/components/reveal";
 
 export function Hero() {
   return (
-    <section className="flex min-h-[92svh] flex-col justify-center px-6 pt-24">
-      <div className="mx-auto grid w-full max-w-6xl items-center gap-14 lg:grid-cols-[1fr_auto]">
-        <div>
-          <p className="eyebrow mb-8 flex items-center gap-3">
-            <span className="text-ink-faint">{site.location}</span>
-            <span className="h-px w-8 bg-current opacity-40" />
-            <span>{site.tagline}</span>
-          </p>
-
-          <h1 className="text-[clamp(3rem,9vw,7rem)] font-semibold leading-[0.95] tracking-tight text-ink">
-            Samvrit
-            <br />
-            Srinath
-          </h1>
-
-          <div className="mt-10 max-w-xl">
-            <p className="text-lg leading-relaxed text-ink-soft md:text-xl">
-              {site.bio}
+    <section
+      id="hero"
+      className="relative overflow-hidden pb-20 pt-32 md:pb-28 md:pt-40"
+    >
+      <AmbientField variant="hero" />
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-6">
+        <div className="grid items-center gap-x-12 gap-y-16 lg:grid-cols-2">
+          <div>
+            <p data-testid="hero-eyebrow" className="eyebrow">
+              SOFTWARE ENGINEER · SYSTEMS · RESEARCH
             </p>
+
+            <Reveal mask className="block">
+              <h1
+                data-testid="hero-headline"
+                className="mt-8 text-6xl font-semibold leading-[1.02] tracking-tight text-ink md:text-8xl"
+              >
+                Samvrit Srinath
+              </h1>
+            </Reveal>
+
+            <HeroTitles />
+
+            <p
+              data-testid="hero-support"
+              className="mt-6 max-w-xl text-left text-lg leading-relaxed text-ink md:text-xl"
+            >
+              I build software for networks, large-scale data, and machine
+              learning systems.
+            </p>
+
+            <p
+              data-testid="hero-proof"
+              className="mt-4 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-ink-faint"
+            >
+              Arista Networks · UC San Diego · Internet Measurement
+            </p>
+
+            <div className="mt-9 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-4">
+              <Link
+                data-testid="hero-view-work"
+                href="/work"
+                className="border border-ink bg-ink px-7 py-3.5 text-center text-sm font-medium text-void transition-colors hover:border-wavelength hover:bg-wavelength"
+              >
+                View work
+              </Link>
+              <Link
+                data-testid="hero-contact"
+                href="/contact"
+                className="border border-line-strong px-7 py-3.5 text-center text-sm font-medium text-ink transition-colors hover:border-wavelength"
+              >
+                Get in touch
+              </Link>
+              <Link
+                href="/resume"
+                className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.18em] text-ink-soft transition-colors hover:text-wavelength"
+              >
+                Résumé
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
           </div>
 
-          <div className="mt-12 flex flex-wrap items-center gap-4">
-            <Link
-              href="/work"
-              className="flex items-center gap-2 rounded-full bg-indigo px-7 py-3.5 text-sm font-medium text-white shadow-[0_8px_32px_-12px_var(--glow)] transition-all duration-300 hover:bg-indigo/90 hover:shadow-[0_12px_40px_-12px_var(--glow)]"
-            >
-              Explore projects
-              <ArrowUpRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href={site.resume.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="glass-float flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium text-ink transition-all duration-300 hover:border-line-strong"
-            >
-              Résumé
-              <ArrowUpRight className="h-4 w-4" />
-            </Link>
-          </div>
-
-          <div className="mt-14 flex flex-wrap gap-x-10 gap-y-3 font-mono text-xs tracking-widest text-ink-faint">
-            <span>B.S./M.S. CS · UCSD</span>
-            <span>Regents Scholar</span>
-            <span>Software Engineer · Arista</span>
+          <div className="w-full max-w-[17.5rem] justify-self-start md:max-w-[21rem] lg:max-w-[26.25rem] lg:justify-self-center">
+            <HeroPortrait />
           </div>
         </div>
-
-        <Portrait />
       </div>
     </section>
   );

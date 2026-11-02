@@ -12,7 +12,7 @@ export function VisualFrame({
   return (
     <figure
       className={cn(
-        "glass-card overflow-hidden rounded-2xl p-6 md:p-10",
+        "border border-line bg-surface overflow-hidden p-6 md:p-10",
         className,
       )}
     >

@@ -1,8 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
-import { X } from "lucide-react";
+import { X } from "@/components/ui-icons";
 import type { Figure as FigureType } from "@/lib/types";
 
 export function Figure({
@@ -13,53 +14,90 @@ export function Figure({
   number?: number;
 }) {
   const [open, setOpen] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const label = number ? `Fig. ${String(number).padStart(2, "0")}` : null;
+  const fit = figure.fit ?? "contain";
+  const ratio =
+    figure.width && figure.height
+      ? `${figure.width} / ${figure.height}`
+      : "4 / 3";
+
+  const openFrom = useCallback((trigger: HTMLButtonElement | null) => {
+    triggerRef.current = trigger;
+    setOpen(true);
+  }, []);
   const close = useCallback(() => setOpen(false), []);
 
   useEffect(() => {
     if (!open) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    closeRef.current?.focus();
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close();
+      if (e.key === "Escape") {
+        close();
+        return;
+      }
+      if (e.key !== "Tab" || !dialogRef.current) return;
+      const items = Array.from(
+        dialogRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], [tabindex]:not([tabindex="-1"])',
+        ),
+      ).filter((el) => !el.hasAttribute("disabled"));
+      if (items.length === 0) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
     return () => {
       window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
+      document.body.style.overflow = prevOverflow;
+      triggerRef.current?.focus();
     };
   }, [open, close]);
 
   return (
     <>
-      <figure className="my-10">
+      <figure>
         <button
           type="button"
-          onClick={() => setOpen(true)}
+          data-testid="figure-thumb"
+          onClick={(e) => openFrom(e.currentTarget)}
           aria-haspopup="dialog"
           aria-label={number ? `Enlarge figure ${number}` : "Enlarge figure"}
-          className="group block w-full cursor-zoom-in text-left"
+          className="block w-full cursor-zoom-in text-left"
         >
-          <div className="glass-card relative aspect-[4/3] overflow-hidden rounded-2xl">
+          <div
+            className="relative overflow-hidden border border-line bg-surface"
+            style={{ aspectRatio: ratio }}
+          >
             <Image
               src={figure.src}
               alt={figure.alt}
               fill
-              sizes="(min-width: 1024px) 60vw, 100vw"
-              className="object-contain p-6 transition-transform duration-500 group-hover:scale-[1.02]"
+              sizes="(min-width: 1024px) 760px, 100vw"
+              className={fit === "cover" ? "object-cover" : "object-contain"}
               priority={number === 1}
             />
-            <span className="absolute bottom-3 right-3 rounded-full bg-ink/80 px-3 py-1.5 font-mono text-[0.65rem] uppercase tracking-wider text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-              Enlarge
-            </span>
           </div>
         </button>
 
-        <figcaption className="mt-4 flex flex-col gap-1 text-sm text-ink-soft">
-          {number && (
-            <span className="font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-indigo">
-              Fig. {String(number).padStart(2, "0")}
+        <figcaption className="mt-3 flex flex-col gap-1 text-sm leading-relaxed text-ink-soft">
+          {label && (
+            <span className="font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-ink">
+              {label}
             </span>
           )}
-          <span className="leading-relaxed">{figure.caption}</span>
+          <span>{figure.caption}</span>
           {figure.source && (
             <span className="font-mono text-xs text-ink-faint">
               Source: {figure.source}
@@ -68,36 +106,61 @@ export function Figure({
         </figcaption>
       </figure>
 
-      {open && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label={figure.alt}
-          className="fixed inset-0 z-[70] flex flex-col bg-void/95 backdrop-blur-xl"
-          onClick={close}
-        >
-          <button
-            type="button"
+      {open &&
+        createPortal(
+          <div
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label={figure.alt}
+            data-testid="figure-lightbox"
+            className="fixed inset-0 z-[90] bg-void"
             onClick={close}
-            autoFocus
-            aria-label="Close figure"
-            className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface/60 text-ink transition-colors hover:text-indigo"
           >
-            <X className="h-5 w-5" />
-          </button>
-          <div className="flex flex-1 items-center justify-center p-6 md:p-14">
-            <Image
-              src={figure.src}
-              alt={figure.alt}
-              width={1600}
-              height={1200}
-              sizes="90vw"
-              className="max-h-[85vh] w-auto max-w-full rounded-lg object-contain"
-              onClick={(e) => e.stopPropagation()}
-            />
-          </div>
-        </div>
-      )}
+            <button
+              ref={closeRef}
+              type="button"
+              onClick={close}
+              aria-label="Close figure"
+              className="absolute right-5 top-5 z-10 flex h-10 w-10 items-center justify-center border border-line bg-surface text-ink transition-colors hover:border-wavelength"
+            >
+              <X className="h-5 w-5" />
+            </button>
+            <div className="h-full overflow-auto p-6 md:p-10">
+              <div
+                className="mx-auto w-fit max-w-[94vw]"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="border border-line bg-surface">
+                  <div
+                    className="relative w-[88vw] max-w-[1400px]"
+                    style={{ aspectRatio: ratio }}
+                  >
+                    <Image
+                      src={figure.src}
+                      alt={figure.alt}
+                      fill
+                      sizes="94vw"
+                      className={fit === "cover" ? "object-cover" : "object-contain"}
+                      priority
+                    />
+                  </div>
+                  <div className="flex items-baseline justify-between gap-6 border-t border-line px-4 py-3">
+                    {label && (
+                      <span className="shrink-0 font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-ink">
+                        {label}
+                      </span>
+                    )}
+                    <span className="min-w-0 text-left text-sm leading-relaxed text-ink-soft">
+                      {figure.caption}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>,
+          document.body,
+        )}
     </>
   );
 }

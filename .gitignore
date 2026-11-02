@@ -20,6 +20,7 @@ out
 # Environment variables
 .env
 .env.*
+!.env.example
 
 # Editor directories and files
 .vscode/*
@@ -37,5 +38,25 @@ out
 # ESLint cache
 .eslintcache
 
+# Playwright run artifacts
+test-results/
+playwright-report/
+
+# Screenshot and visual-review scratch. Kept on disk for comparison, never
+# committed: a PNG of a page is not source.
+.review/
+
+# Repomix codebase dumps: a generated snapshot of tracked source, not a source
+# file. Unignored, it is the largest untracked path in the tree and one
+# `git add -A` away from being committed.
+portfolio.txt
+portfolioMain.txt
+
 GEMINI.md
 .vercel
+.env*.local
+
+# agents coding
+graphify-out/
+.opencode/
+tree.txt

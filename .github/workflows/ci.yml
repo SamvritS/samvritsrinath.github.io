@@ -10,11 +10,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run typecheck
-      - run: npm run build
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun run lint
+      - run: bun run typecheck
+      - run: bun run verify:assets
+      # Reads app/globals.css and measures WCAG 1.4.3 on every text token against
+      # both surfaces in both modes, so contrast is a property of the token sheet
+      # rather than of a reviewer's eye.
+      - run: bun run verify:contrast
+      - run: bun run test:content
+      - run: bun run test:unit
+      - run: bun run build
+      # verify:trope reads the built route HTML for its L1 critical-path rules,
+      # so it must run after build. It is split from the build step rather than
+      # merged into one command so a trope failure names itself in the log.
+      - run: bun run verify:trope
+      # Telemetry, never fails on totals. Prints the chunk table and re-runs the
+      # L1 gate so the numbers sit next to the verdict in the CI log.
+      - run: bun run measure:bundle
+      - run: bunx playwright install --with-deps chromium
+      - run: bunx playwright test

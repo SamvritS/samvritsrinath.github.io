@@ -1,4 +1,4 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "@/components/ui-icons";
 import type { ContentSection } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { Visual } from "@/components/visuals/registry";
@@ -7,159 +7,250 @@ import { Figure } from "@/components/figure";
 import { MetricRow } from "@/components/metric";
 import { PaperLink } from "@/components/paper-link";
 import { Reveal } from "@/components/reveal";
+import { PipelineWalkthrough } from "@/components/demos/pipeline-walkthrough";
+import { LomaVerseLazy, SpecSplitLazy } from "@/components/demos/lazy";
 
-function SectionShell({
-  index,
+function ArticleSection({
+  heading,
+  caption,
   children,
   wide,
 }: {
-  index: number;
+  heading?: string;
+  caption?: string;
   children: React.ReactNode;
   wide?: boolean;
 }) {
   return (
-    <div className="grid gap-5 md:grid-cols-[56px_1fr] md:gap-8">
-      <span className="pt-1 font-mono text-xs text-ink-faint md:pt-1.5">
-        {String(index + 1).padStart(2, "0")}
-      </span>
-      <div className={cn("min-w-0", wide ? "md:max-w-4xl" : "md:max-w-2xl")}>
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function SectionHeading({ children }: { children: React.ReactNode }) {
-  return (
-    <h3 className="mb-5 text-xl font-semibold tracking-tight text-ink md:text-2xl">
+    <section
+      className={cn("mx-auto w-full", wide ? "max-w-[760px]" : "max-w-[680px]")}
+    >
+      {heading && (
+        <h2 className="mb-5 text-2xl font-semibold tracking-tight text-ink md:text-3xl">
+          {heading}
+        </h2>
+      )}
       {children}
-    </h3>
+      {caption && (
+        <p className="mt-5 max-w-[65ch] text-sm leading-relaxed text-ink-soft">
+          {caption}
+        </p>
+      )}
+    </section>
   );
 }
 
-export function VisualStory({ sections }: { sections: ContentSection[] }) {
-  const figureIndexes = sections
-    .map((s, i) => (s.type === "figure" || s.type === "gallery" ? i : -1))
-    .filter((i) => i >= 0);
+function figureStartNumbers(sections: ContentSection[]): number[] {
+  const out: number[] = [];
+  let n = 0;
+  for (const s of sections) {
+    out.push(n + 1);
+    if (s.type === "figure") n += 1;
+    if (s.type === "gallery") n += s.images.length;
+  }
+  return out;
+}
+
+export function VisualStory({
+  sections,
+  primaryVisualIndex = -1,
+}: {
+  sections: ContentSection[];
+  primaryVisualIndex?: number;
+}) {
+  const visible = sections
+    .map((section, i) => ({ section, i }))
+    .filter(({ section, i }) => {
+      if (section.type !== "visual" || i !== primaryVisualIndex) return true;
+      return (
+        section.visual === "ownership-pipeline" ||
+        section.visual === "lomaverse-orbit"
+      );
+    });
+
+  const starts = figureStartNumbers(visible.map((v) => v.section));
 
   return (
-    <div className="flex flex-col gap-14 md:gap-20">
-      {sections.map((section, i) => {
+    <div data-testid="visual-story" className="flex flex-col gap-10 md:gap-14">
+      {visible.map(({ section, i }, displayIndex) => {
+        const first = starts[displayIndex] ?? 1;
         let inner: React.ReactNode;
 
         switch (section.type) {
           case "prose":
             inner = (
-              <SectionShell index={i}>
-                <SectionHeading>{section.heading}</SectionHeading>
-                <div className="flex flex-col gap-4">
-                  {section.body.map((p, j) => (
-                    <p
-                      key={j}
-                      className="text-base leading-relaxed text-ink-soft md:text-[17px]"
-                    >
-                      {p}
-                    </p>
-                  ))}
-                </div>
-              </SectionShell>
+              <div className="flex flex-col gap-4">
+                {section.body.map((p, j) => (
+                  <p key={j} className="read">
+                    {p}
+                  </p>
+                ))}
+              </div>
             );
             break;
           case "metrics":
-            inner = (
-              <SectionShell index={i}>
-                {section.heading && (
-                  <SectionHeading>{section.heading}</SectionHeading>
-                )}
-                <MetricRow metrics={section.metrics} />
-              </SectionShell>
-            );
+            inner = <MetricRow metrics={section.metrics} tone="hue" />;
             break;
           case "visual":
-            inner = (
-              <SectionShell index={i} wide>
-                {section.heading && (
-                  <SectionHeading>{section.heading}</SectionHeading>
-                )}
-                <VisualFrame caption={section.caption}>
+            if (section.visual === "ownership-pipeline") {
+              inner = <PipelineWalkthrough />;
+            } else if (section.visual === "lomaverse-orbit") {
+              inner = (
+                <>
+                  {i !== primaryVisualIndex && (
+                    <LomaVerseLazy className="h-full min-h-[420px] w-full" />
+                  )}
+                  <div className={i !== primaryVisualIndex ? "mt-10" : undefined}>
+                    <VisualFrame>
+                      <Visual id={section.visual} />
+                    </VisualFrame>
+                  </div>
+                </>
+              );
+            } else if (section.visual === "specsplit-topology") {
+              inner = (
+                <div className="grid gap-10 md:grid-cols-2">
+                  <div className="md:sticky md:top-24 md:self-start">
+                    <VisualFrame>
+                      <Visual id={section.visual} />
+                    </VisualFrame>
+                  </div>
+                  <div className="min-w-0">
+                    <SpecSplitLazy />
+                  </div>
+                </div>
+              );
+            } else {
+              inner = (
+                <VisualFrame>
                   <Visual id={section.visual} />
                 </VisualFrame>
-              </SectionShell>
-            );
+              );
+            }
             break;
           case "paper":
             inner = (
-              <SectionShell index={i}>
-                {section.heading && (
-                  <SectionHeading>{section.heading}</SectionHeading>
-                )}
-                <div className="max-w-sm">
-                  <PaperLink paper={section.paper} />
-                </div>
-              </SectionShell>
+              <div className="max-w-sm">
+                <PaperLink paper={section.paper} />
+              </div>
             );
             break;
           case "figure":
-            inner = (
-              <SectionShell index={i} wide>
-                {section.heading && (
-                  <SectionHeading>{section.heading}</SectionHeading>
-                )}
-                <Figure
-                  figure={section.figure}
-                  number={figureIndexes.indexOf(i) + 1}
-                />
-              </SectionShell>
-            );
+            inner = <Figure figure={section.figure} number={first ?? 1} />;
             break;
           case "gallery":
             inner = (
-              <SectionShell index={i} wide>
-                {section.heading && (
-                  <SectionHeading>{section.heading}</SectionHeading>
-                )}
-                <div className="flex flex-col gap-6">
-                  {section.images.map((figure, j) => (
-                    <Figure
-                      key={figure.src}
-                      figure={figure}
-                      number={figureIndexes.indexOf(i) + j + 1}
-                    />
-                  ))}
-                </div>
-              </SectionShell>
+              <div className="flex flex-col gap-8">
+                {section.images.map((figure, j) => (
+                  <Figure
+                    key={figure.src}
+                    figure={figure}
+                    number={(first ?? 1) + j}
+                  />
+                ))}
+              </div>
             );
             break;
           case "links":
             inner = (
-              <SectionShell index={i}>
-                {section.heading && (
-                  <SectionHeading>{section.heading}</SectionHeading>
-                )}
-                <div className="flex flex-wrap gap-3">
-                  {section.links.map((link) => (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      target={link.external ? "_blank" : undefined}
-                      rel={link.external ? "noopener noreferrer" : undefined}
-                      className="flex items-center gap-1.5 rounded-full border border-line px-5 py-2.5 text-sm text-ink-soft transition-colors hover:border-line-strong hover:text-ink"
-                    >
-                      {link.label}
-                      <ArrowUpRight className="h-3.5 w-3.5" />
-                    </a>
-                  ))}
-                </div>
-              </SectionShell>
+              <div className="flex flex-wrap gap-3">
+                {section.links.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noopener noreferrer" : undefined}
+                    className="flex items-center gap-1.5 border border-line px-5 py-2.5 text-sm text-ink-soft transition-colors hover:border-wavelength hover:text-ink"
+                  >
+                    {link.label}
+                    <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+                  </a>
+                ))}
+              </div>
+            );
+            break;
+          case "system":
+            inner = (
+              <dl className="flex flex-col divide-y divide-line border-y border-line">
+                {section.components.map((c) => (
+                  <div
+                    key={c.name}
+                    className="grid gap-1 py-4 md:grid-cols-[180px_minmax(0,1fr)] md:gap-6"
+                  >
+                    <dt className="font-mono text-xs uppercase tracking-[0.14em] text-ink">
+                      {c.name}
+                    </dt>
+                    <dd className="text-sm leading-relaxed text-ink-soft">
+                      <span className="text-ink-faint">In: </span>
+                      {c.receives}
+                      <span className="text-ink-faint">{" · Out: "}</span>
+                      {c.emits}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            );
+            break;
+          case "implementation":
+            inner = (
+              <dl className="flex flex-col divide-y divide-line border-y border-line">
+                {section.decisions.map((d) => (
+                  <div
+                    key={d.choice}
+                    className="grid gap-1 py-4 md:grid-cols-[180px_minmax(0,1fr)] md:gap-6"
+                  >
+                    <dt className="font-mono text-xs uppercase tracking-[0.14em] text-ink">
+                      {d.choice}
+                    </dt>
+                    <dd className="text-sm leading-relaxed text-ink-soft">
+                      {d.why}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            );
+            break;
+          case "evidence":
+            inner = (
+              <dl className="flex flex-col divide-y divide-line border-y border-line">
+                {section.items.map((item) => (
+                  <div
+                    key={item.result}
+                    className="grid gap-1 py-4 md:grid-cols-[180px_minmax(0,1fr)] md:gap-6"
+                  >
+                    <dt className="font-mono text-sm font-medium tabular-nums hue-text">
+                      {item.result}
+                    </dt>
+                    <dd className="text-sm leading-relaxed text-ink-soft">
+                      {item.basis}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
             );
             break;
           default:
             inner = null;
         }
 
+        const wide =
+          section.type === "visual" ||
+          section.type === "figure" ||
+          section.type === "gallery";
+
         return (
-          <Reveal key={i} delay={Math.min(i * 0.04, 0.24)}>
-            {inner}
+          <Reveal key={i} delay={Math.min(displayIndex * 0.04, 0.24)}>
+            <ArticleSection
+              heading={section.heading}
+              caption={
+                section.type === "visual" && i !== primaryVisualIndex
+                  ? section.caption
+                  : undefined
+              }
+              wide={wide}
+            >
+              {inner}
+            </ArticleSection>
           </Reveal>
         );
       })}

@@ -1,91 +1,77 @@
-import type { IconType } from "react-icons";
-import {
-  FaCog,
-  FaDatabase,
-  FaDocker,
-  FaGoogle,
-  FaJava,
-  FaLinux,
-  FaMicrochip,
-  FaPython,
-  FaReact,
-  FaServer,
-} from "react-icons/fa";
-import {
-  SiAnthropic,
-  SiArm,
-  SiC,
-  SiCplusplus,
-  SiElectron,
-  SiFirebase,
-  SiFlask,
-  SiGo,
-  SiMongodb,
-  SiNextdotjs,
-  SiNumpy,
-  SiNvidia,
-  SiOpenaigym,
-  SiPandas,
-  SiPostgresql,
-  SiPytorch,
-  SiScikitlearn,
-  SiSqlite,
-  SiSupabase,
-  SiTensorflow,
-  SiThreedotjs,
-  SiTypescript,
-  SiVercel,
-} from "react-icons/si";
+import { GLYPHS, type IconGlyph } from "./tech-icon-glyphs";
 
-export const techIcons: Record<string, IconType> = {
-  React: FaReact,
-  "Next.js": SiNextdotjs,
-  TypeScript: SiTypescript,
-  JavaScript: FaReact,
-  Firebase: SiFirebase,
-  MongoDB: SiMongodb,
-  Go: SiGo,
-  Python: FaPython,
-  "C++": SiCplusplus,
-  C: SiC,
-  Linux: FaLinux,
-  Docker: FaDocker,
-  gRPC: FaServer,
-  Java: FaJava,
-  JSP: FaJava,
-  SQL: FaDatabase,
-  Playwright: FaCog,
-  GCP: FaGoogle,
-  BigQuery: FaGoogle,
-  PyTorch: SiPytorch,
-  TensorFlow: SiTensorflow,
-  "Scikit-learn": SiScikitlearn,
-  Pandas: SiPandas,
-  NumPy: SiNumpy,
-  Electron: SiElectron,
-  SQLite: SiSqlite,
-  OpenAI: SiOpenaigym,
-  Claude: SiAnthropic,
-  "Hugging Face": SiNvidia,
-  ARM: SiArm,
-  NVIDIA: SiNvidia,
-  PostgreSQL: SiPostgresql,
-  Supabase: SiSupabase,
-  Vercel: SiVercel,
-  Threejs: SiThreedotjs,
-  Flask: SiFlask,
-  CUDA: SiNvidia,
-  Llama: SiNvidia,
-  gdb: FaMicrochip,
-  GDB: FaMicrochip,
-  Valgrind: FaMicrochip,
-  Gurobi: SiNumpy,
-  "RIPE Atlas API": FaServer,
-  Prisma: FaServer,
+// The map is the previous react-icons naming, kept here so data/skills.tsx and the
+// rest of the content sheet never have to know which set a mark came from.
+const BY_NAME: Record<string, string> = {
+  React: "React",
+  "Next.js": "Nextdotjs",
+  TypeScript: "Typescript",
+  JavaScript: "Javascript",
+  Firebase: "Firebase",
+  MongoDB: "Mongodb",
+  Go: "Go",
+  Python: "Python",
+  "C++": "Cplusplus",
+  C: "C",
+  Linux: "Linux",
+  Docker: "Docker",
+  gRPC: "Server",
+  Java: "Java",
+  JSP: "Java",
+  SQL: "Database",
+  Git: "Git",
+  Playwright: "Cog",
+  Postman: "Postman",
+  GCP: "Google",
+  BigQuery: "Google",
+  PyTorch: "Pytorch",
+  TensorFlow: "Tensorflow",
+  "Scikit-learn": "Scikitlearn",
+  Pandas: "Pandas",
+  NumPy: "Numpy",
+  Electron: "Electron",
+  SQLite: "Sqlite",
+  OpenAI: "Openaigym",
+  Claude: "Anthropic",
+  "Hugging Face": "Nvidia",
+  ARM: "Arm",
+  NVIDIA: "Nvidia",
+  PostgreSQL: "Postgresql",
+  Supabase: "Supabase",
+  Vercel: "Vercel",
+  Threejs: "Threedotjs",
+  Flask: "Flask",
+  CUDA: "Nvidia",
+  Llama: "Nvidia",
+  gdb: "Microchip",
+  GDB: "Microchip",
+  Valgrind: "Microchip",
+  Gurobi: "Numpy",
+  "RIPE Atlas API": "Server",
+  Prisma: "Server",
 };
 
+export function glyphFor(name: string): IconGlyph | undefined {
+  const key = BY_NAME[name];
+  return key ? GLYPHS[key] : undefined;
+}
+
 export function TechIcon({ name, className }: { name: string; className?: string }) {
-  const Icon = techIcons[name];
-  if (!Icon) return null;
-  return <Icon className={className} aria-hidden />;
+  const glyph = glyphFor(name);
+  if (!glyph) return null;
+  return (
+    <svg
+      viewBox={glyph.viewBox}
+      width="1em"
+      height="1em"
+      fill="currentColor"
+      stroke="currentColor"
+      strokeWidth="0"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      aria-hidden
+    >
+      <path d={glyph.path} />
+    </svg>
+  );
 }

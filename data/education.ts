@@ -2,9 +2,10 @@ import type { Club, TeachingCompany } from "@/lib/types";
 
 export const education = {
   university: "University of California, San Diego",
+  logo: "/assets/companies/UCSD.png",
   degree: "B.S./M.S. in Computer Science",
   duration: "Sep 2022 – Jun 2026",
-  details: "Regents Scholar — top 1% of the incoming freshman class.",
+  details: "Regents Scholar, top 1% of the incoming freshman class.",
   focus: "Systems · Networking · Machine Learning",
   courses: [
     "Advanced Data Structures",
@@ -23,7 +24,7 @@ export const education = {
 
 export const teaching: TeachingCompany[] = [
   {
-    company: "UC San Diego — CSE Department",
+    company: "UC San Diego, CSE Department",
     logo: "/assets/companies/CSE_UCSD.png",
     roles: [
       {
@@ -58,7 +59,7 @@ export const teaching: TeachingCompany[] = [
     ],
   },
   {
-    company: "CSE — Peer Led Academic Cohorts (PACE)",
+    company: "CSE, Peer Led Academic Cohorts (PACE)",
     logo: "/assets/companies/CSE_PACE.png",
     roles: [
       {
@@ -96,7 +97,7 @@ export const clubs: Club[] = [
   },
   {
     name: "Triton Unmanned Aerial Systems",
-    role: "Computer Vision — Saliency",
+    role: "Computer Vision, Saliency",
     website: "https://tritonuas.com/",
     logo: "/assets/clubs/tuas.png",
   },

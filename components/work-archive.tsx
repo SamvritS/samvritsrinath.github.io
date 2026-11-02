@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Search } from "lucide-react";
+import { MagnifyingGlass } from "@/components/ui-icons";
 import type { Project } from "@/lib/types";
 import { ProjectCard } from "@/components/project-card";
 import { Reveal } from "@/components/reveal";
@@ -31,7 +31,8 @@ export function WorkArchive({ projects }: { projects: Project[] }) {
 
   return (
     <>
-      <div className="mb-12 flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+      <div className="hue-line sticky top-16 z-30 -mx-6 mb-12 border-y bg-surface px-6 py-3">
+        <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
         <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by category">
           {categories.map((c) => (
             <button
@@ -40,10 +41,10 @@ export function WorkArchive({ projects }: { projects: Project[] }) {
               onClick={() => setActive(c)}
               aria-pressed={active === c}
               className={cn(
-                "rounded-full border px-4 py-2 font-mono text-xs uppercase tracking-wider transition-colors",
+                " border px-4 py-2 font-mono text-xs uppercase tracking-wider transition-colors",
                 active === c
-                  ? "border-indigo bg-indigo text-white"
-                  : "border-line text-ink-soft hover:border-line-strong hover:text-ink",
+                  ? "border-ink bg-ink text-void"
+                  : "border-line text-ink-soft hover:border-wavelength hover:text-ink",
               )}
             >
               {c}
@@ -52,23 +53,33 @@ export function WorkArchive({ projects }: { projects: Project[] }) {
         </div>
 
         <div className="relative md:w-72">
-          <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-faint" />
+          <MagnifyingGlass className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-faint" />
           <input
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search projects…"
             aria-label="Search projects"
-            className="w-full rounded-full border border-line bg-surface/60 py-2.5 pl-10 pr-4 text-sm text-ink placeholder:text-ink-faint focus:border-line-strong focus:outline-none"
+            className="w-full border border-line bg-surface py-2.5 pl-10 pr-4 text-sm text-ink placeholder:text-ink-faint focus:border-line-strong"
           />
+        </div>
         </div>
       </div>
 
+      <h2 className="sr-only">All projects</h2>
+
       {filtered.length > 0 ? (
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          data-testid="work-archive"
+          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {filtered.map((p, i) => (
-            <Reveal key={p.slug} delay={Math.min(i * 0.04, 0.32)} className="h-full">
-              <ProjectCard project={p} />
+            <Reveal
+              key={p.slug}
+              delay={Math.min(i * 0.04, 0.32)}
+              className={cn("h-full", i === 0 && "sm:col-span-2")}
+            >
+              <ProjectCard project={p} featured={i === 0} orientation={i === 0 ? "row" : "stack"} />
             </Reveal>
           ))}
         </div>

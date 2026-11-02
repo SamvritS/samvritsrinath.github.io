@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Download, Mail, ArrowUpRight } from "lucide-react";
+import { Download, Envelope, ArrowUpRight } from "@/components/ui-icons";
 import { site } from "@/data/site";
 import { education, skills, teaching } from "@/data/education";
 import { experience } from "@/data/experience";
@@ -8,7 +8,8 @@ import { clubs } from "@/data/education";
 
 export const metadata: Metadata = {
   title: "Résumé",
-  description: "Samvrit Srinath's résumé — systems engineer and researcher.",
+  description: "Samvrit Srinath's résumé, systems engineer and researcher.",
+  alternates: { canonical: "/resume" },
 };
 
 function PaperSection({
@@ -61,15 +62,15 @@ export default function ResumePage() {
           href={site.resume.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 rounded-full bg-indigo px-6 py-3 text-sm font-medium text-white shadow-[0_8px_32px_-12px_var(--glow)] transition-all duration-300 hover:bg-indigo/90"
+          className="flex items-center gap-2 border border-ink bg-ink px-6 py-3 font-mono text-sm text-void transition-colors hover:border-wavelength"
         >
           <Download className="h-4 w-4" />
           Download PDF
         </a>
       </div>
 
-      {/* Paper sheet — intentionally stays warm-white in both themes */}
-      <article className="print-sheet overflow-hidden rounded-2xl bg-[#fbfaf6] text-black shadow-[0_32px_80px_-40px_rgba(0,0,0,0.5)]">
+      {/* Paper sheet, literal warm white for print fidelity in both themes */}
+      <article className="print-sheet overflow-hidden border border-line bg-[#fbfaf6] text-black">
         <div className="px-8 py-12 md:px-16 md:py-16">
           <header>
             <h1 className="text-3xl font-semibold tracking-tight text-black md:text-4xl">
@@ -80,7 +81,7 @@ export default function ResumePage() {
             </p>
             <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-[0.72rem] text-black/60">
               <a href={`mailto:${site.contact.email}`} className="flex items-center gap-1.5 hover:text-black">
-                <Mail className="h-3.5 w-3.5" />
+                <Envelope className="h-3.5 w-3.5" />
                 {site.contact.email}
               </a>
               <a href={site.contact.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-black">
@@ -96,7 +97,7 @@ export default function ResumePage() {
 
           <PaperSection title="Education">
             <PaperEntry
-              title={`${education.university} — ${education.degree}`}
+              title={`${education.university}, ${education.degree}`}
               meta={education.duration}
             >
               <p className="mt-1.5 text-sm leading-relaxed text-black/75">
@@ -110,7 +111,7 @@ export default function ResumePage() {
               company.roles.map((role) => (
                 <PaperEntry
                   key={role.role}
-                  title={`${company.company} — ${role.role}`}
+                  title={`${company.company}, ${role.role}`}
                   meta={role.duration}
                 >
                   {role.description.length > 0 && (
@@ -145,7 +146,7 @@ export default function ResumePage() {
               company.roles.map((role) => (
                 <PaperEntry
                   key={role.role}
-                  title={`${company.company} — ${role.role}`}
+                  title={`${company.company}, ${role.role}`}
                   meta={role.duration}
                 >
                   <ul className="mt-2 flex list-disc flex-col gap-1.5 pl-5 text-sm leading-relaxed text-black/75">

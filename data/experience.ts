@@ -18,7 +18,7 @@ export const experience: Company[] = [
         description: [
           "Architected core software for next-gen Arista Ethernet switches with advanced PHY and loopback support.",
           "Built a switch modeling framework translating hardware register specs into traffic forwarding behaviors for simulation and validation.",
-          "Designed a gRPC device communication framework from scratch — 12 APIs across 3 databases and 8 platforms.",
+          "Designed a gRPC device communication framework from scratch: 12 APIs across 3 databases and 8 platforms.",
           "Optimized board autodetection, achieving a 96% reduction in hardware lookup time.",
           "Developed Linux SMBus middleware for I2C transactions ensuring reliable register-level access across switch platforms.",
           "Built a multiprocessing test framework for switch wiring simulation covering all Arista models.",

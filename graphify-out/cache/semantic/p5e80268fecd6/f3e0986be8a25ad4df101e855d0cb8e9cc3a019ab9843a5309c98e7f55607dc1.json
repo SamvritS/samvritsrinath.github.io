@@ -1,0 +1,1 @@
+{"nodes": [{"id": "public_assets_projects_optfantasy_runtime_vs_score", "label": "OptFantasy Runtime vs Out-of-Sample Score", "file_type": "image", "source_file": "public/assets/projects/optfantasy/runtime_vs_score.png", "rationale": "Log-scale scatter plot comparing solve time against total points for different algorithms."}], "edges": [], "hyperedges": []}
