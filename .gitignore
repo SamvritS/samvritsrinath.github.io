@@ -60,3 +60,5 @@ GEMINI.md
 graphify-out/
 .opencode/
 tree.txt
+skills-lock.json
+.agents/

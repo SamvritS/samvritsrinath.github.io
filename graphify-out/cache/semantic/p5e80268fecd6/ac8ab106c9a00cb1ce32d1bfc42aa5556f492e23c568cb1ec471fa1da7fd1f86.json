@@ -1,1 +1,0 @@
-{"nodes": [{"id": "public_assets_projects_optfantasy_integrality_gap", "label": "OptFantasy Integrality Gap Chart", "file_type": "image", "source_file": "public/assets/projects/optfantasy/integrality_gap.png", "rationale": "Pareto Frontier chart comparing LP Relaxation vs Exact MILP for expected points vs variance target."}], "edges": [], "hyperedges": []}
