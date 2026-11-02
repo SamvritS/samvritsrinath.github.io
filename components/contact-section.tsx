@@ -10,9 +10,7 @@ import {
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
 import { Atmosphere } from "@/components/atmosphere/atmosphere";
 import { CoordinateMarks } from "@/components/atmosphere/coordinate-marks";
-import { HarmonicRegister } from "@/components/atmosphere/harmonic-register";
 import { SectionDivider } from "@/components/atmosphere/section-divider";
-import { SignalTrace } from "@/components/atmosphere/signal-trace";
 import { Reveal } from "@/components/reveal";
 import { useMailto } from "@/components/utm-capture";
 import { site } from "@/data/site";
@@ -48,11 +46,6 @@ export function ContactSection() {
     >
       <Atmosphere variant="footer" />
       <SectionDivider />
-      <HarmonicRegister
-        variant="converge"
-        className="pointer-events-none absolute -bottom-6 right-0 hidden h-auto w-[520px] max-w-[70%] opacity-60 md:block"
-      />
-      <SignalTrace className="pointer-events-none absolute -bottom-6 right-0 hidden w-[520px] max-w-[70%] opacity-60 md:block" />
       <div className="relative z-10 mx-auto max-w-6xl px-6 py-20 md:py-28">
         <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
           <div className="self-start lg:col-span-3">

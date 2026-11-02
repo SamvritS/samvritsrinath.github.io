@@ -29,14 +29,13 @@
   --atmo-field-alpha: 17%;
   --atmo-echo-alpha: 6%;
   --atmo-warm-alpha: 3%;
-  --atmo-contour-alpha: 20%;
   --atmo-halftone-alpha: 4%;
   --atmo-grain-alpha: 4%;
-  --atmo-grid-alpha: 3%;
   --site-field-alpha: 12%;
-  --site-echo-alpha: 5%;
+  --site-echo-alpha: 0%;
   --site-warm-alpha: 2%;
   --site-particle-alpha: 10%;
+  --site-dot-alpha: 6%;
   --hue-text-weight: 50%;
   --hue-field-weight: 7%;
   --type-display: clamp(3.5rem, 7vw, 6rem);
@@ -142,14 +141,13 @@
   --atmo-field-alpha: 26%;
   --atmo-echo-alpha: 8%;
   --atmo-warm-alpha: 3%;
-  --atmo-contour-alpha: 35%;
   --atmo-halftone-alpha: 6%;
   --atmo-grain-alpha: 2%;
-  --atmo-grid-alpha: 4%;
   --site-field-alpha: 18%;
-  --site-echo-alpha: 8%;
+  --site-echo-alpha: 0%;
   --site-warm-alpha: 3%;
   --site-particle-alpha: 15%;
+  --site-dot-alpha: 7%;
   --hue-text-weight: 65%;
   --hue-field-weight: 7%;
 }
@@ -179,14 +177,13 @@
   --atmo-field-alpha: 17%;
   --atmo-echo-alpha: 6%;
   --atmo-warm-alpha: 3%;
-  --atmo-contour-alpha: 20%;
   --atmo-halftone-alpha: 4%;
   --atmo-grain-alpha: 4%;
-  --atmo-grid-alpha: 3%;
   --site-field-alpha: 12%;
-  --site-echo-alpha: 5%;
+  --site-echo-alpha: 0%;
   --site-warm-alpha: 2%;
   --site-particle-alpha: 10%;
+  --site-dot-alpha: 6%;
   --hue-text-weight: 50%;
   --hue-field-weight: 7%;
 }
@@ -778,36 +775,6 @@
     transform: translate3d(2%, 1.5%, 0) scale(1.08);
   }
 }
-.ds-atmosphere-contour {
-  inset: -8%;
-}
-.ds-atmosphere-contour-line {
-  fill: none;
-  stroke: var(--atmosphere);
-  stroke-width: 1;
-  stroke-opacity: var(--atmo-contour-alpha);
-  vector-effect: non-scaling-stroke;
-}
-.ds-atmosphere-contour-layer {
-  transform-box: fill-box;
-  transform-origin: center;
-}
-.ds-atmosphere-contour-layer--a {
-  animation: ds-atmosphere-contour var(--dur-atmo, 75s) linear infinite;
-  will-change: transform;
-}
-.ds-atmosphere-contour-layer--b {
-  opacity: 0.6;
-}
-@keyframes ds-atmosphere-contour {
-  0%,
-  100% {
-    transform: translate3d(-1.4%, 0.6%, 0) rotate(-0.35deg);
-  }
-  50% {
-    transform: translate3d(1.4%, -0.6%, 0) rotate(0.35deg);
-  }
-}
 .ds-atmosphere-halftone {
   background-image: radial-gradient(
     circle,
@@ -830,32 +797,6 @@
 }
 .ds-atmosphere-grain {
   opacity: var(--atmo-grain-alpha, 3%);
-}
-.ds-atmosphere-grid {
-  background-image:
-    repeating-linear-gradient(
-      0deg,
-      color-mix(
-          in srgb,
-          var(--ink) var(--atmo-grid-alpha, 3%),
-          transparent
-        )
-        0 1px,
-      transparent 1px 96px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      color-mix(
-          in srgb,
-          var(--ink) var(--atmo-grid-alpha, 3%),
-          transparent
-        )
-        0 1px,
-      transparent 1px 96px
-    );
-  -webkit-mask-image: linear-gradient(180deg, black 0%, transparent 70%);
-  mask-image: linear-gradient(180deg, black 0%, transparent 70%);
-  opacity: 0.5;
 }
 .ds-atmosphere-marks {
   inset: auto 20px 20px auto;
@@ -895,19 +836,91 @@
   border-width: 0 1px 1px 0;
 }
 .ds-atmosphere[data-inview="false"] .ds-atmosphere-field::before,
-.ds-atmosphere[data-inview="false"] .ds-atmosphere-contour-layer--a,
-.ds-atmosphere[data-inview="false"] .ds-atmosphere-particle-layer {
+.ds-atmosphere[data-inview="false"] .ds-atmosphere-mesh::before,
+.ds-atmosphere[data-inview="false"] .ds-atmosphere-particle-layer,
+.ds-atmosphere[data-hidden="true"] .ds-atmosphere-field::before,
+.ds-atmosphere[data-hidden="true"] .ds-atmosphere-mesh::before,
+.ds-atmosphere[data-hidden="true"] .ds-atmosphere-particle-layer {
   animation-play-state: paused;
 }
-.ds-atmosphere-ambient {
-  --atmo-field-alpha: var(--site-field-alpha);
-  --atmo-echo-alpha: var(--site-echo-alpha);
-  --atmo-warm-alpha: var(--site-warm-alpha);
+.ds-atmosphere-mesh {
+  -webkit-mask-image: radial-gradient(
+    120% 100% at 50% 38%,
+    transparent 30%,
+    black 82%
+  );
+  mask-image: radial-gradient(120% 100% at 50% 38%, transparent 30%, black 82%);
 }
-.ds-atmosphere-ambient .ds-atmosphere-field::before {
+.ds-atmosphere-mesh::before {
+  content: "";
+  position: absolute;
+  inset: -24%;
+  background-image:
+    radial-gradient(
+      closest-side at 16% 18%,
+      color-mix(
+        in srgb,
+        var(--atmosphere) var(--site-field-alpha),
+        transparent
+      ),
+      transparent 72%
+    ),
+    radial-gradient(
+      closest-side at 86% 10%,
+      color-mix(
+        in srgb,
+        var(--atmosphere) var(--site-field-alpha),
+        transparent
+      ),
+      transparent 68%
+    ),
+    radial-gradient(
+      closest-side at 92% 86%,
+      color-mix(
+        in srgb,
+        var(--atmosphere) var(--site-field-alpha),
+        transparent
+      ),
+      transparent 70%
+    ),
+    radial-gradient(
+      closest-side at 8% 92%,
+      color-mix(
+        in srgb,
+        var(--atmosphere-warm) var(--site-warm-alpha),
+        transparent
+      ),
+      transparent 66%
+    );
+  background-repeat: no-repeat;
+  background-size: 72% 66%, 58% 52%, 64% 58%, 42% 38%;
+  background-position: 0% 0%, 100% 0%, 100% 100%, 0% 100%;
   animation: ds-atmosphere-drift var(--dur-ambient, 120s)
     var(--ease-atmo, linear) infinite;
   will-change: transform;
+}
+.ds-atmosphere-dots {
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--ink) var(--site-dot-alpha, 6%), transparent) 1px,
+    transparent 1.25px
+  );
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(
+    120% 100% at 50% 35%,
+    transparent 34%,
+    black 100%
+  );
+  mask-image: radial-gradient(
+    120% 100% at 50% 35%,
+    transparent 34%,
+    black 100%
+  );
+  opacity: 0.55;
+}
+.dark .text-accent,
+.dark .hue-text {
+  text-shadow: 0 0 16px color-mix(in srgb, var(--accent) 32%, transparent);
 }
 .ds-atmosphere-particles {
   inset: 0;
@@ -933,7 +946,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .ds-atmosphere .ds-atmosphere-field::before,
-  .ds-atmosphere .ds-atmosphere-contour-layer--a,
+  .ds-atmosphere .ds-atmosphere-mesh::before,
   .ds-atmosphere .ds-atmosphere-particle-layer {
     animation: none;
     transform: none;
@@ -1027,60 +1040,6 @@
     opacity: 1;
   }
   .constellation-signal {
-    display: none;
-  }
-}
-
-.harmonic-register {
-  pointer-events: none;
-}
-.harmonic-line {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  animation: harmonic-draw 1.2s var(--ease-out-expo) 1 forwards;
-}
-@keyframes harmonic-draw {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .harmonic-line {
-    animation: none;
-    stroke-dashoffset: 0;
-  }
-}
-
-.signal-trace-path {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  animation: signal-trace-draw 1.6s var(--ease-out-expo) 0.2s 1 forwards;
-}
-.signal-trace-accent {
-  stroke-dasharray: 0.02 1;
-  stroke-dashoffset: 0;
-  animation: signal-trace-pulse 4s linear 1.8s 1 both;
-}
-@keyframes signal-trace-draw {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-@keyframes signal-trace-pulse {
-  from {
-    stroke-dashoffset: 0;
-  }
-  to {
-    stroke-dashoffset: -1;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .signal-trace-path,
-  .signal-trace-accent {
-    animation: none;
-    stroke-dashoffset: 0;
-  }
-  .signal-trace-accent {
     display: none;
   }
 }

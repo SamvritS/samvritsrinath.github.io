@@ -1,6 +1,5 @@
 import { ArrowUpRight, FileText } from "@/components/ui-icons";
 import { CitationControl } from "@/components/citation-control";
-import { HarmonicRegister } from "@/components/atmosphere/harmonic-register";
 import { researchAreas } from "@/data/research";
 import { clean } from "@/lib/copy";
 
@@ -24,10 +23,6 @@ export function ResearchArchive({ level = 3 }: { level?: 2 | 3 }) {
             <p className="mt-4 font-mono text-xs tracking-[0.12em] text-ink-faint">
               {area.projects.map(clean).join(" · ")}
             </p>
-            <HarmonicRegister
-              variant="spectral"
-              className="mt-6 h-10 w-full max-w-md opacity-80"
-            />
           </div>
 
           <div className="mt-8 flex flex-col">

@@ -2,7 +2,6 @@
 
 import { useEffect, useId, useRef } from "react";
 import { CoordinateMarks } from "@/components/atmosphere/coordinate-marks";
-import { ContourWaves } from "@/components/atmosphere/contour-waves";
 import { Grain } from "@/components/atmosphere/grain";
 import { ParticleField } from "@/components/atmosphere/particle-field";
 
@@ -34,6 +33,17 @@ export function Atmosphere({ variant }: { variant: AtmosphereVariant }) {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    const sync = () => {
+      node.dataset.hidden = document.hidden ? "true" : "false";
+    };
+    sync();
+    document.addEventListener("visibilitychange", sync);
+    return () => document.removeEventListener("visibilitychange", sync);
+  }, []);
+
   return (
     <div
       ref={ref}
@@ -43,17 +53,19 @@ export function Atmosphere({ variant }: { variant: AtmosphereVariant }) {
       data-inview="false"
       className={`ds-atmosphere ds-atmosphere-${variant}`}
     >
-      <span className="ds-atmosphere-field" />
       {variant === "ambient" ? (
-        <ParticleField />
+        <span className="ds-atmosphere-mesh" />
       ) : (
-        (variant === "hero" || variant === "og") && <ContourWaves />
+        <span className="ds-atmosphere-field" />
       )}
       {(variant === "article" || variant === "footer") && (
         <span className="ds-atmosphere-halftone" />
       )}
-      {variant !== "ambient" && <span className="ds-atmosphere-grid" />}
       <Grain id={grainId} />
+      {variant === "ambient" && (
+        <span className="ds-atmosphere-dots" data-testid="atmosphere-dots" />
+      )}
+      {variant === "ambient" && <ParticleField />}
       {variant !== "ambient" && (
         <CoordinateMarks className="ds-atmosphere-marks" tone="var(--accent)" />
       )}

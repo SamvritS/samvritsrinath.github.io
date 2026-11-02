@@ -67,3 +67,25 @@ test("the ambient particle layer is token-driven and reduced-motion aware", () =
     /@media \(prefers-reduced-motion: reduce\)[\s\S]*ds-atmosphere-particle-layer/,
   );
 });
+
+test("the streak atmosphere is gone from the CSS", () => {
+  assert.ok(!css.includes("ds-atmosphere-contour"));
+  assert.ok(!css.includes("atmo-contour-alpha"));
+  assert.ok(!css.includes(".harmonic-line"));
+  assert.ok(!css.includes(".signal-trace"));
+});
+
+test("the margin frame and line grid are gone from the CSS", () => {
+  assert.ok(!css.includes(".ds-frame"));
+  assert.ok(!css.includes("--site-rail-alpha"));
+  assert.ok(!css.includes("--site-tick-alpha"));
+  assert.ok(!css.includes("--site-beam-alpha"));
+  assert.ok(!css.includes("--dur-beam"));
+  assert.ok(!css.includes(".ds-atmosphere-grid"));
+  assert.ok(!css.includes("--atmo-grid-alpha"));
+});
+
+test("the dot grid is token-driven", () => {
+  assert.ok(css.includes(".ds-atmosphere-dots"));
+  assert.ok(css.includes("var(--site-dot-alpha"));
+});

@@ -26,7 +26,6 @@ export function SelectedWork() {
       kicker="Work"
       title="Selected work"
       atmosphere="article"
-      register="seam"
       divider
     >
       <article

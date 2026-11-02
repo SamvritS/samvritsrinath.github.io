@@ -40,7 +40,7 @@ test("section atmospheres are decorative and never take a pointer", async ({
   ).toBe(true);
 });
 
-test("the site atmosphere is a fixed, decorative particle field", async ({
+test("the site atmosphere is a fixed, decorative CSS stage", async ({
   page,
 }) => {
   await page.goto("/");
@@ -48,7 +48,12 @@ test("the site atmosphere is a fixed, decorative particle field", async ({
   await expect(site).toHaveCount(1);
   await expect(site).toHaveAttribute("aria-hidden", "true");
   await expect(site.locator('[data-variant="ambient"]')).toHaveCount(1);
-  await expect(site.locator('[data-testid="atmosphere-particles"]')).toHaveCount(1);
+  await expect(
+    site.locator('[data-testid="atmosphere-particles"]'),
+  ).toHaveCount(1);
+  await expect(site.locator('[data-testid="atmosphere-dots"]')).toHaveCount(1);
+  await expect(site.locator('[data-testid="atmosphere-frame"]')).toHaveCount(0);
+  await expect(page.locator("canvas")).toHaveCount(0);
 
   const styles = await site.evaluate((node) => {
     const computed = getComputedStyle(node);
@@ -80,70 +85,49 @@ test("section headings remain the topmost hit target", async ({ page }) => {
   }
 });
 
-test("harmonic registers are decorative and share one vocabulary", async ({
+test("no streak or margin frame decorations remain on the homepage", async ({
   page,
 }) => {
+  await page.setViewportSize({ width: 1920, height: 1080 });
   await page.goto("/");
-
-  const rows = await page.getByTestId("harmonic-register").evaluateAll(
-    (nodes) =>
-      nodes.map((node) => ({
-        variant: node.getAttribute("data-variant"),
-        hidden: node.getAttribute("aria-hidden"),
-        pointerEvents: getComputedStyle(node).pointerEvents,
-      })),
-  );
-
-  expect(rows).toHaveLength(5);
-  expect(rows.map((row) => row.variant).sort()).toEqual([
-    "converge",
-    "seam",
-    "seam",
-    "spectral",
-    "spectral",
-  ]);
-  expect(
-    rows.every(
-      (row) => row.hidden === "true" && row.pointerEvents === "none",
+  await expect(
+    page.locator(
+      '[data-testid="atmosphere-contour"], [data-testid="harmonic-register"], [data-testid="atmosphere-frame"], .harmonic-line, .signal-trace-path, .ds-frame, .ds-atmosphere-grid',
     ),
-  ).toBe(true);
+  ).toHaveCount(0);
 });
 
-test("reduced motion stops the atmosphere drift and particle layer", async ({
-  page,
-}) => {
+test("reduced motion stops the ambient wash and particles", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
 
-  const animations = await page.evaluate(() => {
-    const contour = document.querySelector(
-      ".ds-atmosphere-hero .ds-atmosphere-contour-layer--a",
-    );
+  const state = await page.evaluate(() => {
+    const mesh = document.querySelector(".ds-atmosphere-mesh");
     const field = document.querySelector(
       ".ds-atmosphere-article .ds-atmosphere-field",
     );
     const particles = document.querySelector(".ds-atmosphere-particle-layer");
     return {
-      contour: contour ? getComputedStyle(contour).animationName : null,
+      mesh: mesh ? getComputedStyle(mesh, "::before").animationName : null,
       field: field ? getComputedStyle(field, "::before").animationName : null,
       particles: particles ? getComputedStyle(particles).animationName : null,
     };
   });
-  expect(animations.contour).toBe("none");
-  expect(animations.field).toBe("none");
-  expect(animations.particles).toBe("none");
-
-  const line = await page
-    .locator(".harmonic-line")
-    .first()
-    .evaluate((node) => getComputedStyle(node).animationName);
-  expect(line).toBe("none");
+  expect(state.mesh).toBe("none");
+  expect(state.field).toBe("none");
+  expect(state.particles).toBe("none");
 });
 
-test("contact closes with a decorative signal path", async ({ page }) => {
+test("the ambient wash pauses while the document is hidden", async ({
+  page,
+}) => {
   await page.goto("/");
-  const trace = page.locator("#contact path.signal-trace-path").first();
-  await expect(trace).toHaveCount(1);
-  const svg = trace.locator("xpath=..");
-  await expect(svg).toHaveAttribute("aria-hidden", "true");
+  const playState = await page.evaluate(() => {
+    const ambient = document.querySelector('[data-variant="ambient"]');
+    if (!ambient) return null;
+    (ambient as HTMLElement).dataset.hidden = "true";
+    const mesh = document.querySelector(".ds-atmosphere-mesh");
+    return mesh ? getComputedStyle(mesh, "::before").animationPlayState : null;
+  });
+  expect(playState).toBe("paused");
 });

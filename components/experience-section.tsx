@@ -1,5 +1,4 @@
 import { Atmosphere } from "@/components/atmosphere/atmosphere";
-import { HarmonicRegister } from "@/components/atmosphere/harmonic-register";
 import { LogoTile } from "@/components/logo-tile";
 import { experience } from "@/data/experience";
 import { clean } from "@/lib/copy";
@@ -18,10 +17,6 @@ export function ExperienceSection() {
             <span className="text-accent">01</span> / EXPERIENCE
           </p>
           <h2 className="type-h2 mt-4 text-ink">Experience</h2>
-          <HarmonicRegister
-            variant="seam"
-            className="mt-8 hidden h-auto w-40 opacity-70 md:block"
-          />
         </div>
 
         <div className="mt-14 flex flex-col gap-14 md:mt-16 md:gap-16">

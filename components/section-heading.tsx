@@ -2,10 +2,6 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { Atmosphere } from "@/components/atmosphere/atmosphere";
 import type { AtmosphereVariant } from "@/components/atmosphere/atmosphere";
-import {
-  HarmonicRegister,
-  type HarmonicVariant,
-} from "@/components/atmosphere/harmonic-register";
 import { SectionDivider } from "@/components/atmosphere/section-divider";
 import { Reveal } from "@/components/reveal";
 
@@ -19,7 +15,6 @@ type SectionHeadingProps = {
   className?: string;
   rail?: string;
   atmosphere?: AtmosphereVariant;
-  register?: HarmonicVariant;
   divider?: boolean;
   children?: ReactNode;
 };
@@ -34,7 +29,6 @@ export function SectionHeading({
   className,
   rail,
   atmosphere,
-  register,
   divider = false,
   children,
 }: SectionHeadingProps) {
@@ -80,12 +74,6 @@ export function SectionHeading({
               <span className="h-px w-6 bg-accent opacity-60" />
               {rail}
             </p>
-            {register && (
-              <HarmonicRegister
-                variant={register}
-                className="mt-8 hidden h-auto w-40 lg:block"
-              />
-            )}
           </div>
           <div className="lg:col-span-9">
             <Reveal mask>
