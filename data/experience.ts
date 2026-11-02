@@ -11,7 +11,7 @@ export const experience: Company[] = [
         duration: "Jun 2026 – Present",
         description: [
           "Architected and built Arista's proprietary BMC diagnostic software from scratch, defining its architecture and implementing core hardware diagnostic capabilities.",
-          "Developing platform software for next-generation AI/IPU switches, integrating Tomahawk 6 ASICs with FPGA programming and workload-specific hardware interfaces.",
+          "Developing platform software for next generation AI/IPU switches, integrating Tomahawk 6 ASICs with FPGA programming and workload-specific hardware interfaces.",
           "Developing platform software for high-scale content delivery switches, addressing PoE integration and platform-specific SerDes configurations across Tomahawk 6 hardware variants.",
           "Engineered Rust-based asynchronous ETL pipelines to ingest and transform manufacturing data in GCP/GCS data lakes, enabling large-scale manufacturing failure analysis.",
         ],
